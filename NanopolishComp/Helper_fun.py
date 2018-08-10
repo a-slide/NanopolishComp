@@ -6,12 +6,16 @@ import sys
 
 #~~~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~#
 
-def stdout_print (*args, sep="\t"):
-    """reproduce print with stdout.write
-    """
-    sys.stdout.write (sep.join (str(a) for a in args) + "\n")
+def to_string (*args, sep=" "):
+    """make a string from a list of diverse element"""
+    return sep.join (str(a) for a in args) + "\n"
 
-def stderr_print (*args, sep="\t"):
+def stderr_print (*args, sep=" "):
     """reproduce print with stderr.write
     """
-    sys.stderr.write (sep.join (str(a) for a in args) + "\n")
+    sys.stderr.write (to_string (*args, sep))
+
+def stdout_print (*args, sep=" "):
+    """reproduce print with stdout.write
+    """
+    sys.stdout.write (to_string (*args, sep))
