@@ -46,4 +46,4 @@ If using the *--signal-index* option the *start_idx* and *end_idx* are updated t
 
 The package has a command line interface and a Python API.
 
-The usage is detailed in the [usage jupyter notebook]() 
+The usage is detailed in the [usage jupyter notebook](https://github.com/a-slide/NanopolishComp/blob/master/tests/NanopolishComp_usage.ipynb) 
