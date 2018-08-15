@@ -48,7 +48,7 @@ If using the *--samples* mean, median, std and variance are computed for each km
 
 The package has a command line interface and a Python API.
 
-The usage is detailed in the [usage jupyter notebook](https://github.com/a-slide/NanopolishComp/blob/master/tests/NanopolishComp_usage.ipynb)
+The usage is detailed in the [usage jupyter notebook](https://nbviewer.jupyter.org/github/a-slide/NanopolishComp/blob/master/tests/NanopolishComp_usage.ipynb?flush_cache=true)
 
 
 # Note to power-users and developers
