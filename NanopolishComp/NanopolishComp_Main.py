@@ -38,12 +38,15 @@ def main ():
 #~~~~~~~~~~~~~~SUBPROGRAMS~~~~~~~~~~~~~~#
 def Eventalign_collapse_argparse ():
     # Define parser object
-    parser = argparse.ArgumentParser(description="Collapse the nanopolish eventalign output by kmers rather that by events")
+    parser = argparse.ArgumentParser (description=
+    "Collapse the nanopolish eventalign output by kmers rather that by events.\
+    kmer level statistics (mean, median, std, var) are only computed if nanopolish is run with --samples option")
     parser.prog = "NanopolishComp Eventalign_collapse"
     # Define arguments
     parser.add_argument("subprogram")
     parser.add_argument("-i", "--input_fn", default=None, help="Path to a nanopolish eventalign tsv output file. If None, read from std input")
-    parser.add_argument("-o", "--output_fn", default=None, help="Path to a nanopolish eventalign tsv output file. If None, write to std output")
+    parser.add_argument("-o", "--output_fn", default=None, help="Path the output tsv file. If None, write to std output")
+    parser.add_argument("-s", "--write_samples", default=False, action='store_true', help="If given, will write the raw sample if eventalign is run with --samples option")
     parser.add_argument("-v", "--verbose", default=False, action='store_true', help="If given will be more chatty (default = False)")
     # Parse Arguments
     a = parser.parse_args()
