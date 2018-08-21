@@ -28,7 +28,7 @@ def Eventalign_collapse (input_fn=None, output_fn=None, write_samples=False, ski
 
         # Parse file header to detemine the option used by nanopolish
         ls = input.readline().rstrip().split("\t")
-        header_list = ["ref_name", "ref_pos", "ref_kmer", "read_name", "n_events"]
+        header_list = ["ref_pos", "ref_kmer"]
         idx_agregate = False
         sample_agregate = False
 
@@ -45,16 +45,18 @@ def Eventalign_collapse (input_fn=None, output_fn=None, write_samples=False, ski
                 stderr_print ("\tFound samples in nanopolish eventalign header")
             sample_agregate = True
             sample_pos = ls.index("samples")
-            header_list.extend (["mean", "median", "std", "var"])
+            header_list.extend (["mean", "std"])
             if write_samples:
                 header_list.append ("samples")
 
         output.write (to_string (*header_list, sep="\t"))
 
         # First line exception
-        n_events = 1
         ls = input.readline().rstrip().split("\t")
         ref_name, ref_pos, ref_kmer, read_name = ls[0], ls[1], ls[2], ls[3]
+
+        # Write first separator
+        output.write ("#\t{}\t{}\n".format(read_name, ref_name))
 
         if idx_agregate:
             start_idx, end_idx = ls[start_pos], ls[end_pos]
@@ -74,8 +76,7 @@ def Eventalign_collapse (input_fn=None, output_fn=None, write_samples=False, ski
                 c_raw_list = ls[sample_pos].split(",")
 
             # Update values if same position
-            if c_ref_name == ref_name and c_ref_pos == ref_pos:
-                n_events += 1
+            if c_ref_pos == ref_pos and c_ref_kmer == ref_kmer:
                 if idx_agregate:
                     start_idx = c_start_idx
                 if sample_agregate:
@@ -83,12 +84,12 @@ def Eventalign_collapse (input_fn=None, output_fn=None, write_samples=False, ski
 
             # Write new kmer
             else:
-                res_list = [ref_name, ref_pos, ref_kmer, read_name, n_events]
+                res_list = [ref_pos, ref_kmer]
                 if idx_agregate:
                     res_list.extend ([start_idx, end_idx])
                 if sample_agregate:
-                    mean, median, std, var = raw_stat (raw_list)
-                    res_list.extend ([mean, median, std, var])
+                    l = np.array (raw_list, dtype=np.float32)
+                    res_list.extend ([round (np.mean (l), 3), round (np.std (l), 3)])
                     if write_samples:
                         res_list.append (";".join(raw_list))
 
@@ -98,8 +99,11 @@ def Eventalign_collapse (input_fn=None, output_fn=None, write_samples=False, ski
                 read_id_set.add (read_name)
                 nkmers += 1
 
+                # Write new separator if needed
+                if c_ref_name != ref_name or c_read_name != read_name:
+                    output.write ("#\t{}\t{}\n".format(c_read_name, c_ref_name))
+
                 # Initialise a new kmer
-                n_events = 1
                 ref_name, ref_pos, ref_kmer, read_name = c_ref_name, c_ref_pos, c_ref_kmer, c_read_name
                 if idx_agregate:
                     start_idx, end_idx = c_start_idx, c_end_idx
@@ -107,12 +111,12 @@ def Eventalign_collapse (input_fn=None, output_fn=None, write_samples=False, ski
                     raw_list = c_raw_list
 
         # Last line exception
-        res_list = [ref_name, ref_pos, ref_kmer, read_name, n_events]
+        res_list = [ref_pos, ref_kmer]
         if idx_agregate:
             res_list.extend ([start_idx, end_idx])
         if sample_agregate:
-            mean, median, std, var = raw_stat (raw_list)
-            res_list.extend ([mean, median, std, var])
+            l = np.array (raw_list, dtype=np.float32)
+            res_list.extend ([round (np.mean (l), 3), round (np.std (l), 3)])
             if write_samples:
                 res_list.append (";".join(raw_list))
 
@@ -129,18 +133,11 @@ def Eventalign_collapse (input_fn=None, output_fn=None, write_samples=False, ski
     # Print final counts
     stderr_print ("[NanopolishComp summary] Reads:{:,}\tKmers:{:,}".format (len(read_id_set), nkmers))
 
+    # Flag last line
+    output.write ("#\n")
+
     # Close files
     if input_fn:
         input.close()
     if output_fn:
         output.close()
-
-def raw_stat (raw_list):
-
-    l = np.array (raw_list, dtype=np.float32)
-    mean = round (np.mean (l), 3)
-    median = round (np.median (l), 3)
-    std = round (np.std (l), 3)
-    var = round (np.var (l), 3)
-
-    return mean, median, std, var
