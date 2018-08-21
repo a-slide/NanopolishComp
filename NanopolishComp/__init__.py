@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Define self package variable
-__version__ = "0.2.1"
+__version__ = "0.3.0"
 
 description = 'Python package for upstream preprocessing and downstream analysis of nanopolish'
 long_description = """"""
