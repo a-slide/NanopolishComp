@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Define self package variable
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 
 description = 'Python package for upstream preprocessing and downstream analysis of nanopolish'
 long_description = """"""
@@ -27,7 +27,7 @@ setup_dict = {
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',],
-    "install_requires": ['numpy==1.14.0'],
+    "install_requires": ['numpy>=1.14.0'],
     "packages": [__name__],
     "entry_points":{'console_scripts': [
         'NanopolishComp=NanopolishComp.NanopolishComp_Main:main']}}
