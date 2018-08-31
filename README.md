@@ -1,4 +1,4 @@
-# NanopolishComp 0.2.1 package documentation
+# NanopolishComp 0.3 package documentation
 
 ---
 
