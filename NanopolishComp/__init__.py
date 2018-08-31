@@ -27,7 +27,7 @@ setup_dict = {
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',],
-    "install_requires": ['numpy>=1.14.0'],
+    "install_requires": ['numpy>=1.14.0', 'tqdm>=4.23.4'],
     "packages": [__name__],
     "entry_points":{'console_scripts': [
         'NanopolishComp=NanopolishComp.NanopolishComp_Main:main']}}
