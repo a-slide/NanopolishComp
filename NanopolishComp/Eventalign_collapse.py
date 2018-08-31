@@ -6,6 +6,7 @@ from collections import OrderedDict
 
 # Third party imports
 import numpy as np
+from tqdm import tqdm
 
 # Local imports
 from NanopolishComp.Helper_fun import stderr_print
@@ -192,12 +193,14 @@ class Eventalign_collapse ():
         """
         Mono-threaded Writer
         """
-        offset = n_reads = n_reads_prev = 0
-        start_t = time ()
-        t = time ()
+        offset = n_reads = 0
+        t = time()
 
         # Open output files
-        with open (self.output_fn, "w") as output_fp, open (self.output_fn+".idx", "w") as idx_fp:
+        with open (self.output_fn, "w") as output_fp,\
+             open (self.output_fn+".idx", "w") as idx_fp,\
+             tqdm (unit=" reads", mininterval=0.1, smoothing=0.1, disable= not self.verbose) as pbar:
+
             idx_fp.write ("read_id\tref_id\tref_start\tref_end\tkmers\tNNNNN_kmers\tmismatching_kmers\toffset\n")
 
             for _ in range (self.threads):
@@ -215,17 +218,12 @@ class Eventalign_collapse ():
                         offset))
                     offset += len(read_str)
                     n_reads += 1
-
-                    # Update counter
-                    if self.verbose and time()-t >= 0.2:
-                        stderr_print ("Reads:{:,} [{:,} reads/s]\r".format (n_reads, round((n_reads-n_reads_prev)/0.2)))
-                        t = time()
-                        n_reads_prev = n_reads
+                    if self.verbose: pbar.update(1)
 
             # Flag last line
             output_fp.write ("#\n")
 
-        stderr_print ("[Eventalign_collapse] Reads:{:,} [{:,} reads/s]\n".format (n_reads, round(n_reads/(time()-start_t))))
+        stderr_print ("[Eventalign_collapse] total reads: {} [{} reads/s]\n".format(n_reads, round (n_reads/(time()-t), 2)))
 
     #~~~~~~~~~~~~~~HELPER PRIVATE METHODS~~~~~~~~~~~~~~#
     def _init_kmer_dict (self, e, idx):
