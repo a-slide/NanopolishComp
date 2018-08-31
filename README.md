@@ -1,5 +1,4 @@
 # NanopolishComp 0.4 package documentation
-
 ---
 
 **Python3 package for upstream preprocessing and downstream analyses of nanopolish**
