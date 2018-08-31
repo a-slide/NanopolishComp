@@ -12,19 +12,23 @@ from NanopolishComp.Helper_fun import stderr_print
 
 #~~~~~~~~~~~~~~CLASS~~~~~~~~~~~~~~#
 class Eventalign_collapse ():
+    """
+    Collapse the nanopolish eventalign output by kmers rather that by events.
+    kmer level statistics (mean, median, std, var) are only computed if nanopolish is run with --samples option
+    """
 
     def __init__ (self, output_fn, input_fn=0, threads=4, max_reads=None, write_samples=False, verbose=False):
         """
         * output_fn
-            .....
+            Path the output eventalign collapsed tsv file
         * input_fn
-            ..... (default=0 stdin)
+            Path to a nanopolish eventalign tsv output file. If '0' read from std input (default = 0)
         * threads
-            .....
+            Total number of threads. 1 thread is used for the reader and 1 for the writer (default = 4)
         * max_reads
-            .....
+            Maximum number of read to parse. 0 to deactivate (default = 0)
         * write_samples
-            .....
+            If given, will write the raw sample if eventalign is run with --samples option
         * verbose
             .....
         """
@@ -125,41 +129,33 @@ class Eventalign_collapse ():
         Multi-threaded workers
         """
 
-        # Get the header from the header q (one per threads)
+        # Get the header from the header q (one per thread)
         input_header = header_q.get()
+
+        # Get index of the fields we are interested in
+        idx = self._get_field_idx (input_header)
+
         # Prepare output header based on fields in the input_header
-        output_header_list = ["ref_pos", "ref_kmer", "n_events", "NNNNN_events", "mismatching_events"]
-
-        # Get index of fields to fetch
-        idx = OrderedDict()
-        idx["pos"] = input_header.index ("position")
-        idx["ref_kmer"] = input_header.index ("reference_kmer")
-        idx["mod_kmer"] = input_header.index ("model_kmer")
-
-        # Facultative field start and end index
-        if "start_idx" in input_header and "end_idx" in input_header:
-            idx["start"] = input_header.index ("start_idx")
-            idx["end"] = input_header.index ("end_idx")
-            output_header_list.extend (["start_idx", "end_idx"])
-
-        # Facultative field samples
-        if "samples" in input_header:
-            idx["samples"] = input_header.index ("samples")
-            output_header_list.extend (["mean", "std", "n_signals"])
-            if self.write_samples:
-                output_header_list.append ("samples")
-
-        # Convert output_header list to str
-        output_header = "\t".join (output_header_list)
+        output_header = self._make_ouput_header (input_header)
 
         # Collapse event at kmer level
         for read_id, ref_id, event_list in iter(in_q.get, None):
 
-            # Generate read header, init read dictionary and init values for first kmer
+            # Write read header to str
             read_str = "#{}\t{}\n".format (read_id, ref_id)
-            read_str = "{}\n".format (output_header)
-            read_d = self._init_read_dict ()
+            read_str+= "{}\n".format (output_header)
+
+            # Init values for first kmer
             kmer_d = self._init_kmer_dict (event_list[0], idx)
+
+            # init read dictionary
+            read_d = OrderedDict ()
+            read_d["read_id"] = read_id
+            read_d["ref_id"] = ref_id
+            read_d["kmers"] = 1
+            read_d["NNNNN_kmers"] = 0
+            read_d["mismatching_kmers"] = 0
+            read_d["ref_start"] = kmer_d["pos"]
 
             # Iterate over the rest of the lines
             for event in event_list [1:]:
@@ -169,17 +165,25 @@ class Eventalign_collapse ():
                     kmer_d = self._update_kmer_dict (kmer_d, event, idx)
 
                 else:
-                    # Update read dict, converts previous kmer to str and init new kmer
-                    read_d = self._update_read_dict (read_d, kmer_d)
+                    # Update
+                    read_d["kmers"] += 1
+                    if kmer_d ["NNNNN_events"] >= 1: read_d["NNNNN_kmers"] += 1
+                    if kmer_d ["mismatching_events"] >= 1: read_d["mismatching_kmers"] += 1
+
+                    # converts previous kmer to str and init new kmer
                     read_str += self._kmer_dict_to_str (kmer_d, idx)
                     kmer_d = self._init_kmer_dict (event, idx)
 
-            # Last kmer exception
-            read_d = self._update_read_dict (read_d, kmer_d)
+            # Last kmer
             read_str += self._kmer_dict_to_str (kmer_d, idx)
+            # Last read_d update
+            read_d["kmers"] += 1
+            if kmer_d ["NNNNN_events"] >= 1: read_d["NNNNN_kmers"] += 1
+            if kmer_d ["mismatching_events"] >= 1: read_d["mismatching_kmers"] += 1
+            read_d["ref_end"] = kmer_d["pos"]
 
             # Add the current read details to queue
-            out_q.put ((read_id, ref_id, read_d, read_str))
+            out_q.put ((read_d, read_str))
 
         # Add poison pill in queues
         out_q.put (None)
@@ -194,13 +198,21 @@ class Eventalign_collapse ():
 
         # Open output files
         with open (self.output_fn, "w") as output_fp, open (self.output_fn+".idx", "w") as idx_fp:
-            idx_fp.write ("read_id\tref_id\tkmers\tNNNNN_kmers\tmismatching_kmers\toffset\n")
+            idx_fp.write ("read_id\tref_id\tref_start\tref_end\tkmers\tNNNNN_kmers\tmismatching_kmers\toffset\n")
 
             for _ in range (self.threads):
-                for (read_id, ref_id, read_d, read_str) in iter (out_q.get, None):
+                for (read_d, read_str) in iter (out_q.get, None):
 
                     output_fp.write (read_str)
-                    idx_fp.write ("{}\t{}\t{}\t{}\t{}\t{}\n".format (read_id, ref_id, read_d["kmers"], read_d["NNNNN_kmers"], read_d["mismatching_kmers"], offset))
+                    idx_fp.write ("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format (
+                        read_d["read_id"],
+                        read_d["ref_id"],
+                        read_d["ref_start"],
+                        read_d["ref_end"],
+                        read_d["kmers"],
+                        read_d["NNNNN_kmers"],
+                        read_d["mismatching_kmers"],
+                        offset))
                     offset += len(read_str)
                     n_reads += 1
 
@@ -217,6 +229,7 @@ class Eventalign_collapse ():
 
     #~~~~~~~~~~~~~~HELPER PRIVATE METHODS~~~~~~~~~~~~~~#
     def _init_kmer_dict (self, e, idx):
+        """"""
         d = OrderedDict ()
         d["pos"] = e[idx["pos"]]
         d["kmer"] = e[idx["ref_kmer"]]
@@ -235,6 +248,7 @@ class Eventalign_collapse ():
         return d
 
     def _update_kmer_dict (self, d, e, idx):
+        """"""
         d["n_events"] += 1
         if e[idx["mod_kmer"]] == "NNNNN":
             d["NNNNN_events"] += 1
@@ -247,6 +261,7 @@ class Eventalign_collapse ():
         return d
 
     def _kmer_dict_to_str (self, d, idx):
+        """"""
         # Write main fields
         s = "{}\t{}\t{}\t{}\t{}".format (d["pos"], d["kmer"], d["n_events"], d["NNNNN_events"], d["mismatching_events"])
         # Write extra fields
@@ -260,17 +275,34 @@ class Eventalign_collapse ():
         s+="\n"
         return s
 
-    def _init_read_dict (self):
-        d = OrderedDict ()
-        d["kmers"] = 0
-        d["NNNNN_kmers"] = 0
-        d["mismatching_kmers"] = 0
-        return d
+    def _get_field_idx (self, input_header):
+        """"""
+        # Get index of fields to fetch
+        idx = OrderedDict()
+        idx["pos"] = input_header.index ("position")
+        idx["ref_kmer"] = input_header.index ("reference_kmer")
+        idx["mod_kmer"] = input_header.index ("model_kmer")
+        # Facultative field start and end index
+        if "start_idx" in input_header and "end_idx" in input_header:
+            idx["start"] = input_header.index ("start_idx")
+            idx["end"] = input_header.index ("end_idx")
+        # Facultative field samples
+        if "samples" in input_header:
+            idx["samples"] = input_header.index ("samples")
+        return idx
 
-    def _update_read_dict (self, d, kmer_d):
-        d["kmers"] += 1
-        if kmer_d ["NNNNN_events"] >= 1:
-            d["NNNNN_kmers"] += 1
-        if kmer_d ["mismatching_events"] >= 1:
-            d["mismatching_kmers"] += 1
-        return d
+    def _make_ouput_header (self, input_header):
+        """"""
+        # Add the main fields
+        output_header_list = ["ref_pos", "ref_kmer", "n_events", "NNNNN_events", "mismatching_events"]
+        # Facultative field start and end index
+        if "start_idx" in input_header and "end_idx" in input_header:
+            output_header_list.extend (["start_idx", "end_idx"])
+        # Facultative field samples
+        if "samples" in input_header:
+            output_header_list.extend (["mean", "std", "n_signals"])
+            if self.write_samples:
+                output_header_list.append ("samples")
+        # Convert output_header list to str
+        output_header = "\t".join (output_header_list)
+        return output_header

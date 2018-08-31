@@ -45,9 +45,9 @@ def Eventalign_collapse_argparse ():
     # Define arguments
     parser.add_argument("subprogram")
     parser.add_argument("-o", "--output_fn", required=True,
-        help="Path the output tsv file")
+        help="Path the output eventalign collapsed tsv file")
     parser.add_argument("-i", "--input_fn", default=0,
-        help="Path to a nanopolish eventalign tsv output file. If None, read from std input")
+        help="Path to a nanopolish eventalign tsv output file. If '0' read from std input (default = 0)")
     parser.add_argument("-t", "--threads", default=4, type=int,
         help="Total number of threads. 1 thread is used for the reader and 1 for the writer (default = 4)")
     parser.add_argument("-r", "--max_reads", default=0 , type=int ,
