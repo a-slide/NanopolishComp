@@ -66,6 +66,7 @@ In addition **Eventalign_collapse** also generates an useful index file containi
 * kmers: Overall number of resquiggled kmers
 * NNNNN_kmers: Number of resquiggled kmers containing at least 1 event for which the model sequence was "NNNNN"
 * mismatching_kmers: Number of resquiggled kmers containing at least 1 event for which the model sequence diverged from the reference sequence
+* missing_kmers: Number of skipped/missing reference positions in nanopolish output
 * offset: Number of characters before the start of the sequence in the main output file. **This can be used in conjunction with file.seek() to directly access the start of a read**. An example is provided in the Usage notebook.
 
 ## Usage
