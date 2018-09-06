@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 #~~~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~#
 # Standard library imports
 import multiprocessing as mp
@@ -153,35 +155,41 @@ class Eventalign_collapse ():
             read_d = OrderedDict ()
             read_d["read_id"] = read_id
             read_d["ref_id"] = ref_id
-            read_d["kmers"] = 1
+            read_d["kmers"] = 0
             read_d["NNNNN_kmers"] = 0
             read_d["mismatching_kmers"] = 0
+            read_d["missing_kmers"] = 0
             read_d["ref_start"] = kmer_d["pos"]
 
             # Iterate over the rest of the lines
             for event in event_list [1:]:
+                pos_dif = abs (int(event[idx["pos"]])-int(kmer_d["pos"]))
 
                 # Same position = update current kmer
-                if event[idx["pos"]] == kmer_d["pos"]:
+                if pos_dif == 0:
                     kmer_d = self._update_kmer_dict (kmer_d, event, idx)
 
+                # New position = write previous kmer and start new one
                 else:
-                    # Update
+                    # Update read counter
                     read_d["kmers"] += 1
                     if kmer_d ["NNNNN_events"] >= 1: read_d["NNNNN_kmers"] += 1
                     if kmer_d ["mismatching_events"] >= 1: read_d["mismatching_kmers"] += 1
+                    if pos_dif >=2: read_d["missing_kmers"] += (pos_dif-1)
 
-                    # converts previous kmer to str and init new kmer
+                    # Converts previous kmer to str and init new kmer
                     read_str += self._kmer_dict_to_str (kmer_d, idx)
                     kmer_d = self._init_kmer_dict (event, idx)
 
-            # Last kmer
-            read_str += self._kmer_dict_to_str (kmer_d, idx)
             # Last read_d update
             read_d["kmers"] += 1
             if kmer_d ["NNNNN_events"] >= 1: read_d["NNNNN_kmers"] += 1
             if kmer_d ["mismatching_events"] >= 1: read_d["mismatching_kmers"] += 1
-            read_d["ref_end"] = kmer_d["pos"]
+            if pos_dif >=2: read_d["missing_kmers"] += (pos_dif-1)
+            read_d["ref_end"] = int(kmer_d["pos"])+1 ### Off by 1 error if using python indexing
+
+            # Last kmer
+            read_str += self._kmer_dict_to_str (kmer_d, idx)
 
             # Add the current read details to queue
             out_q.put ((read_d, read_str))
@@ -201,20 +209,22 @@ class Eventalign_collapse ():
              open (self.output_fn+".idx", "w") as idx_fp,\
              tqdm (unit=" reads", mininterval=0.1, smoothing=0.1, disable= not self.verbose) as pbar:
 
-            idx_fp.write ("read_id\tref_id\tref_start\tref_end\tkmers\tNNNNN_kmers\tmismatching_kmers\toffset\n")
+            idx_fp.write ("ref_id\tref_start\tref_end\tread_id\tkmers\tNNNNN_kmers\tmismatching_kmers\tmissing_kmers\toffset\n")
 
+            n_reads = 0
             for _ in range (self.threads):
                 for (read_d, read_str) in iter (out_q.get, None):
 
                     output_fp.write (read_str)
-                    idx_fp.write ("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format (
-                        read_d["read_id"],
+                    idx_fp.write ("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format (
                         read_d["ref_id"],
                         read_d["ref_start"],
                         read_d["ref_end"],
+                        read_d["read_id"],
                         read_d["kmers"],
                         read_d["NNNNN_kmers"],
                         read_d["mismatching_kmers"],
+                        read_d["missing_kmers"],
                         offset))
                     offset += len(read_str)
                     n_reads += 1
