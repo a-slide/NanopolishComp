@@ -11,7 +11,7 @@ import numpy as np
 from tqdm import tqdm
 
 # Local imports
-from NanopolishComp.Helper_fun import stderr_print
+from NanopolishComp.Helper_fun import stderr_print, access_file
 
 #~~~~~~~~~~~~~~CLASS~~~~~~~~~~~~~~#
 class Eventalign_collapse ():
@@ -35,6 +35,12 @@ class Eventalign_collapse ():
         * verbose
             .....
         """
+
+        if input_fn and not access_file (input_fn):
+            raise IOError ("Cannot read input file")
+        if threads < 3:
+            raise ValueError ("At least 3 threads required")
+
         self.output_fn = output_fn
         self.input_fn = input_fn
         self.threads = threads-2 # Remove 2 threads for read and write
@@ -201,7 +207,7 @@ class Eventalign_collapse ():
         """
         Mono-threaded Writer
         """
-        offset = n_reads = 0
+        byte_offset = n_reads = 0
         t = time()
 
         # Open output files
@@ -209,14 +215,15 @@ class Eventalign_collapse ():
              open (self.output_fn+".idx", "w") as idx_fp,\
              tqdm (unit=" reads", mininterval=0.1, smoothing=0.1, disable= not self.verbose) as pbar:
 
-            idx_fp.write ("ref_id\tref_start\tref_end\tread_id\tkmers\tNNNNN_kmers\tmismatching_kmers\tmissing_kmers\toffset\n")
+            idx_fp.write ("ref_id\tref_start\tref_end\tread_id\tkmers\tNNNNN_kmers\tmismatching_kmers\tmissing_kmers\tbyte_offset\tbyte_len\n")
 
             n_reads = 0
             for _ in range (self.threads):
                 for (read_d, read_str) in iter (out_q.get, None):
+                    byte_len = len(read_str)
 
                     output_fp.write (read_str)
-                    idx_fp.write ("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format (
+                    idx_fp.write ("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format (
                         read_d["ref_id"],
                         read_d["ref_start"],
                         read_d["ref_end"],
@@ -225,8 +232,10 @@ class Eventalign_collapse ():
                         read_d["NNNNN_kmers"],
                         read_d["mismatching_kmers"],
                         read_d["missing_kmers"],
-                        offset))
-                    offset += len(read_str)
+                        byte_offset,
+                        byte_len-1))
+
+                    byte_offset += byte_len
                     n_reads += 1
                     if self.verbose: pbar.update(1)
 

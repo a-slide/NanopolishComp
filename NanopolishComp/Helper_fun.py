@@ -3,6 +3,7 @@
 #~~~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~#
 # Standard library imports
 import sys
+import os
 
 #~~~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~#
 
@@ -11,3 +12,8 @@ def stderr_print (*args):
     """
     sys.stderr.write(" ".join(str(a) for a in args))
     sys.stderr.flush()
+
+def access_file (fn, **kwargs):
+    """Check if the file is readable
+    """
+    return os.path.isfile (fn) and os.access (fn, os.R_OK)
