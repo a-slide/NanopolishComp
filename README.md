@@ -78,8 +78,8 @@ The usage is detailed in the [usage jupyter notebook](https://nbviewer.jupyter.o
 
 # Note to power-users and developers
 
-Please be aware that NanopolishComp is an experimental package that is still under development. It was tested under Linux Ubuntu 16.04 and in an HPC environment running under Red Hat Enterprise 7.1.
+Please be aware that **NanopolishComp** is an experimental package that is still under development. It was tested under Linux Ubuntu 16.04 and in an HPC environment running under Red Hat Enterprise 7.1.
 
-You are welcome to contribute by requesting additional functionalities, reporting bugs or by forking and submitting patches or updates pull requests
+You are welcome to contribute by requesting additional functionalities, reporting bugs or by forking and submitting pull requests
 
 Thank you

@@ -17,7 +17,7 @@ from NanopolishComp.Helper_fun import stderr_print, access_file
 class Eventalign_collapse ():
     """
     Collapse the nanopolish eventalign output by kmers rather that by events.
-    kmer level statistics (mean, median, std, var) are only computed if nanopolish is run with --samples option
+    kmer level statistics (mean, median, std, mad) are only computed if nanopolish is run with --samples option
     """
 
     def __init__ (self, output_fn, input_fn=0, threads=4, max_reads=None, write_samples=False, verbose=False):
@@ -286,7 +286,13 @@ class Eventalign_collapse ():
             s += "\t{}\t{}".format (d["start"], d["end"])
         if "samples" in idx:
             sample_array = np.array (d["sample_list"], dtype=np.float32)
-            s += "\t{}\t{}\t{}".format (np.mean (sample_array), np.std (sample_array), len(sample_array))
+            s_mean = np.mean (sample_array)
+            s_std = np.std (sample_array)
+            s_median = np.median (sample_array)
+            s_mad = np.median (np.abs (sample_array - s_median))
+            s_len = len(sample_array)
+            s += "\t{}\t{}\t{}\t{}\t{}".format (s_mean, s_std, s_median, s_mad, s_len)
+
             if self.write_samples:
                 s += "\t{}".format(",".join(d["sample_list"]))
         s+="\n"
@@ -317,7 +323,7 @@ class Eventalign_collapse ():
             output_header_list.extend (["start_idx", "end_idx"])
         # Facultative field samples
         if "samples" in input_header:
-            output_header_list.extend (["mean", "std", "n_signals"])
+            output_header_list.extend (["mean", "std", "median", "mad", "n_signals"])
             if self.write_samples:
                 output_header_list.append ("samples")
         # Convert output_header list to str
