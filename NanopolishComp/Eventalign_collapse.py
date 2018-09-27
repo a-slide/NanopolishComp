@@ -20,7 +20,14 @@ class Eventalign_collapse ():
     kmer level statistics (mean, median, std, mad) are only computed if nanopolish is run with --samples option
     """
 
-    def __init__ (self, output_fn, input_fn=0, threads=4, max_reads=None, write_samples=False, verbose=False):
+    def __init__ (self,
+        output_fn,
+        input_fn=0,
+        threads=4,
+        max_reads=None,
+        write_samples=False,
+        stat_fields=["mean", "median", "n_signals"],
+        verbose=False,):
         """
         * output_fn
             Path the output eventalign collapsed tsv file
@@ -32,20 +39,25 @@ class Eventalign_collapse ():
             Maximum number of read to parse. 0 to deactivate (default = 0)
         * write_samples
             If given, will write the raw sample if eventalign is run with --samples option
-        * verbose
-            .....
+        * stat_fields
+            List  of statistical fields generated if nanopolish is ran with --sample option.
+            Valid values = "mean", "std", "median", "mad", "n_signals"
         """
 
         if input_fn and not access_file (input_fn):
             raise IOError ("Cannot read input file")
         if threads < 3:
             raise ValueError ("At least 3 threads required")
+        for field in stat_fields:
+            if not field in ["mean", "std", "median", "mad", "n_signals"]:
+                raise ValueError ("Invalid value in stat_field {}. Valid entries = mean, std, median, mad, n_signals".format(field))
 
         self.output_fn = output_fn
         self.input_fn = input_fn
         self.threads = threads-2 # Remove 2 threads for read and write
         self.max_reads = max_reads
         self.write_samples = write_samples
+        self.stat_fields = stat_fields
         self.verbose = verbose
 
         if self.verbose: stderr_print ("Collapse file by read_id/ref_id\n")
@@ -280,23 +292,36 @@ class Eventalign_collapse ():
     def _kmer_dict_to_str (self, d, idx):
         """"""
         # Write main fields
-        s = "{}\t{}\t{}\t{}\t{}".format (d["pos"], d["kmer"], d["n_events"], d["NNNNN_events"], d["mismatching_events"])
+        l = []
+        l.append (str(d["pos"]))
+        l.append (str(d["kmer"]))
+        l.append (str(d["n_events"]))
+        l.append (str(d["NNNNN_events"]))
+        l.append (str(d["mismatching_events"]))
+
         # Write extra fields
         if "start" in idx:
-            s += "\t{}\t{}".format (d["start"], d["end"])
+            l.append (str(d["start"]))
+            l.append (str(d["end"]))
+
         if "samples" in idx:
             sample_array = np.array (d["sample_list"], dtype=np.float32)
-            s_mean = np.mean (sample_array)
-            s_std = np.std (sample_array)
-            s_median = np.median (sample_array)
-            s_mad = np.median (np.abs (sample_array - s_median))
-            s_len = len(sample_array)
-            s += "\t{}\t{}\t{}\t{}\t{}".format (s_mean, s_std, s_median, s_mad, s_len)
+            for field in self.stat_fields:
+                if field == "mean":
+                    l.append (str (np.mean (sample_array)))
+                if field == "std":
+                    l.append (str (np.std (sample_array)))
+                if field == "median":
+                    l.append (str (np.median (sample_array)))
+                if field == "mad":
+                    l.append (str (np.median (np.abs (sample_array - np.median (sample_array)))))
+                if field == "n_signals":
+                    l.append (str (len (sample_array)))
 
             if self.write_samples:
-                s += "\t{}".format(",".join(d["sample_list"]))
-        s+="\n"
-        return s
+                l.append (",".join(d["sample_list"]))
+
+        return "\t".join(l)+ "\n"
 
     def _get_field_idx (self, input_header):
         """"""
@@ -323,7 +348,7 @@ class Eventalign_collapse ():
             output_header_list.extend (["start_idx", "end_idx"])
         # Facultative field samples
         if "samples" in input_header:
-            output_header_list.extend (["mean", "std", "median", "mad", "n_signals"])
+            output_header_list.extend (self.stat_fields)
             if self.write_samples:
                 output_header_list.append ("samples")
         # Convert output_header list to str
