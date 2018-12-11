@@ -15,6 +15,7 @@ os.environ['OPENBLAS_NUM_THREADS'] = '1'
 import multiprocessing as mp
 from time import time
 from collections import OrderedDict
+import traceback
 
 # Third party imports
 import numpy as np
@@ -75,29 +76,35 @@ class Eventalign_collapse ():
         header_q = mp.Queue ()
         in_q = mp.Queue (maxsize = 1000)
         out_q = mp.Queue (maxsize = 1000)
+        error_q = mp.Queue ()
 
         # Define processes
         ps_list = []
-        ps_list.append (mp.Process (target=self._split_reads, args=(header_q, in_q,)))
+        ps_list.append (mp.Process (target=self._split_reads, args=(in_q, error_q)))
         for i in range (self.threads):
-            ps_list.append (mp.Process (target=self._process_read, args=(header_q, in_q, out_q)))
-        ps_list.append (mp.Process (target=self._write_output, args=(out_q,)))
+            ps_list.append (mp.Process (target=self._process_read, args=(in_q, out_q, error_q)))
+        ps_list.append (mp.Process (target=self._write_output, args=(out_q, error_q)))
 
-        # Start processes and block until done
         try:
+            # Start all processes
             for ps in ps_list:
                 ps.start ()
+            # Monitor error queue
+            for E in iter (error_q.get, None):
+                raise E
+            # Join processes
             for ps in ps_list:
                 ps.join ()
 
-        # Kill processes if early stop
-        except (BrokenPipeError, KeyboardInterrupt) as E:
-            if self.verbose: stderr_print ("Early stop. Kill processes\n")
+        # Kill processes if any error
+        except (BrokenPipeError, KeyboardInterrupt, NanopolishCompError) as E:
             for ps in ps_list:
                 ps.terminate ()
+            stderr_print ("\nAn error occured. All processes were killed\n")
+            raise E
 
     #~~~~~~~~~~~~~~PRIVATE METHODS~~~~~~~~~~~~~~#
-    def _split_reads (self, header_q, in_q):
+    def _split_reads (self, in_q, error_q):
         """
         Mono-threaded reader
         """
@@ -107,6 +114,12 @@ class Eventalign_collapse ():
             # Get header line and pass it to worker processes through header_q
             input_header = fp.readline().rstrip().split("\t")
 
+        try:
+
+        # Manage exceptions and deal poison pills
+        except Exception:
+            error_q.put (NanopolishCompError(traceback.format_exc()))
+        finally:
             for i in range (self.threads):
                 header_q.put (input_header)
 
@@ -151,14 +164,13 @@ class Eventalign_collapse ():
             if event_list:
                 in_q.put ((read_id, ref_id, event_list))
 
-        # Add 1 poison pill for each worker thread
-        for i in range (self.threads):
-            in_q.put(None)
+                in_q.put(None)
 
-    def _process_read (self, header_q, in_q, out_q):
+    def _process_read (self, in_q, out_q, error_q):
         """
         Multi-threaded workers
         """
+        try:
 
         # Get the header from the header q (one per thread)
         input_header = header_q.get()
@@ -224,8 +236,13 @@ class Eventalign_collapse ():
 
         # Add poison pill in queues
         out_q.put (None)
+        # Manage exceptions and deal poison pills
+        except Exception:
+            error_q.put (NanopolishCompError(traceback.format_exc()))
+        finally:
+            out_q.put(None)
 
-    def _write_output (self, out_q):
+    def _write_output (self, out_q, error_q):
         """
         Mono-threaded Writer
         """
@@ -308,6 +325,7 @@ class Eventalign_collapse ():
         l.append (str(d["n_events"]))
         l.append (str(d["NNNNN_events"]))
         l.append (str(d["mismatching_events"]))
+        try:
 
         # Write extra fields
         if "start" in idx:
@@ -327,6 +345,11 @@ class Eventalign_collapse ():
                     l.append (str (np.median (np.abs (sample_array - np.median (sample_array)))))
                 if field == "n_signals":
                     l.append (str (len (sample_array)))
+        # Manage exceptions and deal poison pills
+        except Exception:
+            error_q.put (NanopolishCompError(traceback.format_exc()))
+        finally:
+            error_q.put(None)
 
             if self.write_samples:
                 l.append (",".join(d["sample_list"]))
