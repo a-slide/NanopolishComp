@@ -1,6 +1,16 @@
 # -*- coding: utf-8 -*-
 
 #~~~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~#
+
+# Disable multithreading for MKL and openBlas
+import os
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["MKL_THREADING_LAYER"] = "sequential"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ['OPENBLAS_NUM_THREADS'] = '1'
+
+#~~~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~#
 # Standard library imports
 import multiprocessing as mp
 from time import time
