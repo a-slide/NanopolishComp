@@ -36,7 +36,7 @@ class Eventalign_collapse ():
         threads=4,
         max_reads=None,
         write_samples=False,
-        stat_fields=["mean", "median", "n_signals"],
+        stat_fields=["mean", "median", "num_signals"],
         verbose=False,):
         """
         * output_fn
@@ -51,7 +51,7 @@ class Eventalign_collapse ():
             If given, will write the raw sample if eventalign is run with --samples option
         * stat_fields
             List  of statistical fields generated if nanopolish is ran with --sample option.
-            Valid values = "mean", "std", "median", "mad", "n_signals"
+            Valid values = "mean", "std", "median", "mad", "num_signals"
         """
 
         if input_fn and not access_file (input_fn):
@@ -59,8 +59,8 @@ class Eventalign_collapse ():
         if threads < 3:
             raise ValueError ("At least 3 threads required")
         for field in stat_fields:
-            if not field in ["mean", "std", "median", "mad", "n_signals"]:
-                raise ValueError ("Invalid value in stat_field {}. Valid entries = mean, std, median, mad, n_signals".format(field))
+            if not field in ["mean", "std", "median", "mad", "num_signals"]:
+                raise ValueError ("Invalid value in stat_field {}. Valid entries = mean, std, median, mad, num_signals".format(field))
 
         self.output_fn = output_fn
         self.input_fn = input_fn
