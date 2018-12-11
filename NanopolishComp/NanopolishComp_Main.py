@@ -10,7 +10,7 @@ import sys
 from NanopolishComp import __version__ as package_version
 from NanopolishComp import __name__ as package_name
 from NanopolishComp.Eventalign_collapse import Eventalign_collapse
-from NanopolishComp.Helper_fun import stderr_print
+from NanopolishComp.common import stderr_print
 
 #~~~~~~~~~~~~~~TOP LEVEL ENTRY POINT~~~~~~~~~~~~~~#
 def main ():
@@ -40,7 +40,7 @@ def Eventalign_collapse_argparse ():
     # Define parser object
     parser = argparse.ArgumentParser (description=
     "Collapse the nanopolish eventalign output by kmers rather that by events.\
-    kmer level statistics (mean, median, std, var) are only computed if nanopolish is run with --samples option")
+    kmer level statistics (mean, median, num_signals) are only computed if nanopolish is run with --samples option")
     parser.prog = "NanopolishComp Eventalign_collapse"
     # Define arguments
     parser.add_argument("subprogram")

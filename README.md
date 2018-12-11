@@ -1,37 +1,38 @@
-# NanopolishComp 0.4 package documentation
+# NanopolishComp package documentation
+
+[![GitHub license](https://img.shields.io/github/license/a-slide/NanopolishComp.svg)](https://github.com/a-slide/NanopolishComp/blob/master/LICENSE)
+[![Language](https://img.shields.io/badge/Language-Python3-yellow.svg)](https://www.python.org/)
+[![PyPI version](https://badge.fury.io/py/NanopolishComp.svg)](https://badge.fury.io/py/NanopolishComp)
+
 ---
 
 **Python3 package for upstream preprocessing and downstream analyses of nanopolish**
 
 ---
 
-* Author: Adrien Leger - aleg {at} ebi.ac.uk
-* URL: https://github.com/a-slide/NanopolishComp
-* Licence: MIT
-* Python version: >=3.3
-
 # Installation
 
 Ideally, before installation, create a clean python3 virtual environment to deploy the package, using virtualenvwrapper for example (see http://www.simononsoftware.com/virtualenv-tutorial-part-2/).
 
-## Required python packages:
+## Dependencies
 
 [Nanopolish 0.10+](https://github.com/jts/nanopolish) is required to generate the files used by several commands from this package
 
-All python dependencies are automatically installed with pip
+NanopolishComp relies on a few robustly maintained third party libraries (numpy, tqdm). The correct versions of the packages are installed together with the software when using pip.
 
-## Installation with pip
+## Installation with pip from pypi or github
 
-Ideally, before installation, create a clean python3 virtual environment to deploy the package, using virtualenvwrapper for example (see http://www.simononsoftware.com/virtualenv-tutorial-part-2/).
+Install or upgrade the package with pip from pypi
 
-* To install the package
+```python
+pip3 install NanopolishComp --upgrade
+```
 
-    ```pip3 install git+https://github.com/a-slide/NanopolishComp.git```
+Or from github to get the last version
 
-* To update the package:
-
-    ```pip3 install git+https://github.com/a-slide/NanopolishComp.git --upgrade```
-
+```python
+pip3 install git+https://github.com/a-slide/NanopolishComp.git --upgrade
+```
 ## Command list
 
 ### Eventalign_collapse
@@ -46,15 +47,18 @@ The main data file contains the following fields:
 
 * ref_pos: Reference sequence ID (contig).
 * ref_kmer: Sequence of the reference kmers.
-* n_events: Number of events for this kmer before collapsing.
-* NNNNN_events: Number of events for which the model sequence was "NNNNN" for this kmer before collapsing (event ignored by nanopolish HMM).
-* mismatching_events: Number of events for which the model sequence was different from the reference sequence for this kmer before collapsing.
-* start_idx: If nanopolish called with --signal_idx. Start coordinate on original raw signal in fast5 file
-* end_idx: If nanopolish called with --signal_idx. End coordinate on original raw signal in fast5 file
-* mean: If nanopolish called with --samples. Mean signal intensity based on normalized signal values provided by Nanopolish eventalign
-* std: If nanopolish called with --samples. Standard deviation of signal intensity based on normalised signal values provided by Nanopolish eventalign
-* n_signals: If nanopolish called with --samples. Number of signal data points
-* samples: If nanopolish called with --samples and Eventalign_collapse with --write_samples. List of normalised signal intensity values for this kmer
+* num_events: Number of events for this kmer before collapsing.
+* dwell_time: dwell time for this kmer in seconds
+* NNNNN_dwell_time: dwell time of events for this kmers with a model sequence "NNNNN" (events ignored by nanopolish HMM).
+* mismatch_dwell_time:  dwell time of events for this kmers with a model sequence different from the reference kmer
+* start_idx: Only if nanopolish eventalign called with --signal_idx. Start coordinate on original raw signal in fast5 file
+* end_idx: Only if nanopolish eventalign called with --signal_idx. End coordinate on original raw signal in fast5 file
+* mean: Only if nanopolish eventalign called with --samples. Mean of the normalised signal values provided by Nanopolish eventalign
+* median: Only if nanopolish eventalign called with --samples. Median of the normalised signal values provided by Nanopolish eventalign
+* std: Only if nanopolish eventalign called with --samples. Standard deviation of the normalised signal values provided by Nanopolish eventalign
+* mad: Only if nanopolish eventalign called with --samples. Median absolute deviation of the normalised signal values provided by Nanopolish eventalign
+* num_signals: Only if nanopolish eventalign called with --samples. Number of raw signal points.
+* samples: Only if nanopolish eventalign called with --samples and Eventalign_collapse called with --write_samples. List of normalised signal intensity values for this kmer
 
 In addition **Eventalign_collapse** also generates an useful index file containing reads level information. It contains the following fields:
 
@@ -62,23 +66,59 @@ In addition **Eventalign_collapse** also generates an useful index file containi
 * ref_id: Name of the reference sequence the read was aligned on (contig)
 * ref_start: Start coordinate of the alignment on the reference sequence
 * ref_end: End coordinate of the alignment on the reference sequence
+* dwell_time: Cumulative dwell time in seconds for the entire resquiggled sequence
 * kmers: Overall number of resquiggled kmers
 * NNNNN_kmers: Number of resquiggled kmers containing at least 1 event for which the model sequence was "NNNNN"
 * mismatching_kmers: Number of resquiggled kmers containing at least 1 event for which the model sequence diverged from the reference sequence
 * missing_kmers: Number of skipped/missing reference positions in nanopolish output
-* offset: Number of characters before the start of the sequence in the main output file. **This can be used in conjunction with file.seek() to directly access the start of a read**. An example is provided in the Usage notebook.
+* byte_offset: Number of characters before the start of the sequence in the main output file. **This can be used in conjunction with file.seek() to directly access the start of a read**. An example is provided in the Usage notebook.
+* byte_len: Length of characters after byte_offset to the end of the read, excluding the last newline. **This can be used in conjunction with read() to read all the text chunk corresponding to the read**.
 
-## Usage
+### Usage
 
 The package has a command line interface and a Python API.
+The usage is detailed in the [usage jupyter notebook](https://a-slide.github.io/NanopolishComp/NanopolishComp_usage.html)
 
-The usage is detailed in the [usage jupyter notebook](https://nbviewer.jupyter.org/github/a-slide/NanopolishComp/blob/master/tests/NanopolishComp_usage.ipynb?flush_cache=true)
+### Command line interface help
 
+```
+usage: NanopolishComp Eventalign_collapse [-h] -o OUTPUT_FN [-i INPUT_FN]
+                                          [-t THREADS] [-r MAX_READS] [-s]
+                                          [-v]
+                                          subprogram
+
+Collapse the nanopolish eventalign output by kmers rather that by events. kmer
+level statistics (mean, median, num_signals) are only computed if nanopolish
+is run with --samples option
+
+positional arguments:
+  subprogram
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o OUTPUT_FN, --output_fn OUTPUT_FN
+                        Path the output eventalign collapsed tsv file
+  -i INPUT_FN, --input_fn INPUT_FN
+                        Path to a nanopolish eventalign tsv output file. If
+                        '0' read from std input (default = 0)
+  -t THREADS, --threads THREADS
+                        Total number of threads. 1 thread is used for the
+                        reader and 1 for the writer (default = 4)
+  -r MAX_READS, --max_reads MAX_READS
+                        Maximum number of read to parse. 0 to deactivate
+                        (default = 0)
+  -s, --write_samples   If given, will write the raw sample if eventalign is
+                        run with --samples option
+  -v, --verbose         If given will be more chatty (default = False)
+```
 
 # Note to power-users and developers
 
-Please be aware that **NanopolishComp** is an experimental package that is still under development. It was tested under Linux Ubuntu 16.04 and in an HPC environment running under Red Hat Enterprise 7.1.
-
+Please be aware that NanopolishComp is a research package that is still under development. It was tested under Linux Ubuntu 16.04 and in an HPC environment running under Red Hat Enterprise 7.1.
 You are welcome to contribute by requesting additional functionalities, reporting bugs or by forking and submitting pull requests
 
 Thank you
+
+### Authors
+
+* Adrien Leger - aleg {at} ebi.ac.uk
