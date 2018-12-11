@@ -21,7 +21,7 @@ import numpy as np
 from tqdm import tqdm
 
 # Local imports
-from NanopolishComp.Helper_fun import stderr_print, access_file
+from NanopolishComp.common import stderr_print, access_file, NanopolishCompError
 
 #~~~~~~~~~~~~~~CLASS~~~~~~~~~~~~~~#
 class Eventalign_collapse ():
