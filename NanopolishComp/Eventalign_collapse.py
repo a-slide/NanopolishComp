@@ -113,6 +113,9 @@ class Eventalign_collapse ():
 
                 # Get header line and extract corresponding index
                 input_header = fp.readline().rstrip().split("\t")
+                if not input_header:
+                    raise NanopolishCompError ("Input file/stream is empty")
+
                 idx = self._get_field_idx (input_header)
                 n_reads = 0
 
@@ -242,7 +245,7 @@ class Eventalign_collapse ():
                  open (self.output_fn+".idx", "w") as idx_fp,\
                  tqdm (unit=" reads", mininterval=0.1, smoothing=0.1, disable= not self.verbose) as pbar:
 
-                idx_fp.write ("ref_id\tref_start\tref_end\tread_id\tdwell_time\tkmers\tNNNNN_kmers\tmismatch_kmers\tmissing_kmers\tbyte_offset\tbyte_len\n")
+                idx_fp.write ("ref_id\tref_start\tref_end\tread_id\kmers\tdwell_time\tNNNNN_kmers\tmismatch_kmers\tmissing_kmers\tbyte_offset\tbyte_len\n")
 
                 n_reads = 0
                 for _ in range (self.threads):
@@ -255,8 +258,8 @@ class Eventalign_collapse ():
                             read_d["ref_start"],
                             read_d["ref_end"],
                             read_d["read_id"],
-                            read_d["dwell_time"],
                             read_d["kmers"],
+                            read_d["dwell_time"],
                             read_d["NNNNN_kmers"],
                             read_d["mismatch_kmers"],
                             read_d["missing_kmers"],
