@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-#~~~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
 # Disable multithreading for MKL and openBlas
 import os
@@ -10,7 +10,6 @@ os.environ["NUMEXPR_NUM_THREADS"] = "1"
 os.environ["OMP_NUM_THREADS"] = "1"
 os.environ['OPENBLAS_NUM_THREADS'] = '1'
 
-#~~~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~#
 # Standard library imports
 import multiprocessing as mp
 from time import time
@@ -22,56 +21,83 @@ import numpy as np
 from tqdm import tqdm
 
 # Local imports
-from NanopolishComp.common import stderr_print, access_file, NanopolishCompError
+from NanopolishComp.common import file_readable, dir_writable, NanopolishCompError
 
-#~~~~~~~~~~~~~~CLASS~~~~~~~~~~~~~~#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~LOGGING INFO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+import logging
+logging.basicConfig(level=logging.INFO, format="%(message)s")
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MAIN CLASS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
 class Eventalign_collapse ():
-    """
-    Collapse the nanopolish eventalign output by kmers rather that by events.
-    kmer level statistics (mean, median, std, mad) are only computed if nanopolish is run with --samples option
-    """
 
     def __init__ (self,
-        output_fn,
-        input_fn=0,
-        threads=4,
-        max_reads=None,
-        write_samples=False,
-        stat_fields=["mean", "median", "num_signals"],
-        verbose=False,):
+        output_fn:"str",
+        input_fn:"str",
+        max_reads:"int"=None,
+        write_samples:"bool"=False,
+        stat_fields:"list of str"=["mean", "median", "num_signals"],
+        threads:"int"=4,
+        verbose:"bool"=False,
+        quiet:"bool"=False):
         """
+        Collapse the nanopolish eventalign output by kmers rather that by events.
+        kmer level statistics (mean, median, std, mad) are only computed if nanopolish is run with --samples option
         * output_fn
             Path the output eventalign collapsed tsv file
         * input_fn
-            Path to a nanopolish eventalign tsv output file. If '0' read from std input (default = 0)
-        * threads
-            Total number of threads. 1 thread is used for the reader and 1 for the writer (default = 4)
+            Path to a nanopolish eventalign tsv output file.
         * max_reads
             Maximum number of read to parse. 0 to deactivate (default = 0)
         * write_samples
-            If given, will write the raw sample if eventalign is run with --samples option
+            If given, will write the raw sample if nanopolish eventalign was ran with --samples option
         * stat_fields
-            List  of statistical fields generated if nanopolish is ran with --sample option.
+            List of statistical fields to compute if nanopolish eventalign was ran with --samples option.
             Valid values = "mean", "std", "median", "mad", "num_signals"
+        * threads
+            Total number of threads. 1 thread is used for the reader and 1 for the writer (default = 4)
+        * verbose
+            Increase verbosity
+        * quiet
+            Reduce verbosity
         """
 
-        if input_fn and not access_file (input_fn):
+        # Define overall verbose level
+        self.log = logging.getLogger()
+        if verbose:
+            self.log.setLevel (logging.DEBUG)
+            self.verbose_level = 2
+        elif quiet:
+            self.log.setLevel (logging.WARNING)
+            self.verbose_level = 0
+        else:
+            self.log.setLevel (logging.INFO)
+            self.verbose_level = 1
+
+        # Verify parameters validity
+        self.log.info ("Checking arguments")
+        self.log.debug("\tTesting input file readability")
+        if input_fn != 0 and not file_readable (input_fn):
             raise IOError ("Cannot read input file")
+        self.log.debug("\tTesting output file writability")
+        if not dir_writable (output_fn):
+            raise IOError ("Cannot write output file in indicated folder. Create the output folder if it does not exist yet")
+        self.log.debug("\tChecking number of threads")
         if threads < 3:
             raise ValueError ("At least 3 threads required")
+        self.log.debug("\tChecking if stat_fields names are valid")
         for field in stat_fields:
             if not field in ["mean", "std", "median", "mad", "num_signals"]:
                 raise ValueError ("Invalid value in stat_field {}. Valid entries = mean, std, median, mad, num_signals".format(field))
 
+        # Save args to self values
         self.output_fn = output_fn
         self.input_fn = input_fn
         self.threads = threads-2 # Remove 2 threads for read and write
         self.max_reads = max_reads
         self.write_samples = write_samples
         self.stat_fields = stat_fields
-        self.verbose = verbose
 
-        if self.verbose: stderr_print ("Collapse file by read_id/ref_id\n")
         # Init Multiprocessing variables
         in_q = mp.Queue (maxsize = 1000)
         out_q = mp.Queue (maxsize = 1000)
@@ -81,9 +107,10 @@ class Eventalign_collapse ():
         ps_list = []
         ps_list.append (mp.Process (target=self._split_reads, args=(in_q, error_q)))
         for i in range (self.threads):
-            ps_list.append (mp.Process (target=self._process_read, args=(in_q, out_q, error_q)))
+            ps_list.append (mp.Process (target=self._process_read, args=(in_q, out_q, error_q, i+1)))
         ps_list.append (mp.Process (target=self._write_output, args=(out_q, error_q)))
 
+        self.log.info ("Starting to process files")
         try:
             # Start all processes
             for ps in ps_list:
@@ -99,14 +126,15 @@ class Eventalign_collapse ():
         except (BrokenPipeError, KeyboardInterrupt, NanopolishCompError) as E:
             for ps in ps_list:
                 ps.terminate ()
-            stderr_print ("\nAn error occured. All processes were killed\n")
+            self.log.warning ("\nAn error occured. All processes were killed\n")
             raise E
 
-    #~~~~~~~~~~~~~~PRIVATE METHODS~~~~~~~~~~~~~~#
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PRIVATE METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     def _split_reads (self, in_q, error_q):
         """
         Mono-threaded reader
         """
+        self.log.debug("\t[split_reads] Start reading input file/stream")
         try:
             # Open input file or stdin if 0
             with open (self.input_fn) as fp:
@@ -158,11 +186,13 @@ class Eventalign_collapse ():
         finally:
             for i in range (self.threads):
                 in_q.put(None)
+            self.log.debug("\t[split_reads] Done")
 
-    def _process_read (self, in_q, out_q, error_q):
+    def _process_read (self, in_q, out_q, error_q, pid):
         """
         Multi-threaded workers
         """
+        self.log.debug("\t[process_read {}] Starting processing reads".format(pid))
         try:
             # Collapse event at kmer level
             for read_id, ref_id, read_l in iter(in_q.get, None):
@@ -229,23 +259,25 @@ class Eventalign_collapse ():
         except Exception:
             error_q.put (NanopolishCompError(traceback.format_exc()))
         finally:
+            self.log.debug("\t[process_read {}] Done".format(pid))
             out_q.put(None)
 
     def _write_output (self, out_q, error_q):
         """
         Mono-threaded Writer
         """
+        self.log.debug("\t[write_output] Start rwriting output")
+
         byte_offset = n_reads = 0
         t = time()
 
         try:
-
             # Open output files
             with open (self.output_fn, "w") as output_fp,\
                  open (self.output_fn+".idx", "w") as idx_fp,\
-                 tqdm (unit=" reads", mininterval=0.1, smoothing=0.1, disable= not self.verbose) as pbar:
+                 tqdm (unit=" reads", mininterval=0.1, smoothing=0.1, disable = self.verbose_level == 0) as pbar:
 
-                idx_fp.write ("ref_id\tref_start\tref_end\tread_id\kmers\tdwell_time\tNNNNN_kmers\tmismatch_kmers\tmissing_kmers\tbyte_offset\tbyte_len\n")
+                idx_fp.write ("ref_id\tref_start\tref_end\tread_id\tkmers\tdwell_time\tNNNNN_kmers\tmismatch_kmers\tmissing_kmers\tbyte_offset\tbyte_len\n")
 
                 n_reads = 0
                 for _ in range (self.threads):
@@ -268,7 +300,8 @@ class Eventalign_collapse ():
 
                         byte_offset += byte_len
                         n_reads += 1
-                        if self.verbose: pbar.update(1)
+                        if self.verbose_level > 0:
+                            pbar.update(1)
 
                 # Flag last line
                 output_fp.write ("#\n")
@@ -277,11 +310,12 @@ class Eventalign_collapse ():
         except Exception:
             error_q.put (NanopolishCompError(traceback.format_exc()))
         finally:
+            self.log.debug("\t[write_output] Done")
+            self.log.warning ("[Eventalign_collapse] total reads: {} [{} reads/s]\n".format(n_reads, round (n_reads/(time()-t), 2)))
             error_q.put(None)
 
-        stderr_print ("[Eventalign_collapse] total reads: {} [{} reads/s]\n".format(n_reads, round (n_reads/(time()-t), 2)))
 
-    #~~~~~~~~~~~~~~HELPER PRIVATE METHODS~~~~~~~~~~~~~~#
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~HELPER PRIVATE METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
     def _get_field_idx (self, input_header):
         """"""
