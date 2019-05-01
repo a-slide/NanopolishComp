@@ -32,8 +32,9 @@ logging.basicConfig(level=logging.INFO, format="%(message)s")
 class Eventalign_collapse ():
 
     def __init__ (self,
-        output_fn:"str",
         input_fn:"str",
+        outdir:"str"="./",
+        outprefix:"str"="out",
         max_reads:"int"=None,
         write_samples:"bool"=False,
         stat_fields:"list of str"=["mean", "median", "num_signals"],
@@ -43,10 +44,12 @@ class Eventalign_collapse ():
         """
         Collapse the nanopolish eventalign output by kmers rather that by events.
         kmer level statistics (mean, median, std, mad) are only computed if nanopolish is run with --samples option
-        * output_fn
-            Path the output eventalign collapsed tsv file
         * input_fn
             Path to a nanopolish eventalign tsv output file.
+        * outdir
+            Path to the output folder
+        * outprefix
+            text outprefix for all the files generated
         * max_reads
             Maximum number of read to parse. 0 to deactivate (default = 0)
         * write_samples
@@ -66,21 +69,16 @@ class Eventalign_collapse ():
         self.log = logging.getLogger()
         if verbose:
             self.log.setLevel (logging.DEBUG)
-            self.verbose_level = 2
         elif quiet:
             self.log.setLevel (logging.WARNING)
-            self.verbose_level = 0
-        else:
-            self.log.setLevel (logging.INFO)
-            self.verbose_level = 1
 
         # Verify parameters validity
         self.log.info ("Checking arguments")
         self.log.debug("\tTesting input file readability")
         if input_fn != 0 and not file_readable (input_fn):
             raise IOError ("Cannot read input file")
-        self.log.debug("\tTesting output file writability")
-        if not dir_writable (output_fn):
+        self.log.info("Testing output dir writability")
+        if not dir_writable (outdir):
             raise IOError ("Cannot write output file in indicated folder. Create the output folder if it does not exist yet")
         self.log.debug("\tChecking number of threads")
         if threads < 3:
@@ -91,7 +89,8 @@ class Eventalign_collapse ():
                 raise ValueError ("Invalid value in stat_field {}. Valid entries = mean, std, median, mad, num_signals".format(field))
 
         # Save args to self values
-        self.output_fn = output_fn
+        self.outdir = outdir
+        self.outprefix = outprefix
         self.input_fn = input_fn
         self.threads = threads-2 # Remove 2 threads for read and write
         self.max_reads = max_reads
@@ -273,9 +272,11 @@ class Eventalign_collapse ():
 
         try:
             # Open output files
-            with open (self.output_fn, "w") as output_fp,\
-                 open (self.output_fn+".idx", "w") as idx_fp,\
-                 tqdm (unit=" reads", mininterval=0.1, smoothing=0.1, disable = self.verbose_level == 0) as pbar:
+            data_fn = os.path.join(self.outdir, self.outprefix+"_eventalign_collapse.tsv")
+            idx_fn = os.path.join(self.outdir, self.outprefix+"_eventalign_collapse.tsv.idx")
+            with open (data_fn, "w") as data_fp,\
+                 open (idx_fn, "w") as idx_fp,\
+                 tqdm (unit=" reads", mininterval=0.1, smoothing=0.1, disable=self.log.level>=30) as pbar:
 
                 idx_fp.write ("ref_id\tref_start\tref_end\tread_id\tkmers\tdwell_time\tNNNNN_kmers\tmismatch_kmers\tmissing_kmers\tbyte_offset\tbyte_len\n")
 
@@ -284,7 +285,7 @@ class Eventalign_collapse ():
                     for (read_d, read_str) in iter (out_q.get, None):
                         byte_len = len(read_str)
 
-                        output_fp.write (read_str)
+                        data_fp.write (read_str)
                         idx_fp.write ("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format (
                             read_d["ref_id"],
                             read_d["ref_start"],
@@ -300,11 +301,11 @@ class Eventalign_collapse ():
 
                         byte_offset += byte_len
                         n_reads += 1
-                        if self.verbose_level > 0:
+                        if self.log.level<30:
                             pbar.update(1)
 
                 # Flag last line
-                output_fp.write ("#\n")
+                data_fp.write ("#\n")
 
         # Manage exceptions and deal poison pills
         except Exception:
@@ -313,7 +314,6 @@ class Eventalign_collapse ():
             self.log.debug("\t[write_output] Done")
             self.log.warning ("[Eventalign_collapse] total reads: {} [{} reads/s]\n".format(n_reads, round (n_reads/(time()-t), 2)))
             error_q.put(None)
-
 
     #~~~~~~~~~~~~~~~~~~~~~~~~~~HELPER PRIVATE METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
