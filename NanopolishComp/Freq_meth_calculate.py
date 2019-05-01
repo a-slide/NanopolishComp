@@ -170,9 +170,9 @@ class Freq_meth_calculate():
 
     def __repr__ (self):
         m = ""
-        m+="Read sites summary\n"
+        m+="Read sites summary:\n"
         m+=counter_to_str(self.site_c)
-        m+="Genomic positions summary\n"
+        m+="Genomic positions summary:\n"
         m+=counter_to_str(self.pos_c)
         return m
 
@@ -197,6 +197,13 @@ class Freq_meth_calculate():
             # Sort by methylation frequency and write values
             for site in sorted(sites_d.values(), key=lambda s: s.meth_freq, reverse=True):
                 fp.write (site.to_tsv()+"\n")
+
+        # log file _write_output
+        self.log.info("Writing log file")
+        fn = os.path.join(outdir, outprefix+"_freq_meth_calculate.log")
+        with open (fn, "w") as fp:
+            # Write header
+            fp.write (str(self))
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~HELPER CLASS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
