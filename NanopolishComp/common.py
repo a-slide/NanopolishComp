@@ -139,7 +139,7 @@ def head (fp, n=10, sep="\t", comment=None):
                 line_num+=1
 
     except StopIteration:
-        print ("Only {} lines in the file".format(line_num))
+        pass
 
     # Add padding if sep given
     if sep:
