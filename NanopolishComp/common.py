@@ -9,22 +9,51 @@ from collections import *
 #~~~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~#
 
 def stderr_print (*args):
-    """reproduce print with stderr.write
-    """
+    """reproduce print with stderr.write"""
     sys.stderr.write(" ".join(str(a) for a in args))
     sys.stderr.flush()
 
 def file_readable (fn, **kwargs):
-    """Check if the file is readable
-    """
+    """Check if the file is readable"""
     return os.path.isfile (fn) and os.access (fn, os.R_OK)
 
 def dir_writable (fn, **kwargs):
-    """Check if the file is readable
-    """
+    """Check if the file is readable"""
     if not os.path.isdir(fn):
         fn = os.path.dirname(fn)
     return os.path.dirname(fn) and os.access (fn, os.W_OK)
+
+def numeric_cast_dict (d):
+    """Cast str values to integer or float from a dict """
+    for k, v in d.items():
+        d[k] = numeric_cast(v)
+    return d
+
+def numeric_cast (v):
+    """Try to cast values to int or to float"""
+    if type(v)== str:
+        try:
+            v = int(v)
+        except ValueError:
+            try:
+                v = float(v)
+            except ValueError:
+                pass
+    return v
+
+def find_subseq_index (seq, subseq):
+    """Find all sub-sequences index in a sequence"""
+    i = seq.find(subseq)
+    while i != -1:
+        yield i
+        i = seq.find(subseq, i+1)
+
+def counter_to_str (c):
+    """ Transform a counter dict to a tabulated str """
+    m = ""
+    for i, j in c.most_common():
+        m += "\t{}: {:,}\n".format(i, j)
+    return m
 
 def jhelp (f:"python function or method"):
     """
@@ -84,6 +113,63 @@ def jhelp (f:"python function or method"):
 
         # Display in Jupyter
         display (Markdown(s))
+
+def head (fp, n=10, sep="\t", comment=None):
+    """
+    Emulate linux head cmd. Handle gziped files and bam files
+    * fp
+        Path to the file to be parse.
+    * n
+        Number of lines to print starting from the begining of the file (Default 10)
+    """
+    line_list = []
+
+    # Get lines
+    try:
+        with open(fp) as fh:
+            line_num = 0
+            while (line_num < n):
+                l= next(fh).strip()
+                if comment and l.startswith(comment):
+                    continue
+                if sep:
+                    line_list.append (l.split(sep))
+                else:
+                    line_list.append (l)
+                line_num+=1
+
+    except StopIteration:
+        print ("Only {} lines in the file".format(line_num))
+
+    # Add padding if sep given
+    if sep:
+        try:
+            # Find longest elem per col
+            col_len_list = [0 for _ in range (len(line_list[0]))]
+            for ls in line_list:
+                for i in range (len(ls)):
+                    len_col = len(ls[i])
+                    if len_col > col_len_list[i]:
+                        col_len_list[i] = len_col
+
+            # Add padding
+            line_list_tab = []
+            for ls in line_list:
+                s = ""
+                for i in range (len(ls)):
+                    len_col = col_len_list[i]
+                    len_cur_col = len(ls[i])
+                    s += ls[i][0:len_col] + " "*(len_col-len_cur_col)+" "
+                line_list_tab.append(s)
+            line_list = line_list_tab
+
+        # Fall back to non tabulated display
+        except IndexError:
+            return head (fp=fp, n=n, sep=None)
+
+    for l in line_list:
+        print (l)
+    print()
 
 
 #~~~~~~~~~~~~~~CUSTOM EXCEPTION AND WARN CLASSES~~~~~~~~~~~~~~#
