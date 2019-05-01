@@ -3,6 +3,7 @@
 [![GitHub license](https://img.shields.io/github/license/a-slide/NanopolishComp.svg)](https://github.com/a-slide/NanopolishComp/blob/master/LICENSE)
 [![Language](https://img.shields.io/badge/Language-Python3-yellow.svg)](https://www.python.org/)
 [![PyPI version](https://badge.fury.io/py/NanopolishComp.svg)](https://badge.fury.io/py/NanopolishComp)
+[![PyPI downloads](https://pepy.tech/badge/nanopolishcomp)](https://pepy.tech/project/nanopolishcomp)
 [![DOI](https://zenodo.org/badge/144169864.svg)](https://zenodo.org/badge/latestdoi/144169864)
 
 **NanopolishComp is a Python3 package for downstream analyses of Nanopolish output files**
