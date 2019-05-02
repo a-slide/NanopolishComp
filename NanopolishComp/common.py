@@ -48,11 +48,15 @@ def find_subseq_index (seq, subseq):
         yield i
         i = seq.find(subseq, i+1)
 
-def counter_to_str (c):
-    """ Transform a counter dict to a tabulated str """
+def dict_to_str (c):
+    """ Transform a dict to a tabulated str """
     m = ""
-    for i, j in c.most_common():
-        m += "\t{}: {:,}\n".format(i, j)
+    if type(c) == Counter:
+        for i, j in c.most_common():
+            m += "\t{}: {:,}\n".format(i, j)
+    else:
+        for i, j in c.items():
+            m += "\t{}: {}\n".format(i, j)
     return m
 
 def jhelp (f:"python function or method"):

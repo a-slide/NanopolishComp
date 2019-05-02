@@ -6,12 +6,15 @@
 # Standard library imports
 from collections import *
 import csv
+import datetime
 
 # Third party imports
 from tqdm import tqdm
 
 # Local imports
 from NanopolishComp.common import *
+from NanopolishComp import __version__ as package_version
+from NanopolishComp import __name__ as package_name
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~LOGGING INFO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 import logging
@@ -56,12 +59,28 @@ class Freq_meth_calculate():
             Reduce verbosity
         """
 
+        # Save init options in dict for later
+        kwargs = locals()
+
         # Define overall verbose level
         self.log = logging.getLogger()
         if verbose:
             self.log.setLevel (logging.DEBUG)
         elif quiet:
             self.log.setLevel (logging.WARNING)
+        else:
+            self.log.setLevel (logging.INFO)
+
+        # Collect args in dict for log report
+        self.option_d = OrderedDict()
+        self.option_d["package_name"] = package_name
+        self.option_d["package_version"] = package_version
+        self.option_d["timestamp"] = str(datetime.datetime.now())
+        for i, j in kwargs.items():
+            if i != "self":
+                self.option_d[i]=j
+        self.log.debug ("Options summary")
+        self.log.debug (dict_to_str(self.option_d))
 
         # Verify parameters validity
         self.log.warning ("## Checking arguments ##")
@@ -144,7 +163,7 @@ class Freq_meth_calculate():
 
         # Print read level counter summary
         self.log.debug ("Read sites summary")
-        self.log.debug (counter_to_str(self.site_c))
+        self.log.debug (dict_to_str(self.site_c))
 
         self.log.info ("Filtering out positions with low coverage or methylation frequency")
         filtered_sites_d = OrderedDict()
@@ -164,16 +183,17 @@ class Freq_meth_calculate():
 
         # Print genomic positions level counter summary
         self.log.debug ("Genomic positions summary")
-        self.log.debug (counter_to_str(self.pos_c))
+        self.log.debug (dict_to_str(self.pos_c))
 
         return filtered_sites_d
 
     def __repr__ (self):
-        m = ""
+        m = "General options:\n"
+        m+=dict_to_str(self.option_d)
         m+="Read sites summary:\n"
-        m+=counter_to_str(self.site_c)
+        m+=dict_to_str(self.site_c)
         m+="Genomic positions summary:\n"
-        m+=counter_to_str(self.pos_c)
+        m+=dict_to_str(self.pos_c)
         return m
 
     def _write_output (self, sites_d, outdir, outprefix):
@@ -202,7 +222,6 @@ class Freq_meth_calculate():
         self.log.info("Writing log file")
         fn = os.path.join(outdir, outprefix+"_freq_meth_calculate.log")
         with open (fn, "w") as fp:
-            # Write header
             fp.write (str(self))
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~HELPER CLASS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
