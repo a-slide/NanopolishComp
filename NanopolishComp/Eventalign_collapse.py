@@ -50,7 +50,7 @@ class Eventalign_collapse ():
         * input_fn
             Path to a nanopolish eventalign tsv output file.
         * outdir
-            Path to the output folder
+            Path to the output folder (will be created if it does exist yet)
         * outprefix
             text outprefix for all the files generated
         * max_reads
@@ -93,12 +93,14 @@ class Eventalign_collapse ():
 
         # Verify parameters validity
         self.log.info ("Checking arguments")
+        # Try to read input file if not a stream
         self.log.debug("\tTesting input file readability")
         if input_fn != 0 and not file_readable (input_fn):
             raise IOError ("Cannot read input file")
-        self.log.info("Testing output dir writability")
-        if not dir_writable (outdir):
-            raise IOError ("Cannot write output file in indicated folder. Create the output folder if it does not exist yet")
+        # Try to create output folder
+        self.log.debug("\tCreating output folder")
+        mkdir(outdir, exist_ok=True)
+        # Check other args
         self.log.debug("\tChecking number of threads")
         if threads < 3:
             raise ValueError ("At least 3 threads required")

@@ -23,6 +23,13 @@ def dir_writable (fn, **kwargs):
         fn = os.path.dirname(fn)
     return os.path.dirname(fn) and os.access (fn, os.W_OK)
 
+def mkdir (fn, exist_ok=False):
+    """ Create directory recursivelly. Raise IO error if path exist or if error at creation """
+    try:
+        os.makedirs (fn, exist_ok=exist_ok)
+    except:
+        raise NanopolishCompError ("Error creating output folder `{}`".format(fn))
+
 def numeric_cast_dict (d):
     """Cast str values to integer or float from a dict """
     for k, v in d.items():

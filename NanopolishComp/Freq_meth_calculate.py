@@ -40,7 +40,7 @@ class Freq_meth_calculate():
         * input_fn
             Path to a nanopolish call_methylation tsv output file
         * outdir
-            Path to the output folder
+            Path to the output folder (will be created if it does exist yet)
         * outprefix
             text outprefix for all the files generated
         * min_llr
@@ -84,12 +84,13 @@ class Freq_meth_calculate():
 
         # Verify parameters validity
         self.log.warning ("## Checking arguments ##")
-        self.log.info("Test input file readability")
+        # Try to read input file if not a stream
+        self.log.debug("\tTesting input file readability")
         if input_fn != 0 and not file_readable (input_fn):
             raise IOError ("Cannot read input file")
-        self.log.info("Testing output dir writability")
-        if not dir_writable (outdir):
-            raise IOError ("Cannot write output file in indicated folder. Create the output folder if it does not exist yet")
+        # Try to create output folder
+        self.log.debug("\tCreating output folder")
+        mkdir(outdir, exist_ok=True)
 
         if motif == "cpg":
             motif_seq = "CG"
