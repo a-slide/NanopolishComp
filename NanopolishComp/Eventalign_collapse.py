@@ -13,15 +13,18 @@ os.environ['OPENBLAS_NUM_THREADS'] = '1'
 # Standard library imports
 import multiprocessing as mp
 from time import time
-from collections import OrderedDict
+from collections import *
 import traceback
+import datetime
 
 # Third party imports
 import numpy as np
 from tqdm import tqdm
 
 # Local imports
-from NanopolishComp.common import file_readable, dir_writable, NanopolishCompError
+from NanopolishComp.common import *
+from NanopolishComp import __version__ as package_version
+from NanopolishComp import __name__ as package_name
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~LOGGING INFO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 import logging
@@ -47,7 +50,7 @@ class Eventalign_collapse ():
         * input_fn
             Path to a nanopolish eventalign tsv output file.
         * outdir
-            Path to the output folder
+            Path to the output folder (will be created if it does exist yet)
         * outprefix
             text outprefix for all the files generated
         * max_reads
@@ -65,21 +68,39 @@ class Eventalign_collapse ():
             Reduce verbosity
         """
 
+        # Save init options in dict for later
+        kwargs = locals()
+
         # Define overall verbose level
         self.log = logging.getLogger()
         if verbose:
             self.log.setLevel (logging.DEBUG)
         elif quiet:
             self.log.setLevel (logging.WARNING)
+        else:
+            self.log.setLevel (logging.INFO)
+
+        # Collect args in dict for log report
+        self.option_d = OrderedDict()
+        self.option_d["package_name"] = package_name
+        self.option_d["package_version"] = package_version
+        self.option_d["timestamp"] = str(datetime.datetime.now())
+        for i, j in kwargs.items():
+            if i != "self":
+                self.option_d[i]=j
+        self.log.debug ("Options summary")
+        self.log.debug (dict_to_str(self.option_d))
 
         # Verify parameters validity
         self.log.info ("Checking arguments")
+        # Try to read input file if not a stream
         self.log.debug("\tTesting input file readability")
         if input_fn != 0 and not file_readable (input_fn):
             raise IOError ("Cannot read input file")
-        self.log.info("Testing output dir writability")
-        if not dir_writable (outdir):
-            raise IOError ("Cannot write output file in indicated folder. Create the output folder if it does not exist yet")
+        # Try to create output folder
+        self.log.debug("\tCreating output folder")
+        mkdir(outdir, exist_ok=True)
+        # Check other args
         self.log.debug("\tChecking number of threads")
         if threads < 3:
             raise ValueError ("At least 3 threads required")
@@ -127,6 +148,11 @@ class Eventalign_collapse ():
                 ps.terminate ()
             self.log.warning ("\nAn error occured. All processes were killed\n")
             raise E
+
+    def __repr__ (self):
+        m = "General options:\n"
+        m+=dict_to_str(self.option_d)
+        return m
 
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PRIVATE METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     def _split_reads (self, in_q, error_q):
@@ -306,6 +332,11 @@ class Eventalign_collapse ():
 
                 # Flag last line
                 data_fp.write ("#\n")
+
+            # Open log file
+            log_fn = os.path.join(self.outdir, self.outprefix+"_eventalign_collapse.log")
+            with open (log_fn, "w") as log_fp:
+                log_fp.write (str(self))
 
         # Manage exceptions and deal poison pills
         except Exception:
