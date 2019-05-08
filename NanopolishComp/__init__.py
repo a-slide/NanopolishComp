@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Define self package variable
-__version__ = "0.6.1"
+__version__ = "0.6.2"
 __description__ = 'NanopolishComp is a Python3 package for downstream analyses of Nanopolish output files'
 
 # Collect info in a dictionary for setup.py
