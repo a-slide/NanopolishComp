@@ -44,15 +44,12 @@ def main(args=None):
     subparser_fm.set_defaults(func=Freq_meth_calculate_main)
     subparser_fm_io = subparser_fm.add_argument_group("Input/Output options")
     subparser_fm_io.add_argument("-i", "--input_fn", default=0, help="Path to a nanopolish call_methylation tsv output file. If not specified read from std input")
-    subparser_fm_io.add_argument("-o", "--outdir", type=str, default="./", help="Path to the output folder (will be created if it does exist yet) (default: %(default)s)")
-    subparser_fm_io.add_argument("-p", "--outprefix", type=str, default="out", help="text outprefix for all the files generated (default: %(default)s)")
+    subparser_fm_io.add_argument("-b", "--output_bed_fn", type=str, default="", help="Path to write a summary result file in BED format (default: %(default)s)")
+    subparser_fm_io.add_argument("-t", "--output_tsv_fn", type=str, default="", help="Path to write an more extensive result report in TSV format (default: %(default)s)")
     subparser_fm_fo = subparser_fm.add_argument_group("Filtering options")
     subparser_fm_fo.add_argument("-l", "--min_llr", type=float, default=2.5, help="Log likelihood ratio threshold (default: %(default)s)")
     subparser_fm_fo.add_argument("-d", "--min_depth", type=int, default=10, help="Minimal number of reads covering a site to be reported (default: %(default)s)")
     subparser_fm_fo.add_argument("-f", "--min_meth_freq", type=float, default=0.05, help="Minimal methylation frequency of a site to be reported (default: %(default)s)")
-    subparser_fm_mo = subparser_fm.add_argument_group("Motif options")
-    subparser_fm_mo.add_argument("-s", "--split_group", default=False, action='store_true', help="If True, multi motif groups (sequence with close motifs) are split in individual site (default: %(default)s)")
-    subparser_fm_mo.add_argument("-m", "--motif", type=str, default="cpg", choices=["cpg","gpc","dam","dcm"], help="Methylation motif type (default: %(default)s)")
 
     # Add common group parsers
     for sp in [subparser_ec, subparser_fm]:
@@ -84,12 +81,10 @@ def Freq_meth_calculate_main (args):
     # Run corresponding class
     Freq_meth_calculate (
         input_fn = args.input_fn,
-        outdir = args.outdir,
-        outprefix = args.outprefix,
+        output_bed_fn = args.output_bed_fn,
+        output_tsv_fn = args.output_tsv_fn,
         min_llr = args.min_llr,
         min_depth = args.min_depth,
         min_meth_freq = args.min_meth_freq,
-        split_group = args.split_group,
-        motif = args.motif,
         verbose = args.verbose,
         quiet = args.quiet)
