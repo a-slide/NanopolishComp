@@ -5,6 +5,7 @@
 import sys
 import os
 from collections import *
+import logging
 
 #~~~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~#
 
@@ -48,23 +49,24 @@ def numeric_cast (v):
                 pass
     return v
 
-def find_subseq_index (seq, subseq):
-    """Find all sub-sequences index in a sequence"""
-    i = seq.find(subseq)
-    while i != -1:
-        yield i
-        i = seq.find(subseq, i+1)
-
-def dict_to_str (c):
-    """ Transform a dict to a tabulated str """
+def dict_to_str (d, sep="\t", nsep=0, exclude_list=[]):
+    """ Transform a multilevel dict to a tabulated str """
     m = ""
-    if type(c) == Counter:
-        for i, j in c.most_common():
-            m += "\t{}: {:,}\n".format(i, j)
+
+    if isinstance(d, Counter):
+        for i, j in d.most_common():
+            if not i in exclude_list:
+                m += "{}{}: {:,}\n".format(sep*nsep, i, j)
+
     else:
-        for i, j in c.items():
-            m += "\t{}: {}\n".format(i, j)
-    return m
+        for i, j in d.items():
+            if not i in exclude_list:
+                if isinstance(j, dict):
+                    j = dict_to_str(j, sep=sep, nsep=ntab+1)
+                    m += "{}{}\n{}".format(sep*nsep, i, j)
+                else:
+                    m += "{}{}: {}\n".format(sep*nsep, i, j)
+    return m[:-1]
 
 def jhelp (f:"python function or method"):
     """
@@ -181,6 +183,69 @@ def head (fp, n=10, sep="\t", comment=None):
     for l in line_list:
         print (l)
     print()
+
+def get_logger (name=None, verbose=False, quiet=False):
+    """Set logger to appropriate log level"""
+
+    logging.basicConfig(format='%(message)s')
+    logger = logging.getLogger(name)
+
+    # Define overall verbose level
+    if verbose:
+        logger.setLevel(logging.DEBUG)
+    elif quiet:
+        logger.setLevel(logging.WARNING)
+    else:
+        logger.setLevel(logging.INFO)
+
+    return logger
+
+class LineParser():
+    """Simple line parser which returns namedtuples per line and does numeric
+    type casting for file lines"""
+
+    def __init__(self, header_line, sep="\t", cast_numeric_field=True):
+        """"""
+        self.cast_numeric_field = cast_numeric_field
+        self.sep = sep
+        self.header = header_line.strip().split(self.sep)
+        self.line_tuple = namedtuple("Line", self.header)
+        self.c = Counter()
+
+    def __repr__ (self):
+        m = "Header names: {}\n".format(self.header)
+        m+="Line counter:{}".format(dict_to_str(self.c))
+        return m
+
+    def __call__(self, line):
+        """"""
+        line = line.strip().split(self.sep)
+
+        # Try to cast numeric field to appropiate type
+        if self.cast_numeric_field:
+            for i in range(len(line)):
+                line[i] = self._numeric_cast(line[i])
+
+        if len(line) != len(self.header):
+            self.c["Inconsistent field numbers"]+=1
+            return None
+        else:
+            # Cast line_tuple object
+            line = self.line_tuple(*line)
+            self.c["Valid line parsed"]+=1
+            return line
+
+    def _numeric_cast(self, val):
+        """Try to cast values to int or to float"""
+        if type(val)== str:
+            try:
+                val = int(val)
+            except ValueError:
+                try:
+                    val = float(val)
+                except ValueError:
+                    pass
+        return val
 
 
 #~~~~~~~~~~~~~~CUSTOM EXCEPTION AND WARN CLASSES~~~~~~~~~~~~~~#
