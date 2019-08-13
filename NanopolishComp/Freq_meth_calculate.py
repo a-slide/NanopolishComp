@@ -117,14 +117,18 @@ class Freq_meth_calculate():
             lp = LineParser(header_line, sep="\t", cast_numeric_field=True)
 
             for line in input_fp:
-                self.counter["total read lines"]+=1
+                self.counter["Total read lines"]+=1
                 byte_len = len(line)
                 l = lp(line)
 
-                # Store byte offset corresponding to appropriate line
-                k = (l.chromosome, l.strand, l.start)
-                site_dict[k].append(byte_offset)
-                byte_offset += byte_len
+                if not l:
+                    # Failsafe if line is malformed
+                    self.counter["Invalid read line"]+=1
+                else:
+                    # Store byte offset corresponding to appropriate line
+                    self.counter["Valid read lines"]+=1
+                    site_dict[(l.chromosome, l.strand, l.start)].append(byte_offset)
+                    byte_offset += byte_len
 
             self.log.info ("\tProcessing_valid site found")
             for k, offset_list in site_dict.items():
