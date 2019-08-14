@@ -75,10 +75,12 @@ class Freq_meth_calculate():
         if not output_bed_fn and not output_tsv_fn:
             raise NanopolishCompError("At least one output file should be given")
         if output_bed_fn:
-            mkdir (os.path.dirname(output_bed_fn), exist_ok=True)
+            if os.path.dirname(output_bed_fn):
+                mkdir (os.path.dirname(output_bed_fn), exist_ok=True)
             self.log.debug("\t\tOutput results in bed format")
         if output_tsv_fn:
-            mkdir (os.path.dirname(output_tsv_fn), exist_ok=True)
+            if os.path.dirname(output_tsv_fn):
+                mkdir (os.path.dirname(output_tsv_fn), exist_ok=True)
             self.log.debug("\t\tOutput results in tsv format")
 
         # Create self variables
