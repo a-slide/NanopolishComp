@@ -47,9 +47,7 @@ def main(args=None):
     subparser_fm_io.add_argument("-b", "--output_bed_fn", type=str, default="", help="Path to write a summary result file in BED format (default: %(default)s)")
     subparser_fm_io.add_argument("-t", "--output_tsv_fn", type=str, default="", help="Path to write an more extensive result report in TSV format (default: %(default)s)")
     subparser_fm_fo = subparser_fm.add_argument_group("Filtering options")
-    subparser_fm_fo.add_argument("-l", "--min_llr", type=float, default=2.5, help="Log likelihood ratio threshold (default: %(default)s)")
     subparser_fm_fo.add_argument("-d", "--min_depth", type=int, default=10, help="Minimal number of reads covering a site to be reported (default: %(default)s)")
-    subparser_fm_fo.add_argument("-f", "--min_meth_freq", type=float, default=0.05, help="Minimal methylation frequency of a site to be reported (default: %(default)s)")
 
     # Add common group parsers
     for sp in [subparser_ec, subparser_fm]:
@@ -83,8 +81,6 @@ def Freq_meth_calculate_main (args):
         input_fn = args.input_fn,
         output_bed_fn = args.output_bed_fn,
         output_tsv_fn = args.output_tsv_fn,
-        min_llr = args.min_llr,
         min_depth = args.min_depth,
-        min_meth_freq = args.min_meth_freq,
         verbose = args.verbose,
         quiet = args.quiet)

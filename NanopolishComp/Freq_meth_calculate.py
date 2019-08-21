@@ -10,6 +10,7 @@ import datetime
 
 # Third party imports
 from tqdm import tqdm
+import numpy as np
 
 # Local imports
 from NanopolishComp.common import *
@@ -24,9 +25,7 @@ class Freq_meth_calculate():
         input_fn:"str",
         output_bed_fn:"str"="",
         output_tsv_fn:"str"="",
-        min_llr:"float"=2.5,
         min_depth:"int"=10,
-        min_meth_freq:"float"=0.05,
         verbose:"bool"=False,
         quiet:"bool"=False):
         """
@@ -37,12 +36,8 @@ class Freq_meth_calculate():
             Path to write a summary result file in BED format
         * output_tsv_fn
             Path to write an more extensive result report in TSV format
-        * min_llr
-            Log likelihood ratio threshold
         * min_depth
             Minimal number of reads covering a site to be reported
-        * min_meth_freq
-            Minimal methylation frequency of a site to be reported
         * verbose
             Increase verbosity
         * quiet
@@ -75,10 +70,12 @@ class Freq_meth_calculate():
         if not output_bed_fn and not output_tsv_fn:
             raise NanopolishCompError("At least one output file should be given")
         if output_bed_fn:
-            mkdir (os.path.dirname(output_bed_fn), exist_ok=True)
+            if os.path.dirname(output_bed_fn):
+                mkdir (os.path.dirname(output_bed_fn), exist_ok=True)
             self.log.debug("\t\tOutput results in bed format")
         if output_tsv_fn:
-            mkdir (os.path.dirname(output_tsv_fn), exist_ok=True)
+            if os.path.dirname(output_tsv_fn):
+                mkdir (os.path.dirname(output_tsv_fn), exist_ok=True)
             self.log.debug("\t\tOutput results in tsv format")
 
         # Create self variables
@@ -86,9 +83,7 @@ class Freq_meth_calculate():
         self.input_fn = input_fn
         self.output_bed_fn = output_bed_fn
         self.output_tsv_fn = output_tsv_fn
-        self.min_llr = min_llr
         self.min_depth = min_depth
-        self.min_meth_freq = min_meth_freq
 
         self.log.warning ("## Parsing methylation_calls file ##")
         self._parse_methylation_calls ()
@@ -148,15 +143,12 @@ class Freq_meth_calculate():
                         ll.append (lp(input_fp.readline()))
 
                     # Parse list with helper class Site
-                    site = Site(ll, self.min_llr)
-                    if site.meth_freq < self.min_meth_freq:
-                        self.counter["Low methylation sites"]+=1
-                    else:
-                        self.counter["Valid sites"]+=1
-                        if self.output_bed_fn:
-                            output_bed_fp.write(site.to_bed()+"\n")
-                        if self.output_tsv_fn:
-                            output_tsv_fp.write(site.to_tsv()+"\n")
+                    site = Site (ll)
+                    self.counter["Valid sites"]+=1
+                    if self.output_bed_fn:
+                        output_bed_fp.write(site.to_bed()+"\n")
+                    if self.output_tsv_fn:
+                        output_tsv_fp.write(site.to_tsv()+"\n")
         finally:
             input_fp.close()
             if self.output_bed_fn:
@@ -179,13 +171,13 @@ class Site ():
 
     @classmethod
     def BED_header (cls):
-        return "track name='nanopolish_methylation' description='Methylation frequency track generated with nanopolish/NanopolishComp' useScore=1"
+        return "track name=methylation itemRgb=On"
 
     @classmethod
     def TSV_header (cls):
-        return "\t".join(["chromosome","start","end","strand","site_id","methylated_reads","unmethylated_reads","ambiguous_reads","sequence","num_motifs","meth_freq"])
+        return "\t".join(["chromosome","start","end","strand","site_id","methylated_reads","unmethylated_reads","ambiguous_reads","sequence","num_motifs","llr_list"])
 
-    def __init__ (self, ll, min_llr):
+    def __init__ (self, ll, min_llr=2):
         """"""
         self.total = len(ll)
         self.methylated = 0
@@ -199,7 +191,9 @@ class Site ():
         self.end = ll[0].end+1
         self.strand = ll[0].strand
 
+        llr_list = []
         for l in ll:
+            llr_list.append(float(l.log_lik_ratio))
             # Count read methylation call per site
             if l.log_lik_ratio >= min_llr:
                 self.methylated+=1
@@ -208,31 +202,40 @@ class Site ():
             else:
                 self.ambiguous+=1
 
-        self.meth_freq = self.methylated/self.total
+        self.med_llr = np.mean(llr_list)
+        self.llr_list = llr_list
+        if self.med_llr <= -min_llr:
+            self.color = '8,121,207'
+        elif self.med_llr < min_llr:
+            self.color = '100,100,100'
+        else:
+            self.color = '235,5,79'
 
     def __repr__(self):
-        return "{}:{}-{}({}) / id:{} / reads:{} / meth_freq:{:03}".format(
+        return "{}:{}-{}({}) / id:{} / reads:{}".format(
             self.chromosome,
             self.start,
             self.end,
             self.strand,
             self.id,
-            self.total,
-            self.meth_freq)
+            self.total)
 
     def to_bed (self):
         """"""
-        return "{}\t{}\t{}\t{}\t{:06}\t{}".format(
+        return "{}\t{}\t{}\t{}\t{:.6f}\t{}\t{}\t{}\t'{}''".format(
             self.chromosome,
             self.start,
             self.end,
             self.id,
-            int(self.meth_freq*1000),
-            self.strand)
+            self.med_llr,
+            self.strand,
+            self.start,
+            self.end,
+            self.color)
 
     def to_tsv (self):
         """"""
-        return "{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{:.6f}".format(
+        return "{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}".format(
             self.chromosome,
             self.start,
             self.end,
@@ -243,4 +246,4 @@ class Site ():
             self.ambiguous,
             self.sequence,
             self.num_motifs,
-            self.meth_freq)
+            ",".join([str(i) for i in self.llr_list]))
