@@ -26,6 +26,7 @@ class Freq_meth_calculate():
         output_bed_fn:"str"="",
         output_tsv_fn:"str"="",
         min_depth:"int"=10,
+        sample_id:"str"="",
         verbose:"bool"=False,
         quiet:"bool"=False):
         """
@@ -38,6 +39,8 @@ class Freq_meth_calculate():
             Path to write an more extensive result report in TSV format
         * min_depth
             Minimal number of reads covering a site to be reported
+        * sample_id
+            Sample ID to be used for the bed track header
         * verbose
             Increase verbosity
         * quiet
@@ -84,6 +87,7 @@ class Freq_meth_calculate():
         self.output_bed_fn = output_bed_fn
         self.output_tsv_fn = output_tsv_fn
         self.min_depth = min_depth
+        self.sample_id = sample_id
 
         self.log.warning ("## Parsing methylation_calls file ##")
         self._parse_methylation_calls ()
@@ -101,7 +105,7 @@ class Freq_meth_calculate():
             self.log.debug ("\tWrite output file header")
             if self.output_bed_fn:
                 output_bed_fp = open (self.output_bed_fn, "w")
-                output_bed_fp.write(Site.BED_header()+"\n")
+                output_bed_fp.write(Site.BED_header(self.sample_id)+"\n")
             if self.output_tsv_fn:
                 output_tsv_fp = open (self.output_tsv_fn, "w")
                 output_tsv_fp.write(Site.TSV_header()+"\n")
@@ -125,7 +129,7 @@ class Freq_meth_calculate():
                     site_dict[(l.chromosome, l.strand, l.start)].append(byte_offset)
                     byte_offset += byte_len
 
-            self.log.info ("\tProcessing_valid site found")
+            self.log.info ("\tProcessing valid sites found")
             for k, offset_list in site_dict.items():
                 self.counter["Total sites"]+=1
 
@@ -170,8 +174,8 @@ class Site ():
         return id
 
     @classmethod
-    def BED_header (cls):
-        return "track name=methylation itemRgb=On"
+    def BED_header (cls, sample_id=""):
+        return "track name=Nanopolish_methylation_{} itemRgb=On".format(sample_id)
 
     @classmethod
     def TSV_header (cls):

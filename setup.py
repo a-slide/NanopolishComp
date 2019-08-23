@@ -5,7 +5,7 @@ from setuptools import setup
 
 # Define package info
 name = "NanopolishComp"
-version = "0.6.6"
+version = "0.6.7"
 description = 'NanopolishComp is a Python3 package for downstream analyses of Nanopolish output files'
 with open("README.md", "r") as fh:
     long_description = fh.read()

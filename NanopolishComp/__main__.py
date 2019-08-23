@@ -48,6 +48,8 @@ def main(args=None):
     subparser_fm_io.add_argument("-t", "--output_tsv_fn", type=str, default="", help="Path to write an more extensive result report in TSV format (default: %(default)s)")
     subparser_fm_fo = subparser_fm.add_argument_group("Filtering options")
     subparser_fm_fo.add_argument("-d", "--min_depth", type=int, default=10, help="Minimal number of reads covering a site to be reported (default: %(default)s)")
+    subparser_fm_other = subparser_fm.add_argument_group("Other options")
+    subparser_fm_other.add_argument("-sc", "--sample_id", type=str, default="", help="Sample ID to be used for the bed track header (default: %(default)s)")
 
     # Add common group parsers
     for sp in [subparser_ec, subparser_fm]:
@@ -82,5 +84,6 @@ def Freq_meth_calculate_main (args):
         output_bed_fn = args.output_bed_fn,
         output_tsv_fn = args.output_tsv_fn,
         min_depth = args.min_depth,
+        sample_id = args.sample_id,
         verbose = args.verbose,
         quiet = args.quiet)
