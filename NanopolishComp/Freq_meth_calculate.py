@@ -7,6 +7,7 @@
 from collections import *
 import csv
 import datetime
+from random import randint
 
 # Third party imports
 from tqdm import tqdm
@@ -23,6 +24,7 @@ class Freq_meth_calculate():
 
     def __init__ (self,
         input_fn:"str",
+        fasta_index:"str"="",
         output_bed_fn:"str"="",
         output_tsv_fn:"str"="",
         min_depth:"int"=10,
@@ -33,6 +35,8 @@ class Freq_meth_calculate():
         Calculate methylation frequency at genomic CpG sites from the output of nanopolish call-methylation
         * input_fn
             Path to a nanopolish call_methylation tsv output file
+        * fasta_index
+            fasta index file obtained with samtools faidx. Required for coordinate sorting
         * output_bed_fn
             Path to write a summary result file in BED format
         * output_tsv_fn
@@ -84,6 +88,7 @@ class Freq_meth_calculate():
         # Create self variables
         self.counter = Counter()
         self.input_fn = input_fn
+        self.fasta_index = fasta_index
         self.output_bed_fn = output_bed_fn
         self.output_tsv_fn = output_tsv_fn
         self.min_depth = min_depth
@@ -96,6 +101,9 @@ class Freq_meth_calculate():
 
     def _parse_methylation_calls(self):
         """"""
+        # Init SGC class with fasta_index
+        if self.fasta_index:
+            SGC.set_chrom_list(self.fasta_index)
 
         # Create collection to store results
         site_dict = defaultdict(list)
@@ -126,7 +134,7 @@ class Freq_meth_calculate():
                 else:
                     # Store byte offset corresponding to appropriate line
                     self.counter["Valid read lines"]+=1
-                    site_dict[(l.chromosome, l.start, l.strand)].append(byte_offset)
+                    site_dict[SGC(l.chromosome, l.start, l.end, l.strand)].append(byte_offset)
                     byte_offset += byte_len
 
             self.log.info ("\tFiltering out low coverage sites")
@@ -142,8 +150,10 @@ class Freq_meth_calculate():
                     filtered_site_dict[k]=offset_list
             del site_dict
 
-            self.log.info ("\tSorting by coordinates")
-            filtered_site_dict = OrderedDict(sorted(filtered_site_dict.items(), key=lambda t: t[0]))
+            if self.fasta_index:
+                self.log.info ("\tSorting by coordinates")
+
+                filtered_site_dict = OrderedDict(sorted(filtered_site_dict.items(), key=lambda t: t[0]))
 
             self.log.info ("\tProcessing valid sites found")
             for k, offset_list in tqdm(filtered_site_dict.items(), desc="\t", unit=" sites", disable=self.log.level>=30):
@@ -169,7 +179,7 @@ class Freq_meth_calculate():
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~HELPER CLASS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
-class Site ():
+class Site():
     """Structure like class to store site information"""
 
     # Class id dispatcher
@@ -182,7 +192,7 @@ class Site ():
 
     @classmethod
     def BED_header (cls, sample_id=""):
-        return "track name=Nanopolish_methylation_{} itemRgb=On".format(sample_id)
+        return "track name=Methylation_{} itemRgb=On".format(sample_id)
 
     @classmethod
     def TSV_header (cls):
@@ -258,3 +268,54 @@ class Site ():
             self.sequence,
             self.num_motifs,
             ",".join([str(i) for i in self.llr_list]))
+
+class SGC():
+    """Sortable genomic coordinate object"""
+
+    chr_list = OrderedDict()
+    @classmethod
+    def set_chrom_list (cls, index):
+        if isinstance(index, dict):
+            cls.chr_list = index
+        else:
+            with open(index) as fp:
+                for i, line in enumerate(fp):
+                    chrom = line.split()[0]
+                    cls.chr_list[chrom]=i
+
+    def __init__ (self, chrom, start=0, end=0, strand=""):
+        # Verify and store chromosome name
+        self.chrom = chrom
+        self.start = int(start)
+        if not end or int(end) < self.start:
+            self.end = self.start
+        else:
+            self.end = int(end)
+        self.strand = strand
+
+    def __repr__ (self):
+        return "{}:{}-{} ({})".format(self.chrom, self.start, self.end, self.strand)
+
+    def __lt__(self, other):
+        if self.chrom == other.chrom:
+            if self.start == other.start:
+                if self.end == other.end:
+                    if self.strand == other.strand:
+                        return randint(0,1)
+                    else:
+                        return self.strand < other.strand
+                else:
+                    return self.end < other.end
+            else:
+                return self.start < other.start
+        else:
+            return self.chr_list.get(self.chrom, 0) < self.chr_list.get(other.chrom, 0)
+
+    def __hash__(self):
+        return hash((self.chrom, self.start, self.end, self.strand))
+
+    def __eq__(self, other):
+        return (self.chrom, self.start, self.end, self.strand) == (other.chrom, other.start, other.end, other.strand)
+
+    def __ne__(self, other):
+        return not(self == other)
