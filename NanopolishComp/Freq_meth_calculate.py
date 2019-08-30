@@ -115,7 +115,7 @@ class Freq_meth_calculate():
             byte_offset = len(header_line)
             lp = LineParser(header_line, sep="\t", cast_numeric_field=True)
 
-            for line in input_fp:
+            for line in tqdm(input_fp, desc="\t", unit=" lines", disable=self.log.level>=30):
                 self.counter["Total read lines"]+=1
                 byte_len = len(line)
                 l = lp(line)
@@ -126,33 +126,40 @@ class Freq_meth_calculate():
                 else:
                     # Store byte offset corresponding to appropriate line
                     self.counter["Valid read lines"]+=1
-                    site_dict[(l.chromosome, l.strand, l.start)].append(byte_offset)
+                    site_dict[(l.chromosome, l.start, l.strand)].append(byte_offset)
                     byte_offset += byte_len
 
-            self.log.info ("\tProcessing valid sites found")
+            self.log.info ("\tFiltering out low coverage sites")
+            filtered_site_dict = defaultdict(list)
             for k, offset_list in site_dict.items():
                 self.counter["Total sites"]+=1
 
                 # If low coverage unset list to release memory
                 if len(offset_list) < self.min_depth:
                     self.counter["Low coverage sites"]+=1
-                    site_dict[k] = []
-
-                # If sufficient coverage, process site
                 else:
-                    # Get all read lines corresponding to current site
-                    ll = []
-                    for offset in offset_list:
-                        input_fp.seek(offset, 0)
-                        ll.append (lp(input_fp.readline()))
-
-                    # Parse list with helper class Site
-                    site = Site (ll)
                     self.counter["Valid sites"]+=1
-                    if self.output_bed_fn:
-                        output_bed_fp.write(site.to_bed()+"\n")
-                    if self.output_tsv_fn:
-                        output_tsv_fp.write(site.to_tsv()+"\n")
+                    filtered_site_dict[k]=offset_list
+            del site_dict
+
+            self.log.info ("\tSorting by coordinates")
+            filtered_site_dict = OrderedDict(sorted(filtered_site_dict.items(), key=lambda t: t[0]))
+
+            self.log.info ("\tProcessing valid sites found")
+            for k, offset_list in tqdm(filtered_site_dict.items(), desc="\t", unit=" sites", disable=self.log.level>=30):
+                # Get all read lines corresponding to current site
+                ll = []
+                for offset in offset_list:
+                    input_fp.seek(offset, 0)
+                    ll.append (lp(input_fp.readline()))
+
+                # Parse list with helper class Site
+                site = Site (ll)
+                self.counter["Valid sites"]+=1
+                if self.output_bed_fn:
+                    output_bed_fp.write(site.to_bed()+"\n")
+                if self.output_tsv_fn:
+                    output_tsv_fp.write(site.to_tsv()+"\n")
         finally:
             input_fp.close()
             if self.output_bed_fn:
