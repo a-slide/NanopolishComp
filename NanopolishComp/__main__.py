@@ -51,12 +51,14 @@ def main(args=None):
     subparser_fm_other = subparser_fm.add_argument_group("Other options")
     subparser_fm_other.add_argument("-f", "--fasta_index", type=str, default="", help="fasta index file obtained with samtools faidx. Required for coordinate sorting")
     subparser_fm_other.add_argument("-s", "--sample_id", type=str, default="", help="Sample ID to be used for the bed track header (default: %(default)s)")
+    subparser_fm_other.add_argument("--strand_specific", action="store_true", default=False, help="Output strand specific sites")
+    subparser_fm_other.add_argument("--min_llr", type=float, default=2, help="Minimal log likelyhood ratio to consider a site significantly methylated or unmethylated (default: %(default)s)")
 
     # Add common group parsers
     for sp in [subparser_ec, subparser_fm]:
         sp_verbosity = sp.add_mutually_exclusive_group()
-        sp_verbosity.add_argument("-v", "--verbose", action="store_true", default=False, help="Increase verbosity (default: %(default)s)")
-        sp_verbosity.add_argument("-q", "--quiet", action="store_true", default=False, help="Reduce verbosity (default: %(default)s)")
+        sp_verbosity.add_argument("-v", "--verbose", action="store_true", default=False, help="Increase verbosity")
+        sp_verbosity.add_argument("-q", "--quiet", action="store_true", default=False, help="Reduce verbosity")
 
     # Parse args and call subfunction
     args = parser.parse_args()
@@ -87,5 +89,7 @@ def Freq_meth_calculate_main (args):
         output_tsv_fn = args.output_tsv_fn,
         min_depth = args.min_depth,
         sample_id = args.sample_id,
+        strand_specific = args.strand_specific,
+        min_llr = args.min_llr,
         verbose = args.verbose,
         quiet = args.quiet)
