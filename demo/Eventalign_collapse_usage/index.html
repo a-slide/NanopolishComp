@@ -1,0 +1,1950 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Python package for upstream preprocessing and downstream analysis of nanopolish">
+      
+      
+        <link rel="canonical" href="https://a-slide.github.io/NanopolishComp/demo/Eventalign_collapse_usage/">
+      
+      
+        <meta name="author" content="Adrien Leger">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+    
+    
+      
+        <title>Eventalign_collapse usage - NanopolishComp</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#eventalign_collapse-usage" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://a-slide.github.io/NanopolishComp/" title="NanopolishComp" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              NanopolishComp
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Eventalign_collapse usage
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/a-slide/NanopolishComp/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    a-slide/NanopolishComp
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://a-slide.github.io/NanopolishComp/" title="NanopolishComp" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    NanopolishComp
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/a-slide/NanopolishComp/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    a-slide/NanopolishComp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../installation/" title="Installation instructions" class="md-nav__link">
+      Installation instructions
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Usage
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Usage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../usage/" title="How to use NanopolishComp" class="md-nav__link">
+      How to use NanopolishComp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Eventalign_collapse usage
+      </label>
+    
+    <a href="./" title="Eventalign_collapse usage" class="md-nav__link md-nav__link--active">
+      Eventalign_collapse usage
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    Options
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-files-format" class="md-nav__link">
+    Output files format
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bash-command-line-usage" class="md-nav__link">
+    Bash command line usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command-line-help" class="md-nav__link">
+    Command line help
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    Example usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-an-existing-nanopolish-eventalign-output-to-a-file" class="md-nav__link">
+    From an existing nanopolish eventalign output to a file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#from-standard-input-to-a-file" class="md-nav__link">
+    From standard input to a file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-the-fly-from-nanopolish-eventalign-to-a-file" class="md-nav__link">
+    On the fly, from nanopolish eventalign to a file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-api-usage" class="md-nav__link">
+    Python API usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-the-package" class="md-nav__link">
+    Import the package
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-api-help" class="md-nav__link">
+    python API help
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-usage_1" class="md-nav__link">
+    Example usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-with-minimal-file" class="md-nav__link">
+    Example with minimal file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-with-indexes" class="md-nav__link">
+    Example with indexes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-including-samples" class="md-nav__link">
+    Example including samples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-including-samples-and-writing-samples-values-in-ouput-file" class="md-nav__link">
+    Example including samples and writing samples values in ouput file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-index-to-random-access-a-specific-entry-in-the-file" class="md-nav__link">
+    Using the index to random access a specific entry in the file
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#random-access-with-standard-library" class="md-nav__link">
+    Random access with standard library
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#random-access-with-pandas" class="md-nav__link">
+    Random access with pandas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Freq_meth_calculate_usage/" title="Freq_meth_calculate usage" class="md-nav__link">
+      Freq_meth_calculate usage
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/" title="Contributing" class="md-nav__link">
+      Contributing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../code_of_conduct/" title="Code of conduct" class="md-nav__link">
+      Code of conduct
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../licence/" title="Licence" class="md-nav__link">
+      Licence
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    Options
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-files-format" class="md-nav__link">
+    Output files format
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bash-command-line-usage" class="md-nav__link">
+    Bash command line usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command-line-help" class="md-nav__link">
+    Command line help
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    Example usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-an-existing-nanopolish-eventalign-output-to-a-file" class="md-nav__link">
+    From an existing nanopolish eventalign output to a file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#from-standard-input-to-a-file" class="md-nav__link">
+    From standard input to a file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-the-fly-from-nanopolish-eventalign-to-a-file" class="md-nav__link">
+    On the fly, from nanopolish eventalign to a file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-api-usage" class="md-nav__link">
+    Python API usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-the-package" class="md-nav__link">
+    Import the package
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-api-help" class="md-nav__link">
+    python API help
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-usage_1" class="md-nav__link">
+    Example usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-with-minimal-file" class="md-nav__link">
+    Example with minimal file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-with-indexes" class="md-nav__link">
+    Example with indexes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-including-samples" class="md-nav__link">
+    Example including samples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-including-samples-and-writing-samples-values-in-ouput-file" class="md-nav__link">
+    Example including samples and writing samples values in ouput file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-index-to-random-access-a-specific-entry-in-the-file" class="md-nav__link">
+    Using the index to random access a specific entry in the file
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#random-access-with-standard-library" class="md-nav__link">
+    Random access with standard library
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#random-access-with-pandas" class="md-nav__link">
+    Random access with pandas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/a-slide/NanopolishComp/edit/master/docs/demo/Eventalign_collapse_usage.ipynb" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="eventalign_collapse-usage">Eventalign_collapse usage</h1>
+<p>This program collapses the raw file generated by <code class="codehilite"><span class="n">nanopolish</span> <span class="n">eventalign</span></code> by kmers rather than by event.</p>
+<h2 id="options">Options</h2>
+<ul>
+<li><strong>input_fn</strong></li>
+</ul>
+<p>Path to a <code class="codehilite"><span class="n">nanopolish</span> <span class="n">eventalign</span></code> tsv output file (read access required). In command line mode it is also possible to pipe the output of the <code class="codehilite"><span class="n">nanopolish</span> <span class="n">eventalign</span></code> directly into <code class="codehilite"><span class="n">Eventalign_collapse</span></code>.</p>
+<ul>
+<li><strong>outdir</strong></li>
+</ul>
+<p>Path to an existing directory where to write all the output files generated by <code class="codehilite"><span class="n">Eventalign_collapse</span></code>(write access required). If the directory does not exist an error is raised.</p>
+<ul>
+<li><strong>outprefix</strong></li>
+</ul>
+<p>Prefix for all the files generated by the program</p>
+<ul>
+<li><strong>write_samples</strong></li>
+</ul>
+<p>Write the concatenated sample data values corresponding to each kmer in the output data file. This options make only sense if <code class="codehilite"><span class="n">nanopolish</span> <span class="n">eventalign</span></code> was ran with <code class="codehilite"><span class="c1">--samples</span></code> option.</p>
+<ul>
+<li><strong>max_reads</strong></li>
+</ul>
+<p>Controls the maximum number of read to parse before stopping to read the input file. This could be usefull for testing or downsampling. </p>
+<ul>
+<li><strong>stat_fields</strong></li>
+</ul>
+<p>Specify the list of statistical analyses to perform on a kmer basis and add in the output data file. This will only be performed if <code class="codehilite"><span class="n">nanopolish</span> <span class="n">eventalign</span></code> was ran with <code class="codehilite"><span class="c1">--samples</span></code> option.</p>
+<div class="admonition note">
+<p class="admonition-title">Valid statistics fields</p>
+<ul>
+<li>mean (mean of signal intensity)</li>
+<li>median (mean of signal intensity)</li>
+<li>std (standard deviation of signal intensity))</li>
+<li>mad (median absolute deviation of signal intensity))</li>
+<li>num_signals (Number of raw signal data point)</li>
+</ul>
+</div>
+<ul>
+<li><strong>threads</strong></li>
+</ul>
+<p><code class="codehilite"><span class="n">Eventalign_collapse</span></code> is multi threaded to speed up the data processing and keep pace with Nanopolish if using the direct piping strategy. Take advantage of many threads if you have access to a large compute cluster</p>
+<h2 id="output-files-format">Output files format</h2>
+<p>Contrary to <code class="codehilite"><span class="n">nanopolish</span> <span class="n">eventalign</span></code> output text file, in <code class="codehilite"><span class="n">Eventalign_collapse</span></code> the reads are separated by a hashtag headers containing the read_id and ref_id. This reduces the redundancy and makes it easier to find the start and end of a read.</p>
+<p>Example : <code class="codehilite"><span class="o">#</span><span class="mi">7</span><span class="n">ef1d7b9</span><span class="o">-</span><span class="mi">5824</span><span class="o">-</span><span class="mi">4382</span><span class="o">-</span><span class="n">b23b</span><span class="o">-</span><span class="mi">78</span><span class="n">d82c07ebbd</span>  <span class="n">YHR055C</span><span class="p">.</span></code></p>
+<p>The main data file contains the following fields:</p>
+<ul>
+<li><strong>ref_pos</strong>: Reference sequence ID (contig).</li>
+<li><strong>ref_kmer</strong>: Sequence of the reference kmers.</li>
+<li><strong>num_events</strong>: Number of events for this kmer before collapsing.</li>
+<li><strong>dwell_time</strong>: dwell time for this kmer in seconds</li>
+<li><strong>NNNNN_dwell_time</strong>: dwell time of events for this kmers with a model sequence "NNNNN" (events ignored by nanopolish HMM).</li>
+<li><strong>mismatch_dwell_time</strong>:  dwell time of events for this kmers with a model sequence different from the reference kmer</li>
+<li><strong>start_idx</strong>: Only if nanopolish eventalign called with --signal_idx. Start coordinate on original raw signal in fast5 file</li>
+<li><strong>end_idx</strong>: Only if nanopolish eventalign called with --signal_idx. End coordinate on original raw signal in fast5 file</li>
+<li><strong>mean</strong>: Only if nanopolish eventalign called with --samples. Mean of the normalised signal values provided by Nanopolish eventalign</li>
+<li><strong>median</strong>: Only if nanopolish eventalign called with --samples. Median of the normalised signal values provided by Nanopolish eventalign</li>
+<li><strong>std</strong>: Only if nanopolish eventalign called with --samples. Standard deviation of the normalised signal values provided by Nanopolish eventalign</li>
+<li><strong>mad</strong>: Only if nanopolish eventalign called with --samples. Median absolute deviation of the normalised signal values provided by Nanopolish eventalign</li>
+<li><strong>num_signals</strong>: Only if nanopolish eventalign called with --samples. Number of raw signal points.</li>
+<li><strong>samples</strong>: Only if nanopolish eventalign called with --samples and Eventalign_collapse called with --write_samples. List of normalised signal intensity values for this kmer</li>
+</ul>
+<p>In addition <code class="codehilite"><span class="n">Eventalign_collapse</span></code> also generates an useful index file containing reads level information. It contains the following fields:</p>
+<ul>
+<li><strong>read_id</strong>: Name or index of the read</li>
+<li><strong>ref_id</strong>: Name of the reference sequence the read was aligned on (contig)</li>
+<li><strong>ref_start</strong>: Start coordinate of the alignment on the reference sequence</li>
+<li><strong>ref_end</strong>: End coordinate of the alignment on the reference sequence</li>
+<li><strong>dwell_time</strong>: Cumulative dwell time in seconds for the entire resquiggled sequence</li>
+<li><strong>kmers</strong>: Overall number of resquiggled kmers</li>
+<li><strong>NNNNN_kmers</strong>: Number of resquiggled kmers containing at least 1 event for which the model sequence was "NNNNN"</li>
+<li><strong>mismatching_kmers</strong>: Number of resquiggled kmers containing at least 1 event for which the model sequence diverged from the reference sequence</li>
+<li><strong>missing_kmers</strong>: Number of skipped/missing reference positions in nanopolish output</li>
+<li><strong>byte_offset</strong>: Number of characters before the start of the sequence in the main output file. <strong>This can be used in conjunction with file.seek() to directly access the start of a read</strong>. An example is provided in the Usage notebook.</li>
+<li><strong>byte_len</strong>: Length of characters after byte_offset to the end of the read, excluding the last newline. <strong>This can be used in conjunction with read() to read all the text chunk corresponding to the read</strong>.</li>
+</ul>
+<h2 id="bash-command-line-usage">Bash command line usage</h2>
+<h3 id="command-line-help">Command line help</h3>
+<div class="codehilite"><pre><span></span>%%bash
+
+<span class="c1"># Load local bashrc and activate virtual environment</span>
+<span class="nb">source</span> ~/.bashrc
+workon Nanopolish_0.11.1
+
+NanopolishComp Eventalign_collapse --help
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nv">usage</span>: <span class="nv">NanopolishComp</span> <span class="nv">Eventalign_collapse</span> [<span class="o">-</span><span class="nv">h</span>] [<span class="o">-</span><span class="nv">i</span> <span class="nv">INPUT_FN</span>] [<span class="o">-</span><span class="nv">o</span> <span class="nv">OUTDIR</span>]
+                                          [<span class="o">-</span><span class="nv">p</span> <span class="nv">OUTPREFIX</span>] [<span class="o">-</span><span class="nv">s</span>] [<span class="o">-</span><span class="nv">r</span> <span class="nv">MAX_READS</span>]
+                                          [<span class="o">-</span><span class="nv">f</span> <span class="nv">STAT_FIELDS</span> [<span class="nv">STAT_FIELDS</span> ...]]
+                                          [<span class="o">-</span><span class="nv">t</span> <span class="nv">THREADS</span>] [<span class="o">-</span><span class="nv">v</span> <span class="o">|</span> <span class="o">-</span><span class="nv">q</span>]
+
+<span class="nv">Collapse</span> <span class="nv">the</span> <span class="nv">nanopolish</span> <span class="nv">eventalign</span> <span class="nv">output</span> <span class="nv">at</span> <span class="nv">kmers</span> <span class="nv">level</span> <span class="nv">and</span> <span class="nv">compute</span> <span class="nv">kmer</span>
+<span class="nv">level</span> <span class="nv">statistics</span>
+
+<span class="nv">optional</span> <span class="nv">arguments</span>:
+  <span class="o">-</span><span class="nv">h</span>, <span class="o">--</span><span class="nv">help</span>            <span class="k">show</span> <span class="nv">this</span> <span class="nv">help</span> <span class="nv">message</span> <span class="nv">and</span> <span class="k">exit</span>
+  <span class="o">-</span><span class="nv">v</span>, <span class="o">--</span><span class="nv">verbose</span>         <span class="nv">Increase</span> <span class="nv">verbosity</span> <span class="ss">(</span><span class="nv">default</span>: <span class="nv">False</span><span class="ss">)</span>
+  <span class="o">-</span><span class="nv">q</span>, <span class="o">--</span><span class="nv">quiet</span>           <span class="nv">Reduce</span> <span class="nv">verbosity</span> <span class="ss">(</span><span class="nv">default</span>: <span class="nv">False</span><span class="ss">)</span>
+
+<span class="nv">Input</span><span class="o">/</span><span class="nv">Output</span> <span class="nv">options</span>:
+  <span class="o">-</span><span class="nv">i</span> <span class="nv">INPUT_FN</span>, <span class="o">--</span><span class="nv">input_fn</span> <span class="nv">INPUT_FN</span>
+                        <span class="nv">Path</span> <span class="nv">to</span> <span class="nv">a</span> <span class="nv">nanopolish</span> <span class="nv">eventalign</span> <span class="nv">tsv</span> <span class="nv">output</span> <span class="nv">file</span>. <span class="k">If</span>
+                        <span class="s1">&#39;</span><span class="s">0</span><span class="s1">&#39;</span> <span class="nv">read</span> <span class="nv">from</span> <span class="nv">std</span> <span class="nv">input</span> <span class="ss">(</span><span class="nv">default</span>: <span class="mi">0</span><span class="ss">)</span>
+  <span class="o">-</span><span class="nv">o</span> <span class="nv">OUTDIR</span>, <span class="o">--</span><span class="nv">outdir</span> <span class="nv">OUTDIR</span>
+                        <span class="nv">Path</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">output</span> <span class="nv">folder</span> <span class="ss">(</span><span class="nv">will</span> <span class="nv">be</span> <span class="nv">created</span> <span class="k">if</span> <span class="nv">it</span> <span class="nv">does</span>
+                        <span class="nv">exist</span> <span class="nv">yet</span><span class="ss">)</span> <span class="ss">(</span><span class="nv">default</span>: .<span class="o">/</span><span class="ss">)</span>
+  <span class="o">-</span><span class="nv">p</span> <span class="nv">OUTPREFIX</span>, <span class="o">--</span><span class="nv">outprefix</span> <span class="nv">OUTPREFIX</span>
+                        <span class="nv">text</span> <span class="nv">outprefix</span> <span class="k">for</span> <span class="nv">all</span> <span class="nv">the</span> <span class="nv">files</span> <span class="nv">generated</span> <span class="ss">(</span><span class="nv">default</span>:
+                        <span class="nv">out</span><span class="ss">)</span>
+
+<span class="nv">Run</span> <span class="nv">parameters</span> <span class="nv">options</span>:
+  <span class="o">-</span><span class="nv">s</span>, <span class="o">--</span><span class="nv">write_samples</span>   <span class="k">If</span> <span class="nv">given</span>, <span class="nv">will</span> <span class="nv">write</span> <span class="nv">the</span> <span class="nv">raw</span> <span class="nv">sample</span> <span class="k">if</span> <span class="nv">nanopolish</span>
+                        <span class="nv">eventalign</span> <span class="nv">was</span> <span class="nv">ran</span> <span class="nv">with</span> <span class="o">--</span><span class="nv">samples</span> <span class="nv">option</span> <span class="ss">(</span><span class="nv">default</span>:
+                        <span class="nv">False</span><span class="ss">)</span>
+  <span class="o">-</span><span class="nv">r</span> <span class="nv">MAX_READS</span>, <span class="o">--</span><span class="nv">max_reads</span> <span class="nv">MAX_READS</span>
+                        <span class="nv">Maximum</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">read</span> <span class="nv">to</span> <span class="nv">parse</span>. <span class="mi">0</span> <span class="nv">to</span> <span class="nv">deactivate</span>
+                        <span class="ss">(</span><span class="nv">default</span>: <span class="mi">0</span><span class="ss">)</span>
+  <span class="o">-</span><span class="nv">f</span> <span class="nv">STAT_FIELDS</span> [<span class="nv">STAT_FIELDS</span> ...], <span class="o">--</span><span class="nv">stat_fields</span> <span class="nv">STAT_FIELDS</span> [<span class="nv">STAT_FIELDS</span> ...]
+                        <span class="nv">List</span> <span class="nv">of</span> <span class="nv">statistical</span> <span class="nv">fields</span> <span class="nv">to</span> <span class="nv">compute</span> <span class="k">if</span> <span class="nv">nanopolish</span>
+                        <span class="nv">eventalign</span> <span class="nv">was</span> <span class="nv">ran</span> <span class="nv">with</span> <span class="o">--</span><span class="nv">sample</span> <span class="nv">option</span>. <span class="nv">Valid</span> <span class="nv">values</span>
+                        <span class="o">=</span> <span class="nv">mean</span>, <span class="nv">std</span>, <span class="nv">median</span>, <span class="nv">mad</span>, <span class="nv">num_signals</span> <span class="ss">(</span><span class="nv">default</span>:
+                        [<span class="s1">&#39;</span><span class="s">mean</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">median</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">num_signals</span><span class="s1">&#39;</span>]<span class="ss">)</span>
+
+<span class="nv">Other</span> <span class="nv">options</span>:
+  <span class="o">-</span><span class="nv">t</span> <span class="nv">THREADS</span>, <span class="o">--</span><span class="nv">threads</span> <span class="nv">THREADS</span>
+                        <span class="nv">Total</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">threads</span>. <span class="mi">1</span> <span class="nv">thread</span> <span class="nv">is</span> <span class="nv">used</span> <span class="k">for</span> <span class="nv">the</span>
+                        <span class="nv">reader</span> <span class="nv">and</span> <span class="mi">1</span> <span class="k">for</span> <span class="nv">the</span> <span class="nv">writer</span> <span class="ss">(</span><span class="nv">default</span>: <span class="mi">4</span><span class="ss">)</span>
+</pre></div>
+
+
+<h3 id="example-usage">Example usage</h3>
+<h4 id="from-an-existing-nanopolish-eventalign-output-to-a-file">From an existing nanopolish eventalign output to a file</h4>
+<div class="codehilite"><pre><span></span>%%bash
+
+<span class="c1"># Load local bashrc and activate virtual environment</span>
+<span class="nb">source</span> ~/.bashrc
+workon Nanopolish_0.11.1
+
+NanopolishComp Eventalign_collapse -i ./data/eventalign_collapse//nanopolish_reads.tsv -o ./output/eventalign_collapse/ -v
+head ./output/eventalign_collapse/out_eventalign_collapse.tsv
+head ./output/eventalign_collapse/out_eventalign_collapse.tsv.idx
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="sc">#0</span>  <span class="nv">YGR240C</span>
+<span class="nv">ref_pos</span> <span class="nv">ref_kmer</span>    <span class="nv">num_events</span>  <span class="nv">dwell_time</span>  <span class="nv">NNNNN_dwell_time</span>    <span class="nv">mismatch_dwell_time</span>
+<span class="mi">1656</span>    <span class="nv">GAAAA</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00266</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="mi">1657</span>    <span class="nv">AAAAC</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00764</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="mi">1658</span>    <span class="nv">AAACA</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00398</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="mi">1659</span>    <span class="nv">AACAA</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00432</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="mi">1660</span>    <span class="nv">ACAAA</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00498</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="mi">1661</span>    <span class="nv">CAAAG</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00564</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="mi">1662</span>    <span class="nv">AAAGA</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00963</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="mi">1663</span>    <span class="nv">AAGAT</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00299</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="nv">ref_id</span>  <span class="nv">ref_start</span>   <span class="nv">ref_end</span> <span class="nv">read_id</span> <span class="nv">kmers</span>   <span class="nv">dwell_time</span>  <span class="nv">NNNNN_kmers</span> <span class="nv">mismatch_kmers</span>  <span class="nv">missing_kmers</span>   <span class="nv">byte_offset</span> <span class="nv">byte_len</span>
+<span class="nv">YGR240C</span> <span class="mi">1656</span>    <span class="mi">2960</span>    <span class="mi">0</span>   <span class="mi">1250</span>    <span class="mi">13</span>.<span class="mi">788570000000009</span>  <span class="mi">35</span>  <span class="mi">0</span>   <span class="mi">54</span>  <span class="mi">0</span>   <span class="mi">38028</span>
+<span class="nv">YCR030C</span> <span class="mi">1578</span>    <span class="mi">2576</span>    <span class="mi">1</span>   <span class="mi">971</span> <span class="mi">11</span>.<span class="mi">487010000000005</span>  <span class="mi">23</span>  <span class="mi">0</span>   <span class="mi">27</span>  <span class="mi">38029</span>   <span class="mi">29704</span>
+<span class="nv">YHR174W</span> <span class="mi">0</span>   <span class="mi">839</span> <span class="mi">2</span>   <span class="mi">825</span> <span class="mi">9</span>.<span class="mi">659210000000002</span>   <span class="mi">15</span>  <span class="mi">0</span>   <span class="mi">14</span>  <span class="mi">67734</span>   <span class="mi">24231</span>
+<span class="nv">YHR174W</span> <span class="mi">218</span> <span class="mi">1309</span>    <span class="mi">3</span>   <span class="mi">1028</span>    <span class="mi">11</span>.<span class="mi">06325000000001</span>   <span class="mi">36</span>  <span class="mi">0</span>   <span class="mi">63</span>  <span class="mi">91966</span>   <span class="mi">30801</span>
+<span class="nv">YHR174W</span> <span class="mi">462</span> <span class="mi">1309</span>    <span class="mi">4</span>   <span class="mi">818</span> <span class="mi">10</span>.<span class="mi">73776000000001</span>   <span class="mi">18</span>  <span class="mi">0</span>   <span class="mi">29</span>  <span class="mi">122768</span>  <span class="mi">24589</span>
+<span class="nv">YLR441C</span> <span class="mi">173</span> <span class="mi">764</span> <span class="mi">5</span>   <span class="mi">554</span> <span class="mi">5</span>.<span class="mi">556939999999999</span>   <span class="mi">20</span>  <span class="mi">0</span>   <span class="mi">37</span>  <span class="mi">147358</span>  <span class="mi">16437</span>
+<span class="nv">YGR192C</span> <span class="mi">1</span>   <span class="mi">989</span> <span class="mi">6</span>   <span class="mi">927</span> <span class="mi">11</span>.<span class="mi">731470000000003</span>  <span class="mi">37</span>  <span class="mi">0</span>   <span class="mi">61</span>  <span class="mi">163796</span>  <span class="mi">27388</span>
+<span class="nv">YDR500C</span> <span class="mi">9</span>   <span class="mi">252</span> <span class="mi">8</span>   <span class="mi">231</span> <span class="mi">2</span>.<span class="mi">9179100000000027</span>  <span class="mi">7</span>   <span class="mi">0</span>   <span class="mi">14</span>  <span class="mi">191185</span>  <span class="mi">6751</span>
+<span class="nv">YGR192C</span> <span class="mi">3</span>   <span class="mi">995</span> <span class="mi">7</span>   <span class="mi">946</span> <span class="mi">12</span>.<span class="mi">30464000000001</span>   <span class="mi">31</span>  <span class="mi">0</span>   <span class="mi">50</span>  <span class="mi">197937</span>  <span class="mi">28123</span>
+
+
+<span class="nv">Options</span> <span class="nv">summary</span>
+    <span class="nv">package_name</span>: <span class="nv">NanopolishComp</span>
+    <span class="nv">package_version</span>: <span class="mi">0</span>.<span class="mi">6</span>.<span class="mi">1</span>
+    <span class="nv">timestamp</span>: <span class="mi">2019</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">08</span> <span class="mi">11</span>:<span class="mi">59</span>:<span class="mi">11</span>.<span class="mi">239171</span>
+    <span class="nv">quiet</span>: <span class="nv">False</span>
+    <span class="nv">verbose</span>: <span class="nv">True</span>
+    <span class="nv">threads</span>: <span class="mi">4</span>
+    <span class="nv">stat_fields</span>: [<span class="s1">&#39;</span><span class="s">mean</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">median</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">num_signals</span><span class="s1">&#39;</span>]
+    <span class="nv">write_samples</span>: <span class="nv">False</span>
+    <span class="nv">max_reads</span>: <span class="nv">None</span>
+    <span class="nv">outprefix</span>: <span class="nv">out</span>
+    <span class="nv">outdir</span>: .<span class="o">/</span><span class="nv">output</span><span class="o">/</span><span class="nv">eventalign_collapse</span><span class="o">/</span>
+    <span class="nv">input_fn</span>: .<span class="o">/</span><span class="nv">data</span><span class="o">/</span><span class="nv">eventalign_collapse</span><span class="o">//</span><span class="nv">nanopolish_reads</span>.<span class="nv">tsv</span>
+
+<span class="nv">Checking</span> <span class="nv">arguments</span>
+    <span class="nv">Testing</span> <span class="nv">input</span> <span class="nv">file</span> <span class="nv">readability</span>
+    <span class="nv">Creating</span> <span class="nv">output</span> <span class="nv">folder</span>
+    <span class="nv">Checking</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">threads</span>
+    <span class="nv">Checking</span> <span class="k">if</span> <span class="nv">stat_fields</span> <span class="nv">names</span> <span class="nv">are</span> <span class="nv">valid</span>
+<span class="nv">Starting</span> <span class="nv">to</span> <span class="nv">process</span> <span class="nv">files</span>
+    [<span class="nv">split_reads</span>] <span class="nv">Start</span> <span class="nv">reading</span> <span class="nv">input</span> <span class="nv">file</span><span class="o">/</span><span class="nv">stream</span>
+    [<span class="nv">process_read</span> <span class="mi">1</span>] <span class="nv">Starting</span> <span class="nv">processing</span> <span class="nv">reads</span>
+    [<span class="nv">process_read</span> <span class="mi">2</span>] <span class="nv">Starting</span> <span class="nv">processing</span> <span class="nv">reads</span>
+    [<span class="nv">write_output</span>] <span class="nv">Start</span> <span class="nv">rwriting</span> <span class="nv">output</span>
+<span class="mi">14</span> <span class="nv">reads</span> [<span class="mi">00</span>:<span class="mi">00</span>, <span class="mi">74</span>.<span class="mi">94</span> <span class="nv">reads</span><span class="o">/</span><span class="nv">s</span>] [<span class="nv">split_reads</span>] <span class="nv">Done</span>
+    [<span class="nv">process_read</span> <span class="mi">1</span>] <span class="nv">Done</span>
+    [<span class="nv">process_read</span> <span class="mi">2</span>] <span class="nv">Done</span>
+<span class="mi">21</span> <span class="nv">reads</span> [<span class="mi">00</span>:<span class="mi">00</span>, <span class="mi">88</span>.<span class="mi">36</span> <span class="nv">reads</span><span class="o">/</span><span class="nv">s</span>]
+    [<span class="nv">write_output</span>] <span class="nv">Done</span>
+[<span class="nv">Eventalign_collapse</span>] <span class="nv">total</span> <span class="nv">reads</span>: <span class="mi">21</span> [<span class="mi">86</span>.<span class="mi">45</span> <span class="nv">reads</span><span class="o">/</span><span class="nv">s</span>]
+</pre></div>
+
+
+<h4 id="from-standard-input-to-a-file">From standard input to a file</h4>
+<div class="codehilite"><pre><span></span>%%bash
+
+<span class="c1"># Load local bashrc and activate virtual environment</span>
+<span class="nb">source</span> ~/.bashrc
+workon Nanopolish_0.11.1
+
+cat ./data/eventalign_collapse//nanopolish_reads_index.tsv <span class="p">|</span> NanopolishComp Eventalign_collapse -o ./output/eventalign_collapse/ --verbose
+head ./output/eventalign_collapse/out_eventalign_collapse.tsv
+head ./output/eventalign_collapse/out_eventalign_collapse.tsv.idx
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="sc">#0</span>  <span class="nv">YGR240C</span>
+<span class="nv">ref_pos</span> <span class="nv">ref_kmer</span>    <span class="nv">num_events</span>  <span class="nv">dwell_time</span>  <span class="nv">NNNNN_dwell_time</span>    <span class="nv">mismatch_dwell_time</span>
+<span class="mi">1656</span>    <span class="nv">GAAAA</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00266</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="mi">1657</span>    <span class="nv">AAAAC</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00764</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="mi">1658</span>    <span class="nv">AAACA</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00398</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="mi">1659</span>    <span class="nv">AACAA</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00432</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="mi">1660</span>    <span class="nv">ACAAA</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00498</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="mi">1661</span>    <span class="nv">CAAAG</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00564</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="mi">1662</span>    <span class="nv">AAAGA</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00963</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="mi">1663</span>    <span class="nv">AAGAT</span>   <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">00299</span> <span class="mi">0</span>.<span class="mi">0</span> <span class="mi">0</span>.<span class="mi">0</span>
+<span class="nv">ref_id</span>  <span class="nv">ref_start</span>   <span class="nv">ref_end</span> <span class="nv">read_id</span> <span class="nv">kmers</span>   <span class="nv">dwell_time</span>  <span class="nv">NNNNN_kmers</span> <span class="nv">mismatch_kmers</span>  <span class="nv">missing_kmers</span>   <span class="nv">byte_offset</span> <span class="nv">byte_len</span>
+<span class="nv">YGR240C</span> <span class="mi">1656</span>    <span class="mi">2960</span>    <span class="mi">0</span>   <span class="mi">1250</span>    <span class="mi">13</span>.<span class="mi">788570000000009</span>  <span class="mi">35</span>  <span class="mi">0</span>   <span class="mi">54</span>  <span class="mi">0</span>   <span class="mi">38028</span>
+<span class="nv">YCR030C</span> <span class="mi">1578</span>    <span class="mi">2576</span>    <span class="mi">1</span>   <span class="mi">971</span> <span class="mi">11</span>.<span class="mi">487010000000005</span>  <span class="mi">23</span>  <span class="mi">0</span>   <span class="mi">27</span>  <span class="mi">38029</span>   <span class="mi">29704</span>
+<span class="nv">YHR174W</span> <span class="mi">0</span>   <span class="mi">839</span> <span class="mi">2</span>   <span class="mi">825</span> <span class="mi">9</span>.<span class="mi">659210000000002</span>   <span class="mi">15</span>  <span class="mi">0</span>   <span class="mi">14</span>  <span class="mi">67734</span>   <span class="mi">24231</span>
+<span class="nv">YHR174W</span> <span class="mi">218</span> <span class="mi">1309</span>    <span class="mi">3</span>   <span class="mi">1028</span>    <span class="mi">11</span>.<span class="mi">06325000000001</span>   <span class="mi">36</span>  <span class="mi">0</span>   <span class="mi">63</span>  <span class="mi">91966</span>   <span class="mi">30801</span>
+<span class="nv">YHR174W</span> <span class="mi">462</span> <span class="mi">1309</span>    <span class="mi">4</span>   <span class="mi">818</span> <span class="mi">10</span>.<span class="mi">73776000000001</span>   <span class="mi">18</span>  <span class="mi">0</span>   <span class="mi">29</span>  <span class="mi">122768</span>  <span class="mi">24589</span>
+<span class="nv">YLR441C</span> <span class="mi">173</span> <span class="mi">764</span> <span class="mi">5</span>   <span class="mi">554</span> <span class="mi">5</span>.<span class="mi">556939999999999</span>   <span class="mi">20</span>  <span class="mi">0</span>   <span class="mi">37</span>  <span class="mi">147358</span>  <span class="mi">16437</span>
+<span class="nv">YGR192C</span> <span class="mi">1</span>   <span class="mi">989</span> <span class="mi">6</span>   <span class="mi">927</span> <span class="mi">11</span>.<span class="mi">731470000000003</span>  <span class="mi">37</span>  <span class="mi">0</span>   <span class="mi">61</span>  <span class="mi">163796</span>  <span class="mi">27388</span>
+<span class="nv">YDR500C</span> <span class="mi">9</span>   <span class="mi">252</span> <span class="mi">8</span>   <span class="mi">231</span> <span class="mi">2</span>.<span class="mi">9179100000000027</span>  <span class="mi">7</span>   <span class="mi">0</span>   <span class="mi">14</span>  <span class="mi">191185</span>  <span class="mi">6751</span>
+<span class="nv">YGR192C</span> <span class="mi">3</span>   <span class="mi">995</span> <span class="mi">7</span>   <span class="mi">946</span> <span class="mi">12</span>.<span class="mi">30464000000001</span>   <span class="mi">31</span>  <span class="mi">0</span>   <span class="mi">50</span>  <span class="mi">197937</span>  <span class="mi">28123</span>
+
+
+<span class="nv">Options</span> <span class="nv">summary</span>
+    <span class="nv">package_name</span>: <span class="nv">NanopolishComp</span>
+    <span class="nv">package_version</span>: <span class="mi">0</span>.<span class="mi">6</span>.<span class="mi">1</span>
+    <span class="nv">timestamp</span>: <span class="mi">2019</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">08</span> <span class="mi">11</span>:<span class="mi">59</span>:<span class="mi">12</span>.<span class="mi">535254</span>
+    <span class="nv">quiet</span>: <span class="nv">False</span>
+    <span class="nv">verbose</span>: <span class="nv">True</span>
+    <span class="nv">threads</span>: <span class="mi">4</span>
+    <span class="nv">stat_fields</span>: [<span class="s1">&#39;</span><span class="s">mean</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">median</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">num_signals</span><span class="s1">&#39;</span>]
+    <span class="nv">write_samples</span>: <span class="nv">False</span>
+    <span class="nv">max_reads</span>: <span class="nv">None</span>
+    <span class="nv">outprefix</span>: <span class="nv">out</span>
+    <span class="nv">outdir</span>: .<span class="o">/</span><span class="nv">output</span>
+    <span class="nv">input_fn</span>: <span class="mi">0</span>
+
+<span class="nv">Checking</span> <span class="nv">arguments</span>
+    <span class="nv">Testing</span> <span class="nv">input</span> <span class="nv">file</span> <span class="nv">readability</span>
+    <span class="nv">Creating</span> <span class="nv">output</span> <span class="nv">folder</span>
+    <span class="nv">Checking</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">threads</span>
+    <span class="nv">Checking</span> <span class="k">if</span> <span class="nv">stat_fields</span> <span class="nv">names</span> <span class="nv">are</span> <span class="nv">valid</span>
+<span class="nv">Starting</span> <span class="nv">to</span> <span class="nv">process</span> <span class="nv">files</span>
+    [<span class="nv">split_reads</span>] <span class="nv">Start</span> <span class="nv">reading</span> <span class="nv">input</span> <span class="nv">file</span><span class="o">/</span><span class="nv">stream</span>
+    [<span class="nv">process_read</span> <span class="mi">1</span>] <span class="nv">Starting</span> <span class="nv">processing</span> <span class="nv">reads</span>
+    [<span class="nv">process_read</span> <span class="mi">2</span>] <span class="nv">Starting</span> <span class="nv">processing</span> <span class="nv">reads</span>
+    [<span class="nv">write_output</span>] <span class="nv">Start</span> <span class="nv">rwriting</span> <span class="nv">output</span>
+<span class="mi">19</span> <span class="nv">reads</span> [<span class="mi">00</span>:<span class="mi">00</span>, <span class="mi">74</span>.<span class="mi">77</span> <span class="nv">reads</span><span class="o">/</span><span class="nv">s</span>] [<span class="nv">split_reads</span>] <span class="nv">Done</span>
+    [<span class="nv">process_read</span> <span class="mi">1</span>] <span class="nv">Done</span>
+    [<span class="nv">process_read</span> <span class="mi">2</span>] <span class="nv">Done</span>
+<span class="mi">21</span> <span class="nv">reads</span> [<span class="mi">00</span>:<span class="mi">00</span>, <span class="mi">90</span>.<span class="mi">18</span> <span class="nv">reads</span><span class="o">/</span><span class="nv">s</span>]
+    [<span class="nv">write_output</span>] <span class="nv">Done</span>
+[<span class="nv">Eventalign_collapse</span>] <span class="nv">total</span> <span class="nv">reads</span>: <span class="mi">21</span> [<span class="mi">89</span>.<span class="mi">3</span> <span class="nv">reads</span><span class="o">/</span><span class="nv">s</span>]
+</pre></div>
+
+
+<h4 id="on-the-fly-from-nanopolish-eventalign-to-a-file">On the fly, from nanopolish eventalign to a file</h4>
+<div class="codehilite"><pre><span></span>%%bash
+
+<span class="c1"># Load local bashrc and activate virtual environment</span>
+<span class="nb">source</span> ~/.bashrc
+workon Nanopolish_0.11.1
+
+nanopolish eventalign -t <span class="m">4</span> --samples --scale-events --print-read-name <span class="se">\</span>
+    --reads ./data/eventalign_collapse/reads.fastq <span class="se">\</span>
+    --bam ./data/eventalign_collapse/aligned_reads.bam <span class="se">\</span>
+    --genome ./data/eventalign_collapse/reference.fa <span class="p">|</span> <span class="se">\</span>
+    NanopolishComp Eventalign_collapse -o ./output
+
+head ./output/eventalign_collapse/out_eventalign_collapse.tsv
+head ./output/eventalign_collapse/out_eventalign_collapse.tsv.idx
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="n">#0</span><span class="w">  </span><span class="n">YGR240C</span><span class="w"></span>
+<span class="n">ref_pos</span><span class="w"> </span><span class="n">ref_kmer</span><span class="w">    </span><span class="n">num_events</span><span class="w">  </span><span class="n">dwell_time</span><span class="w">  </span><span class="n">NNNNN_dwell_time</span><span class="w">    </span><span class="n">mismatch_dwell_time</span><span class="w"></span>
+<span class="mi">1656</span><span class="w">    </span><span class="n">GAAAA</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00266</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="mi">1657</span><span class="w">    </span><span class="n">AAAAC</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00764</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="mi">1658</span><span class="w">    </span><span class="n">AAACA</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00398</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="mi">1659</span><span class="w">    </span><span class="n">AACAA</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00432</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="mi">1660</span><span class="w">    </span><span class="n">ACAAA</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00498</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="mi">1661</span><span class="w">    </span><span class="n">CAAAG</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00564</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="mi">1662</span><span class="w">    </span><span class="n">AAAGA</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00963</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="mi">1663</span><span class="w">    </span><span class="n">AAGAT</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00299</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="n">ref_id</span><span class="w">  </span><span class="n">ref_start</span><span class="w">   </span><span class="n">ref_end</span><span class="w"> </span><span class="n">read_id</span><span class="w"> </span><span class="n">kmers</span><span class="w">   </span><span class="n">dwell_time</span><span class="w">  </span><span class="n">NNNNN_kmers</span><span class="w"> </span><span class="n">mismatch_kmers</span><span class="w">  </span><span class="n">missing_kmers</span><span class="w">   </span><span class="n">byte_offset</span><span class="w"> </span><span class="n">byte_len</span><span class="w"></span>
+<span class="n">YGR240C</span><span class="w"> </span><span class="mi">1656</span><span class="w">    </span><span class="mi">2960</span><span class="w">    </span><span class="mi">0</span><span class="w">   </span><span class="mi">1250</span><span class="w">    </span><span class="mf">13.788570000000009</span><span class="w">  </span><span class="mi">35</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="mi">54</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="mi">38028</span><span class="w"></span>
+<span class="n">YCR030C</span><span class="w"> </span><span class="mi">1578</span><span class="w">    </span><span class="mi">2576</span><span class="w">    </span><span class="mi">1</span><span class="w">   </span><span class="mi">971</span><span class="w"> </span><span class="mf">11.487010000000005</span><span class="w">  </span><span class="mi">23</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="mi">27</span><span class="w">  </span><span class="mi">38029</span><span class="w">   </span><span class="mi">29704</span><span class="w"></span>
+<span class="n">YHR174W</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="mi">839</span><span class="w"> </span><span class="mi">2</span><span class="w">   </span><span class="mi">825</span><span class="w"> </span><span class="mf">9.659210000000002</span><span class="w">   </span><span class="mi">15</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="mi">14</span><span class="w">  </span><span class="mi">67734</span><span class="w">   </span><span class="mi">24231</span><span class="w"></span>
+<span class="n">YHR174W</span><span class="w"> </span><span class="mi">218</span><span class="w"> </span><span class="mi">1309</span><span class="w">    </span><span class="mi">3</span><span class="w">   </span><span class="mi">1028</span><span class="w">    </span><span class="mf">11.06325000000001</span><span class="w">   </span><span class="mi">36</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="mi">63</span><span class="w">  </span><span class="mi">91966</span><span class="w">   </span><span class="mi">30801</span><span class="w"></span>
+<span class="n">YHR174W</span><span class="w"> </span><span class="mi">462</span><span class="w"> </span><span class="mi">1309</span><span class="w">    </span><span class="mi">4</span><span class="w">   </span><span class="mi">818</span><span class="w"> </span><span class="mf">10.73776000000001</span><span class="w">   </span><span class="mi">18</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="mi">29</span><span class="w">  </span><span class="mi">122768</span><span class="w">  </span><span class="mi">24589</span><span class="w"></span>
+<span class="n">YLR441C</span><span class="w"> </span><span class="mi">173</span><span class="w"> </span><span class="mi">764</span><span class="w"> </span><span class="mi">5</span><span class="w">   </span><span class="mi">554</span><span class="w"> </span><span class="mf">5.556939999999999</span><span class="w">   </span><span class="mi">20</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="mi">37</span><span class="w">  </span><span class="mi">147358</span><span class="w">  </span><span class="mi">16437</span><span class="w"></span>
+<span class="n">YGR192C</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="mi">989</span><span class="w"> </span><span class="mi">6</span><span class="w">   </span><span class="mi">927</span><span class="w"> </span><span class="mf">11.731470000000003</span><span class="w">  </span><span class="mi">37</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="mi">61</span><span class="w">  </span><span class="mi">163796</span><span class="w">  </span><span class="mi">27388</span><span class="w"></span>
+<span class="n">YDR500C</span><span class="w"> </span><span class="mi">9</span><span class="w">   </span><span class="mi">252</span><span class="w"> </span><span class="mi">8</span><span class="w">   </span><span class="mi">231</span><span class="w"> </span><span class="mf">2.9179100000000027</span><span class="w">  </span><span class="mi">7</span><span class="w">   </span><span class="mi">0</span><span class="w">   </span><span class="mi">14</span><span class="w">  </span><span class="mi">191185</span><span class="w">  </span><span class="mi">6751</span><span class="w"></span>
+<span class="n">YGR192C</span><span class="w"> </span><span class="mi">3</span><span class="w">   </span><span class="mi">995</span><span class="w"> </span><span class="mi">7</span><span class="w">   </span><span class="mi">946</span><span class="w"> </span><span class="mf">12.30464000000001</span><span class="w">   </span><span class="mi">31</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="mi">50</span><span class="w">  </span><span class="mi">197937</span><span class="w">  </span><span class="mi">28123</span><span class="w"></span>
+
+
+<span class="n">Checking</span><span class="w"> </span><span class="n">arguments</span><span class="w"></span>
+<span class="n">Starting</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">process</span><span class="w"> </span><span class="n">files</span><span class="w"></span>
+<span class="mi">18</span><span class="w"> </span><span class="k">reads</span><span class="w"> </span><span class="o">[</span><span class="n">00:01,  7.25 reads/s</span><span class="o">][</span><span class="n">post-run summary</span><span class="o">]</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="k">reads</span><span class="err">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="nl">unparseable</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">qc</span><span class="w"> </span><span class="nl">fail</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nl">calibrate</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="nl">alignment</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">bad</span><span class="w"> </span><span class="nl">fast5</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="mi">21</span><span class="w"> </span><span class="k">reads</span><span class="w"> </span><span class="o">[</span><span class="n">00:01,  7.84 reads/s</span><span class="o">]</span><span class="w"></span>
+<span class="o">[</span><span class="n">Eventalign_collapse</span><span class="o">]</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="k">reads</span><span class="err">:</span><span class="w"> </span><span class="mi">21</span><span class="w"> </span><span class="o">[</span><span class="n">14.06 reads/s</span><span class="o">]</span><span class="w"></span>
+</pre></div>
+
+
+<h2 id="python-api-usage">Python API usage</h2>
+<h3 id="import-the-package">Import the package</h3>
+<div class="codehilite"><pre><span></span><span class="c1"># Import main program</span>
+<span class="kn">from</span> <span class="nn">NanopolishComp.Eventalign_collapse</span> <span class="kn">import</span> <span class="n">Eventalign_collapse</span>
+
+<span class="c1"># Import helper functions</span>
+<span class="kn">from</span> <span class="nn">NanopolishComp.common</span> <span class="kn">import</span> <span class="n">jhelp</span><span class="p">,</span> <span class="n">head</span>
+</pre></div>
+
+<h3 id="python-api-help">python API help</h3>
+<div class="codehilite"><pre><span></span><span class="n">jhelp</span><span class="p">(</span><span class="n">Eventalign_collapse</span><span class="p">)</span>
+</pre></div>
+
+<hr />
+<p><strong>NanopolishComp.Eventalign_collapse.<strong>init</strong></strong></p>
+<p>Collapse the nanopolish eventalign output by kmers rather that by events. kmer level statistics (mean, median, std, mad) are only computed if nanopolish is run with --samples option</p>
+<hr />
+<ul>
+<li><strong>input_fn</strong> <em>: str (required)</em></li>
+</ul>
+<p>Path to a nanopolish eventalign tsv output file.</p>
+<ul>
+<li><strong>outdir</strong> <em>: str (default = ./)</em></li>
+</ul>
+<p>Path to the output folder (will be created if it does exist yet)</p>
+<ul>
+<li><strong>outprefix</strong> <em>: str (default = out)</em></li>
+</ul>
+<p>text outprefix for all the files generated</p>
+<ul>
+<li><strong>max_reads</strong> <em>: int (default = None)</em></li>
+</ul>
+<p>Maximum number of read to parse. 0 to deactivate (default = 0)</p>
+<ul>
+<li><strong>write_samples</strong> <em>: bool (default = False)</em></li>
+</ul>
+<p>If given, will write the raw sample if nanopolish eventalign was ran with --samples option</p>
+<ul>
+<li><strong>stat_fields</strong> <em>: list of str (default = ['mean', 'median', 'num_signals'])</em></li>
+</ul>
+<p>List of statistical fields to compute if nanopolish eventalign was ran with --samples option. Valid values = "mean", "std", "median", "mad", "num_signals"</p>
+<ul>
+<li><strong>threads</strong> <em>: int (default = 4)</em></li>
+</ul>
+<p>Total number of threads. 1 thread is used for the reader and 1 for the writer (default = 4)</p>
+<ul>
+<li><strong>verbose</strong> <em>: bool (default = False)</em></li>
+</ul>
+<p>Increase verbosity</p>
+<ul>
+<li><strong>quiet</strong> <em>: bool (default = False)</em></li>
+</ul>
+<p>Reduce verbosity</p>
+<h3 id="example-usage_1">Example usage</h3>
+<h4 id="example-with-minimal-file">Example with minimal file</h4>
+<div class="codehilite"><pre><span></span><span class="n">input_fn</span> <span class="o">=</span> <span class="s2">&quot;./data/eventalign_collapse//nanopolish_reads.tsv&quot;</span>
+<span class="n">outdir</span> <span class="o">=</span> <span class="s2">&quot;./output/eventalign_collapse&quot;</span>
+<span class="n">outprefix</span> <span class="o">=</span> <span class="s2">&quot;basic&quot;</span>
+
+<span class="n">Eventalign_collapse</span> <span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">input_fn</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="n">outdir</span><span class="p">,</span> <span class="n">outprefix</span><span class="o">=</span><span class="n">outprefix</span><span class="p">,</span> <span class="n">threads</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./output/eventalign_collapse/basic_eventalign_collapse.tsv&quot;</span><span class="p">)</span>
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./output/eventalign_collapse/basic_eventalign_collapse.tsv.idx&quot;</span><span class="p">)</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="n">Checking</span><span class="w"> </span><span class="n">arguments</span><span class="w"></span>
+<span class="n">Starting</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">process</span><span class="w"> </span><span class="n">files</span><span class="w"></span>
+<span class="mi">21</span><span class="w"> </span><span class="k">reads</span><span class="w"> </span><span class="o">[</span><span class="n">00:00, 99.56 reads/s</span><span class="o">]</span><span class="w"> </span>
+<span class="o">[</span><span class="n">Eventalign_collapse</span><span class="o">]</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="k">reads</span><span class="err">:</span><span class="w"> </span><span class="mi">21</span><span class="w"> </span><span class="o">[</span><span class="n">90.56 reads/s</span><span class="o">]</span><span class="w"></span>
+
+
+
+<span class="n">#0</span><span class="w">  </span><span class="n">YGR240C</span><span class="w"></span>
+<span class="n">ref_pos</span><span class="w"> </span><span class="n">ref_kmer</span><span class="w">    </span><span class="n">num_events</span><span class="w">  </span><span class="n">dwell_time</span><span class="w">  </span><span class="n">NNNNN_dwell_time</span><span class="w">    </span><span class="n">mismatch_dwell_time</span><span class="w"></span>
+<span class="mi">1656</span><span class="w">    </span><span class="n">GAAAA</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00266</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="mi">1657</span><span class="w">    </span><span class="n">AAAAC</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00764</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="mi">1658</span><span class="w">    </span><span class="n">AAACA</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00398</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="mi">1659</span><span class="w">    </span><span class="n">AACAA</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00432</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="mi">1660</span><span class="w">    </span><span class="n">ACAAA</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00498</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="mi">1661</span><span class="w">    </span><span class="n">CAAAG</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00564</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="mi">1662</span><span class="w">    </span><span class="n">AAAGA</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00963</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="mi">1663</span><span class="w">    </span><span class="n">AAGAT</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00299</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+
+<span class="n">ref_id</span><span class="w">  </span><span class="n">ref_start</span><span class="w"> </span><span class="n">ref_end</span><span class="w"> </span><span class="n">read_id</span><span class="w"> </span><span class="n">kmers</span><span class="w"> </span><span class="n">dwell_time</span><span class="w">         </span><span class="n">NNNNN_kmers</span><span class="w"> </span><span class="n">mismatch_kmers</span><span class="w"> </span><span class="n">missing_kmers</span><span class="w"> </span><span class="n">byte_offset</span><span class="w"> </span><span class="n">byte_len</span><span class="w"> </span>
+<span class="n">YGR240C</span><span class="w"> </span><span class="mi">1656</span><span class="w">      </span><span class="mi">2960</span><span class="w">    </span><span class="mi">0</span><span class="w">       </span><span class="mi">1250</span><span class="w">  </span><span class="mf">13.788570000000009</span><span class="w"> </span><span class="mi">35</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">54</span><span class="w">            </span><span class="mi">0</span><span class="w">           </span><span class="mi">38028</span><span class="w">    </span>
+<span class="n">YCR030C</span><span class="w"> </span><span class="mi">1578</span><span class="w">      </span><span class="mi">2576</span><span class="w">    </span><span class="mi">1</span><span class="w">       </span><span class="mi">971</span><span class="w">   </span><span class="mf">11.487010000000005</span><span class="w"> </span><span class="mi">23</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">27</span><span class="w">            </span><span class="mi">38029</span><span class="w">       </span><span class="mi">29704</span><span class="w">    </span>
+<span class="n">YHR174W</span><span class="w"> </span><span class="mi">0</span><span class="w">         </span><span class="mi">839</span><span class="w">     </span><span class="mi">2</span><span class="w">       </span><span class="mi">825</span><span class="w">   </span><span class="mf">9.659210000000002</span><span class="w">  </span><span class="mi">15</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">14</span><span class="w">            </span><span class="mi">67734</span><span class="w">       </span><span class="mi">24231</span><span class="w">    </span>
+<span class="n">YHR174W</span><span class="w"> </span><span class="mi">218</span><span class="w">       </span><span class="mi">1309</span><span class="w">    </span><span class="mi">3</span><span class="w">       </span><span class="mi">1028</span><span class="w">  </span><span class="mf">11.06325000000001</span><span class="w">  </span><span class="mi">36</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">63</span><span class="w">            </span><span class="mi">91966</span><span class="w">       </span><span class="mi">30801</span><span class="w">    </span>
+<span class="n">YHR174W</span><span class="w"> </span><span class="mi">462</span><span class="w">       </span><span class="mi">1309</span><span class="w">    </span><span class="mi">4</span><span class="w">       </span><span class="mi">818</span><span class="w">   </span><span class="mf">10.73776000000001</span><span class="w">  </span><span class="mi">18</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">29</span><span class="w">            </span><span class="mi">122768</span><span class="w">      </span><span class="mi">24589</span><span class="w">    </span>
+<span class="n">YLR441C</span><span class="w"> </span><span class="mi">173</span><span class="w">       </span><span class="mi">764</span><span class="w">     </span><span class="mi">5</span><span class="w">       </span><span class="mi">554</span><span class="w">   </span><span class="mf">5.556939999999999</span><span class="w">  </span><span class="mi">20</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">37</span><span class="w">            </span><span class="mi">147358</span><span class="w">      </span><span class="mi">16437</span><span class="w">    </span>
+<span class="n">YGR192C</span><span class="w"> </span><span class="mi">1</span><span class="w">         </span><span class="mi">989</span><span class="w">     </span><span class="mi">6</span><span class="w">       </span><span class="mi">927</span><span class="w">   </span><span class="mf">11.731470000000003</span><span class="w"> </span><span class="mi">37</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">61</span><span class="w">            </span><span class="mi">163796</span><span class="w">      </span><span class="mi">27388</span><span class="w">    </span>
+<span class="n">YDR500C</span><span class="w"> </span><span class="mi">9</span><span class="w">         </span><span class="mi">252</span><span class="w">     </span><span class="mi">8</span><span class="w">       </span><span class="mi">231</span><span class="w">   </span><span class="mf">2.9179100000000027</span><span class="w"> </span><span class="mi">7</span><span class="w">           </span><span class="mi">0</span><span class="w">              </span><span class="mi">14</span><span class="w">            </span><span class="mi">191185</span><span class="w">      </span><span class="mi">6751</span><span class="w">     </span>
+<span class="n">YGR192C</span><span class="w"> </span><span class="mi">3</span><span class="w">         </span><span class="mi">995</span><span class="w">     </span><span class="mi">7</span><span class="w">       </span><span class="mi">946</span><span class="w">   </span><span class="mf">12.30464000000001</span><span class="w">  </span><span class="mi">31</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">50</span><span class="w">            </span><span class="mi">197937</span><span class="w">      </span><span class="mi">28123</span><span class="w"></span>
+</pre></div>
+
+
+<h4 id="example-with-indexes">Example with indexes</h4>
+<div class="codehilite"><pre><span></span><span class="n">input_fn</span> <span class="o">=</span> <span class="s2">&quot;./data/eventalign_collapse//nanopolish_reads_index.tsv&quot;</span>
+<span class="n">outdir</span> <span class="o">=</span> <span class="s2">&quot;./output/eventalign_collapse&quot;</span>
+<span class="n">outprefix</span> <span class="o">=</span> <span class="s2">&quot;index&quot;</span>
+
+<span class="n">Eventalign_collapse</span> <span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">input_fn</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="n">outdir</span><span class="p">,</span> <span class="n">outprefix</span><span class="o">=</span><span class="n">outprefix</span><span class="p">,</span> <span class="n">threads</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./output/eventalign_collapse/index_eventalign_collapse.tsv&quot;</span><span class="p">)</span>
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./output/eventalign_collapse/index_eventalign_collapse.tsv.idx&quot;</span><span class="p">)</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="n">Checking</span><span class="w"> </span><span class="n">arguments</span><span class="w"></span>
+<span class="n">Starting</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">process</span><span class="w"> </span><span class="n">files</span><span class="w"></span>
+<span class="mi">21</span><span class="w"> </span><span class="k">reads</span><span class="w"> </span><span class="o">[</span><span class="n">00:00, 94.30 reads/s</span><span class="o">]</span><span class="w"></span>
+<span class="o">[</span><span class="n">Eventalign_collapse</span><span class="o">]</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="k">reads</span><span class="err">:</span><span class="w"> </span><span class="mi">21</span><span class="w"> </span><span class="o">[</span><span class="n">82.25 reads/s</span><span class="o">]</span><span class="w"></span>
+
+
+
+<span class="n">#0</span><span class="w">  </span><span class="n">YGR240C</span><span class="w"></span>
+<span class="n">ref_pos</span><span class="w"> </span><span class="n">ref_kmer</span><span class="w">    </span><span class="n">num_events</span><span class="w">  </span><span class="n">dwell_time</span><span class="w">  </span><span class="n">NNNNN_dwell_time</span><span class="w">    </span><span class="n">mismatch_dwell_time</span><span class="w"> </span><span class="n">start_idx</span><span class="w">   </span><span class="n">end_idx</span><span class="w"></span>
+<span class="mi">1656</span><span class="w">    </span><span class="n">GAAAA</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00266</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mi">63446</span><span class="w">   </span><span class="mi">63454</span><span class="w"></span>
+<span class="mi">1657</span><span class="w">    </span><span class="n">AAAAC</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00764</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mi">63423</span><span class="w">   </span><span class="mi">63446</span><span class="w"></span>
+<span class="mi">1658</span><span class="w">    </span><span class="n">AAACA</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00398</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mi">63411</span><span class="w">   </span><span class="mi">63423</span><span class="w"></span>
+<span class="mi">1659</span><span class="w">    </span><span class="n">AACAA</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00432</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mi">63398</span><span class="w">   </span><span class="mi">63411</span><span class="w"></span>
+<span class="mi">1660</span><span class="w">    </span><span class="n">ACAAA</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00498</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mi">63383</span><span class="w">   </span><span class="mi">63398</span><span class="w"></span>
+<span class="mi">1661</span><span class="w">    </span><span class="n">CAAAG</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00564</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mi">63366</span><span class="w">   </span><span class="mi">63383</span><span class="w"></span>
+<span class="mi">1662</span><span class="w">    </span><span class="n">AAAGA</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00963</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mi">63337</span><span class="w">   </span><span class="mi">63366</span><span class="w"></span>
+<span class="mi">1663</span><span class="w">    </span><span class="n">AAGAT</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="mf">0.00299</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mi">63328</span><span class="w">   </span><span class="mi">63337</span><span class="w"></span>
+
+<span class="n">ref_id</span><span class="w">  </span><span class="n">ref_start</span><span class="w"> </span><span class="n">ref_end</span><span class="w"> </span><span class="n">read_id</span><span class="w"> </span><span class="n">kmers</span><span class="w"> </span><span class="n">dwell_time</span><span class="w">         </span><span class="n">NNNNN_kmers</span><span class="w"> </span><span class="n">mismatch_kmers</span><span class="w"> </span><span class="n">missing_kmers</span><span class="w"> </span><span class="n">byte_offset</span><span class="w"> </span><span class="n">byte_len</span><span class="w"> </span>
+<span class="n">YGR240C</span><span class="w"> </span><span class="mi">1656</span><span class="w">      </span><span class="mi">2960</span><span class="w">    </span><span class="mi">0</span><span class="w">       </span><span class="mi">1250</span><span class="w">  </span><span class="mf">13.788570000000009</span><span class="w"> </span><span class="mi">35</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">54</span><span class="w">            </span><span class="mi">0</span><span class="w">           </span><span class="mi">53046</span><span class="w">    </span>
+<span class="n">YCR030C</span><span class="w"> </span><span class="mi">1578</span><span class="w">      </span><span class="mi">2576</span><span class="w">    </span><span class="mi">1</span><span class="w">       </span><span class="mi">971</span><span class="w">   </span><span class="mf">11.487010000000005</span><span class="w"> </span><span class="mi">23</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">27</span><span class="w">            </span><span class="mi">53047</span><span class="w">       </span><span class="mi">41374</span><span class="w">    </span>
+<span class="n">YHR174W</span><span class="w"> </span><span class="mi">0</span><span class="w">         </span><span class="mi">839</span><span class="w">     </span><span class="mi">2</span><span class="w">       </span><span class="mi">825</span><span class="w">   </span><span class="mf">9.659210000000002</span><span class="w">  </span><span class="mi">15</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">14</span><span class="w">            </span><span class="mi">94422</span><span class="w">       </span><span class="mi">33595</span><span class="w">    </span>
+<span class="n">YHR174W</span><span class="w"> </span><span class="mi">218</span><span class="w">       </span><span class="mi">1309</span><span class="w">    </span><span class="mi">3</span><span class="w">       </span><span class="mi">1028</span><span class="w">  </span><span class="mf">11.06325000000001</span><span class="w">  </span><span class="mi">36</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">63</span><span class="w">            </span><span class="mi">128018</span><span class="w">      </span><span class="mi">43155</span><span class="w">    </span>
+<span class="n">YHR174W</span><span class="w"> </span><span class="mi">462</span><span class="w">       </span><span class="mi">1309</span><span class="w">    </span><span class="mi">4</span><span class="w">       </span><span class="mi">818</span><span class="w">   </span><span class="mf">10.73776000000001</span><span class="w">  </span><span class="mi">18</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">29</span><span class="w">            </span><span class="mi">171174</span><span class="w">      </span><span class="mi">34423</span><span class="w">    </span>
+<span class="n">YLR441C</span><span class="w"> </span><span class="mi">173</span><span class="w">       </span><span class="mi">764</span><span class="w">     </span><span class="mi">5</span><span class="w">       </span><span class="mi">554</span><span class="w">   </span><span class="mf">5.556939999999999</span><span class="w">  </span><span class="mi">20</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">37</span><span class="w">            </span><span class="mi">205598</span><span class="w">      </span><span class="mi">23103</span><span class="w">    </span>
+<span class="n">YGR192C</span><span class="w"> </span><span class="mi">1</span><span class="w">         </span><span class="mi">989</span><span class="w">     </span><span class="mi">6</span><span class="w">       </span><span class="mi">927</span><span class="w">   </span><span class="mf">11.731470000000003</span><span class="w"> </span><span class="mi">37</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">61</span><span class="w">            </span><span class="mi">228702</span><span class="w">      </span><span class="mi">38529</span><span class="w">    </span>
+<span class="n">YDR500C</span><span class="w"> </span><span class="mi">9</span><span class="w">         </span><span class="mi">252</span><span class="w">     </span><span class="mi">8</span><span class="w">       </span><span class="mi">231</span><span class="w">   </span><span class="mf">2.9179100000000027</span><span class="w"> </span><span class="mi">7</span><span class="w">           </span><span class="mi">0</span><span class="w">              </span><span class="mi">14</span><span class="w">            </span><span class="mi">267232</span><span class="w">      </span><span class="mi">9541</span><span class="w">     </span>
+<span class="n">YGR192C</span><span class="w"> </span><span class="mi">3</span><span class="w">         </span><span class="mi">995</span><span class="w">     </span><span class="mi">7</span><span class="w">       </span><span class="mi">946</span><span class="w">   </span><span class="mf">12.30464000000001</span><span class="w">  </span><span class="mi">31</span><span class="w">          </span><span class="mi">0</span><span class="w">              </span><span class="mi">50</span><span class="w">            </span><span class="mi">276774</span><span class="w">      </span><span class="mi">39493</span><span class="w"></span>
+</pre></div>
+
+
+<h4 id="example-including-samples">Example including samples</h4>
+<div class="codehilite"><pre><span></span><span class="n">input_fn</span> <span class="o">=</span> <span class="s2">&quot;./data/eventalign_collapse//nanopolish_reads_index.tsv&quot;</span>
+<span class="n">outdir</span> <span class="o">=</span> <span class="s2">&quot;./output/eventalign_collapse&quot;</span>
+<span class="n">outprefix</span> <span class="o">=</span> <span class="s2">&quot;stats&quot;</span>
+
+<span class="n">Eventalign_collapse</span> <span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">input_fn</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="n">outdir</span><span class="p">,</span> <span class="n">outprefix</span><span class="o">=</span><span class="n">outprefix</span><span class="p">,</span> <span class="n">threads</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">stat_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;median&quot;</span><span class="p">,</span> <span class="s2">&quot;mad&quot;</span><span class="p">,</span> <span class="s2">&quot;num_signals&quot;</span><span class="p">])</span>
+
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./output/eventalign_collapse/stats_eventalign_collapse.tsv&quot;</span><span class="p">)</span>
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./output/eventalign_collapse/stats_eventalign_collapse.tsv.idx&quot;</span><span class="p">)</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="k">[Eventalign_collapse] total reads: 21 [86.98 reads/s]</span>
+
+
+
+<span class="c1">#0  YGR240C</span>
+<span class="na">ref_pos ref_kmer    num_events  dwell_time  NNNNN_dwell_time    mismatch_dwell_time start_idx   end_idx</span>
+<span class="na">1656    GAAAA   1   0.00266 0.0 0.0 63446   63454</span>
+<span class="na">1657    AAAAC   1   0.00764 0.0 0.0 63423   63446</span>
+<span class="na">1658    AAACA   1   0.00398 0.0 0.0 63411   63423</span>
+<span class="na">1659    AACAA   1   0.00432 0.0 0.0 63398   63411</span>
+<span class="na">1660    ACAAA   1   0.00498 0.0 0.0 63383   63398</span>
+<span class="na">1661    CAAAG   1   0.00564 0.0 0.0 63366   63383</span>
+<span class="na">1662    AAAGA   1   0.00963 0.0 0.0 63337   63366</span>
+<span class="na">1663    AAGAT   1   0.00299 0.0 0.0 63328   63337</span>
+
+<span class="na">ref_id  ref_start ref_end read_id kmers dwell_time         NNNNN_kmers mismatch_kmers missing_kmers byte_offset byte_len </span>
+<span class="na">YGR240C 1656      2960    0       1250  13.788570000000009 35          0              54            0           53046    </span>
+<span class="na">YCR030C 1578      2576    1       971   11.487010000000005 23          0              27            53047       41374    </span>
+<span class="na">YHR174W 0         839     2       825   9.659210000000002  15          0              14            94422       33595    </span>
+<span class="na">YHR174W 218       1309    3       1028  11.06325000000001  36          0              63            128018      43155    </span>
+<span class="na">YHR174W 462       1309    4       818   10.73776000000001  18          0              29            171174      34423    </span>
+<span class="na">YLR441C 173       764     5       554   5.556939999999999  20          0              37            205598      23103    </span>
+<span class="na">YGR192C 1         989     6       927   11.731470000000003 37          0              61            228702      38529    </span>
+<span class="na">YDR500C 9         252     8       231   2.9179100000000027 7           0              14            267232      9541     </span>
+<span class="na">YGR192C 3         995     7       946   12.30464000000001  31          0              50            276774      39493</span>
+</pre></div>
+
+
+<h4 id="example-including-samples-and-writing-samples-values-in-ouput-file">Example including samples and writing samples values in ouput file</h4>
+<div class="codehilite"><pre><span></span><span class="n">input_fn</span> <span class="o">=</span> <span class="s2">&quot;./data/eventalign_collapse//nanopolish_reads_samples.tsv&quot;</span>
+<span class="n">outdir</span> <span class="o">=</span> <span class="s2">&quot;./output/eventalign_collapse&quot;</span>
+<span class="n">outprefix</span> <span class="o">=</span> <span class="s2">&quot;samples&quot;</span>
+
+<span class="n">Eventalign_collapse</span> <span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">input_fn</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="n">outdir</span><span class="p">,</span> <span class="n">outprefix</span><span class="o">=</span><span class="n">outprefix</span><span class="p">,</span> <span class="n">threads</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">stat_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;median&quot;</span><span class="p">,</span> <span class="s2">&quot;mad&quot;</span><span class="p">,</span> <span class="s2">&quot;num_signals&quot;</span><span class="p">],</span> <span class="n">write_samples</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./output/eventalign_collapse/samples_eventalign_collapse.tsv&quot;</span><span class="p">)</span>
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./output/eventalign_collapse/samples_eventalign_collapse.tsv.idx&quot;</span><span class="p">)</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="k">[Eventalign_collapse] total reads: 21 [12.19 reads/s]</span>
+
+
+
+<span class="c1">#2  YHR174W</span>
+<span class="na">ref_pos ref_kmer    num_events  dwell_time  NNNNN_dwell_time    mismatch_dwell_time mean    std median  mad num_signals samples</span>
+<span class="na">0   ATGGC   1   0.01096 0.0 0.0 86.3893051147461    3.8192403316497803  85.67970275878906   2.618194580078125   33  96.4434,93.5342,94.5524,87.1342,85.6797,86.6978,85.0978,91.0615,89.316,84.0797,82.916,82.3342,89.316,84.3706,84.3706,85.8251,81.4615,83.0615,85.9706,85.0978,80.7342,82.4796,93.0979,88.0069,82.916,85.3887,84.0797,86.5524,84.3706,82.3342,88.2979,88.2979,85.9706</span>
+<span class="na">1   TGGCT   4   0.03253 0.0 0.0 104.78181457519531  6.572873592376709   106.18900299072266  3.9269943237304688  98  104.007,96.1524,106.189,99.0615,108.371,102.407,107.498,100.662,113.462,106.189,111.28,111.28,112.298,102.989,101.971,109.68,106.916,109.243,106.916,103.28,101.825,110.553,112.443,105.898,101.098,99.0615,105.462,102.843,100.516,107.643,109.098,107.789,113.316,109.098,110.116,108.807,106.916,112.443,114.916,110.843,109.098,111.716,103.862,110.262,109.098,105.171,109.68,108.807,112.589,111.425,123.498,110.116,108.371,110.843,111.134,110.843,96.007,94.5524,97.8979,90.6251,94.9888,97.0252,93.9706,104.589,109.971,106.48,108.807,101.389,103.716,96.8797,89.7524,97.4615,98.0434,86.8433,104.443,103.716,102.407,107.207,102.989,93.6797,103.571,104.007,100.08,103.862,109.68,106.625,101.534,97.3161,103.571,97.607,88.7342,109.534,106.771,113.025,108.807,93.2433,108.952,91.207</span>
+<span class="na">2   GGCTG   1   0.00465 0.0 0.0 96.55765533447266   6.874111652374268   97.75244903564453   5.382049560546875   14  105.752,98.9161,98.7706,96.7343,95.5706,100.08,105.607,96.4434,88.5888,101.68,85.6797,104.589,88.1524,85.2433</span>
+<span class="na">3   GCTGT   5   0.0385  0.0 0.0 81.69342803955078   5.14208984375   80.29779815673828   1.5273017883300781  116 94.1161,90.6251,93.2433,81.316,105.316,87.716,95.7161,90.3342,98.0434,86.116,87.716,107.789,96.2979,83.4978,84.2251,83.3524,79.5705,80.8796,79.1342,78.116,80.4433,80.5887,79.4251,79.2796,81.6069,77.9705,81.6069,81.7524,81.4615,80.4433,86.9888,79.5705,81.316,77.5342,82.6251,77.9705,82.1887,77.6796,80.7342,83.6433,77.9705,78.4069,80.0069,80.1524,80.4433,80.7342,80.2978,84.9524,78.5524,81.316,80.2978,82.1887,81.6069,77.6796,81.0251,78.4069,79.4251,80.4433,79.8615,82.1887,79.8615,80.0069,78.6978,80.7342,80.5887,78.5524,78.8433,79.4251,82.6251,80.0069,77.5342,80.0069,77.5342,83.7887,84.0797,83.0615,82.1887,81.6069,80.8796,81.316,80.0069,78.9887,82.7706,84.516,81.4615,80.5887,79.2796,78.9887,78.4069,80.5887,80.2978,83.7887,78.4069,78.116,79.5705,78.5524,79.4251,79.2796,81.0251,78.8433,78.9887,78.5524,80.1524,77.9705,78.2614,80.8796,78.4069,79.2796,78.2614,79.716,77.6796,79.4251,77.6796,78.6978,77.3887,76.9523</span>
+<span class="na">4   CTGTC   1   0.00232 0.0 0.0 102.4487075805664   1.5290673971176147  103.57099914550781  0.2910003662109375  7   103.571,103.716,103.862,101.243,100.371,103.862,100.516</span>
+<span class="na">5   TGTCT   4   0.019249999999999996    0.0 0.0 107.04158020019531  5.813553810119629   107.64350128173828  2.5454978942871094  58  113.462,109.534,107.789,112.298,110.116,112.153,109.243,111.862,107.352,112.88,103.716,102.262,103.571,101.971,104.007,104.152,99.6434,104.88,109.971,109.825,114.625,105.898,107.062,88.7342,105.462,112.589,108.516,114.771,106.916,111.716,110.116,106.334,108.08,107.207,110.262,110.116,105.898,109.825,108.08,106.771,107.207,108.08,107.498,114.48,116.807,107.062,109.68,105.607,110.407,110.553,106.189,105.025,109.389,104.88,86.6978,103.425,88.2979,97.4615</span>
+<span class="na">6   GTCTC   2   0.00797 0.0 0.0 76.83718872070312   2.1963260173797607  76.87960052490234   1.1636505126953125  24  78.5524,75.6432,75.7887,79.4251,82.3342,77.3887,79.4251,77.8251,76.9523,78.4069,76.9523,77.8251,76.6614,78.9887,76.6614,76.8069,75.7887,71.8614,74.7705,74.6251,77.3887,76.8069,74.3341,72.8796</span>
+<span class="na">7   TCTCT   1   0.00232 0.0 0.0 80.0484619140625    1.0306347608566284  80.00689697265625   0.727294921875  7   78.6978,79.2796,79.2796,80.0069,81.4615,81.6069,80.0069</span>
+
+<span class="na">ref_id  ref_start ref_end read_id kmers dwell_time         NNNNN_kmers mismatch_kmers missing_kmers byte_offset byte_len </span>
+<span class="na">YHR174W 0         839     2       825   9.659210000000002  15          0              14            0           317027   </span>
+<span class="na">YCR030C 1578      2576    1       971   11.487010000000005 23          0              27            317028      376326   </span>
+<span class="na">YGR240C 1656      2960    0       1250  13.788570000000009 35          0              54            693355      461011   </span>
+<span class="na">YHR174W 218       1309    3       1028  11.06325000000001  36          0              63            1154367     372126   </span>
+<span class="na">YLR441C 173       764     5       554   5.556939999999999  20          0              37            1526494     190670   </span>
+<span class="na">YDR500C 9         252     8       231   2.9179100000000027 7           0              14            1717165     93821    </span>
+<span class="na">YHR174W 462       1309    4       818   10.73776000000001  18          0              29            1810987     342528   </span>
+<span class="na">YGR192C 3         995     7       946   12.30464000000001  31          0              50            2153516     392222   </span>
+<span class="na">YDR224C 0         389     9       376   4.2840300000000004 8           0              13            2545739     141262</span>
+</pre></div>
+
+
+<h2 id="using-the-index-to-random-access-a-specific-entry-in-the-file">Using the index to random access a specific entry in the file</h2>
+<h3 id="random-access-with-standard-library">Random access with standard library</h3>
+<div class="codehilite"><pre><span></span><span class="n">output_fn</span> <span class="o">=</span> <span class="s2">&quot;./output/eventalign_collapse/stats_eventalign_collapse.tsv&quot;</span>
+<span class="n">index_fn</span> <span class="o">=</span> <span class="s2">&quot;./output/eventalign_collapse/stats_eventalign_collapse.tsv.idx&quot;</span>
+
+<span class="c1"># Imports</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">sample</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">islice</span>
+
+<span class="c1"># read index file and select random lines</span>
+<span class="n">index_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span> <span class="p">(</span><span class="n">index_fn</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">):</span>
+        <span class="n">index_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="n">random_index</span> <span class="o">=</span> <span class="n">sample</span><span class="p">(</span><span class="n">index_list</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="s2">&quot;RANDOM INDEX LINES&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">random_index</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;keys&quot;</span><span class="p">))</span>
+
+<span class="c1"># Open the collapsed event align file</span>
+<span class="k">with</span> <span class="nb">open</span> <span class="p">(</span><span class="n">output_fn</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">random_index</span><span class="p">:</span>
+        <span class="c1"># Access the header corresponding to the randomly selected index line using seek </span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># Return to file start</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="s2">&quot;byte_offset&quot;</span><span class="p">]))</span> <span class="c1"># Move to the offset indicated in the index file</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">fp</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span> <span class="c1"># Print read header</span>
+        <span class="c1"># Get 5 first lines and print then</span>
+        <span class="n">data_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">islice</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">),</span> <span class="mi">5</span><span class="p">):</span>
+            <span class="n">data_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+        <span class="k">print</span> <span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">data_list</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;keys&quot;</span><span class="p">))</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="k">RANDOM</span> <span class="nv">INDEX</span> <span class="nv">LINES</span>
+<span class="nv">ref_id</span>      <span class="nv">ref_start</span>    <span class="nv">ref_end</span>    <span class="nv">read_id</span>    <span class="nv">kmers</span>    <span class="nv">dwell_time</span>    <span class="nv">NNNNN_kmers</span>    <span class="nv">mismatch_kmers</span>    <span class="nv">missing_kmers</span>    <span class="nv">byte_offset</span>    <span class="nv">byte_len</span>
+<span class="o">--------</span>  <span class="o">-----------</span>  <span class="o">---------</span>  <span class="o">---------</span>  <span class="o">-------</span>  <span class="o">------------</span>  <span class="o">-------------</span>  <span class="o">----------------</span>  <span class="o">---------------</span>  <span class="o">-------------</span>  <span class="o">----------</span>
+<span class="nv">YMR116C</span>           <span class="mi">180</span>        <span class="mi">950</span>         <span class="mi">16</span>      <span class="mi">740</span>       <span class="mi">9</span>.<span class="mi">30597</span>             <span class="mi">20</span>                 <span class="mi">0</span>               <span class="mi">30</span>         <span class="mi">482785</span>       <span class="mi">30690</span>
+<span class="nv">YLR110C</span>            <span class="mi">14</span>        <span class="mi">395</span>         <span class="mi">15</span>      <span class="mi">364</span>       <span class="mi">4</span>.<span class="mi">61444</span>              <span class="mi">9</span>                 <span class="mi">0</span>               <span class="mi">17</span>         <span class="mi">450178</span>       <span class="mi">15023</span>
+<span class="nv">YGR240C</span>          <span class="mi">1656</span>       <span class="mi">2960</span>          <span class="mi">0</span>     <span class="mi">1250</span>      <span class="mi">13</span>.<span class="mi">7886</span>              <span class="mi">35</span>                 <span class="mi">0</span>               <span class="mi">54</span>              <span class="mi">0</span>       <span class="mi">53046</span>
+<span class="nv">YGR192C</span>             <span class="mi">3</span>        <span class="mi">995</span>          <span class="mi">7</span>      <span class="mi">946</span>      <span class="mi">12</span>.<span class="mi">3046</span>              <span class="mi">31</span>                 <span class="mi">0</span>               <span class="mi">50</span>         <span class="mi">276774</span>       <span class="mi">39493</span>
+<span class="nv">YHR174W</span>           <span class="mi">462</span>       <span class="mi">1309</span>          <span class="mi">4</span>      <span class="mi">818</span>      <span class="mi">10</span>.<span class="mi">7378</span>              <span class="mi">18</span>                 <span class="mi">0</span>               <span class="mi">29</span>         <span class="mi">171174</span>       <span class="mi">34423</span>
+
+<span class="sc">#16</span> <span class="nv">YMR116C</span>
+  <span class="nv">ref_pos</span>  <span class="nv">ref_kmer</span>      <span class="nv">num_events</span>    <span class="nv">dwell_time</span>    <span class="nv">NNNNN_dwell_time</span>    <span class="nv">mismatch_dwell_time</span>    <span class="nv">start_idx</span>    <span class="nv">end_idx</span>
+<span class="o">---------</span>  <span class="o">----------</span>  <span class="o">------------</span>  <span class="o">------------</span>  <span class="o">------------------</span>  <span class="o">---------------------</span>  <span class="o">-----------</span>  <span class="o">---------</span>
+      <span class="mi">180</span>  <span class="nv">TTCAA</span>                  <span class="mi">3</span>       <span class="mi">0</span>.<span class="mi">06408</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">41362</span>      <span class="mi">41555</span>
+      <span class="mi">181</span>  <span class="nv">TCAAG</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">00598</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">41344</span>      <span class="mi">41362</span>
+      <span class="mi">182</span>  <span class="nv">CAAGG</span>                  <span class="mi">2</span>       <span class="mi">0</span>.<span class="mi">00963</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">41315</span>      <span class="mi">41344</span>
+      <span class="mi">183</span>  <span class="nv">AAGGG</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">00697</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">41294</span>      <span class="mi">41315</span>
+      <span class="mi">184</span>  <span class="nv">AGGGT</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">00199</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">41288</span>      <span class="mi">41294</span>
+
+<span class="sc">#15</span> <span class="nv">YLR110C</span>
+  <span class="nv">ref_pos</span>  <span class="nv">ref_kmer</span>      <span class="nv">num_events</span>    <span class="nv">dwell_time</span>    <span class="nv">NNNNN_dwell_time</span>    <span class="nv">mismatch_dwell_time</span>    <span class="nv">start_idx</span>    <span class="nv">end_idx</span>
+<span class="o">---------</span>  <span class="o">----------</span>  <span class="o">------------</span>  <span class="o">------------</span>  <span class="o">------------------</span>  <span class="o">---------------------</span>  <span class="o">-----------</span>  <span class="o">---------</span>
+       <span class="mi">14</span>  <span class="nv">TGTCG</span>                  <span class="mi">2</span>       <span class="mi">0</span>.<span class="mi">00598</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">23697</span>      <span class="mi">23715</span>
+       <span class="mi">15</span>  <span class="nv">GTCGC</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">0073</span>                    <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">23675</span>      <span class="mi">23697</span>
+       <span class="mi">16</span>  <span class="nv">TCGCT</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">00564</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">23658</span>      <span class="mi">23675</span>
+       <span class="mi">17</span>  <span class="nv">CGCTT</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">00398</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">23646</span>      <span class="mi">23658</span>
+       <span class="mi">18</span>  <span class="nv">GCTTC</span>                  <span class="mi">2</span>       <span class="mi">0</span>.<span class="mi">01328</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">23606</span>      <span class="mi">23646</span>
+
+<span class="sc">#0</span>  <span class="nv">YGR240C</span>
+  <span class="nv">ref_pos</span>  <span class="nv">ref_kmer</span>      <span class="nv">num_events</span>    <span class="nv">dwell_time</span>    <span class="nv">NNNNN_dwell_time</span>    <span class="nv">mismatch_dwell_time</span>    <span class="nv">start_idx</span>    <span class="nv">end_idx</span>
+<span class="o">---------</span>  <span class="o">----------</span>  <span class="o">------------</span>  <span class="o">------------</span>  <span class="o">------------------</span>  <span class="o">---------------------</span>  <span class="o">-----------</span>  <span class="o">---------</span>
+     <span class="mi">1656</span>  <span class="nv">GAAAA</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">00266</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">63446</span>      <span class="mi">63454</span>
+     <span class="mi">1657</span>  <span class="nv">AAAAC</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">00764</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">63423</span>      <span class="mi">63446</span>
+     <span class="mi">1658</span>  <span class="nv">AAACA</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">00398</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">63411</span>      <span class="mi">63423</span>
+     <span class="mi">1659</span>  <span class="nv">AACAA</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">00432</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">63398</span>      <span class="mi">63411</span>
+     <span class="mi">1660</span>  <span class="nv">ACAAA</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">00498</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">63383</span>      <span class="mi">63398</span>
+
+<span class="sc">#7</span>  <span class="nv">YGR192C</span>
+  <span class="nv">ref_pos</span>  <span class="nv">ref_kmer</span>      <span class="nv">num_events</span>    <span class="nv">dwell_time</span>    <span class="nv">NNNNN_dwell_time</span>    <span class="nv">mismatch_dwell_time</span>    <span class="nv">start_idx</span>    <span class="nv">end_idx</span>
+<span class="o">---------</span>  <span class="o">----------</span>  <span class="o">------------</span>  <span class="o">------------</span>  <span class="o">------------------</span>  <span class="o">---------------------</span>  <span class="o">-----------</span>  <span class="o">---------</span>
+        <span class="mi">3</span>  <span class="nv">GTTAG</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">00564</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">55070</span>      <span class="mi">55087</span>
+        <span class="mi">4</span>  <span class="nv">TTAGA</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">0073</span>                    <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">55048</span>      <span class="mi">55070</span>
+        <span class="mi">5</span>  <span class="nv">TAGAG</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">01162</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">55013</span>      <span class="mi">55048</span>
+        <span class="mi">6</span>  <span class="nv">AGAGT</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">00465</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">54999</span>      <span class="mi">55013</span>
+        <span class="mi">7</span>  <span class="nv">GAGTT</span>                  <span class="mi">3</span>       <span class="mi">0</span>.<span class="mi">01128</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">54965</span>      <span class="mi">54999</span>
+
+<span class="sc">#4</span>  <span class="nv">YHR174W</span>
+  <span class="nv">ref_pos</span>  <span class="nv">ref_kmer</span>      <span class="nv">num_events</span>    <span class="nv">dwell_time</span>    <span class="nv">NNNNN_dwell_time</span>    <span class="nv">mismatch_dwell_time</span>    <span class="nv">start_idx</span>    <span class="nv">end_idx</span>
+<span class="o">---------</span>  <span class="o">----------</span>  <span class="o">------------</span>  <span class="o">------------</span>  <span class="o">------------------</span>  <span class="o">---------------------</span>  <span class="o">-----------</span>  <span class="o">---------</span>
+      <span class="mi">462</span>  <span class="nv">TTGAA</span>                  <span class="mi">2</span>       <span class="mi">0</span>.<span class="mi">00797</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">42640</span>      <span class="mi">42664</span>
+      <span class="mi">463</span>  <span class="nv">TGAAC</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">00531</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">42624</span>      <span class="mi">42640</span>
+      <span class="mi">464</span>  <span class="nv">GAACG</span>                  <span class="mi">3</span>       <span class="mi">0</span>.<span class="mi">01726</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">42572</span>      <span class="mi">42624</span>
+      <span class="mi">465</span>  <span class="nv">AACGG</span>                  <span class="mi">5</span>       <span class="mi">0</span>.<span class="mi">02423</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">42499</span>      <span class="mi">42572</span>
+      <span class="mi">466</span>  <span class="nv">ACGGT</span>                  <span class="mi">1</span>       <span class="mi">0</span>.<span class="mi">00764</span>                   <span class="mi">0</span>                      <span class="mi">0</span>        <span class="mi">42476</span>      <span class="mi">42499</span>
+</pre></div>
+
+
+<h3 id="random-access-with-pandas">Random access with pandas</h3>
+<div class="codehilite"><pre><span></span><span class="n">output_fn</span> <span class="o">=</span> <span class="s2">&quot;./output/eventalign_collapse/stats_eventalign_collapse.tsv&quot;</span>
+<span class="n">index_fn</span> <span class="o">=</span> <span class="s2">&quot;./output/eventalign_collapse/stats_eventalign_collapse.tsv.idx&quot;</span>
+
+<span class="c1"># Imports</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="c1"># read index file and select random lines</span>
+<span class="n">index_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span> <span class="p">(</span><span class="n">index_fn</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">random_lines</span> <span class="o">=</span> <span class="n">index_df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="s2">&quot;Random index lines&quot;</span><span class="p">)</span>
+<span class="n">display</span> <span class="p">(</span><span class="n">random_lines</span><span class="p">)</span>
+
+<span class="c1"># Open the collapsed event align file</span>
+<span class="k">with</span> <span class="nb">open</span> <span class="p">(</span><span class="n">output_fn</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="nb">id</span><span class="p">,</span> <span class="n">read</span> <span class="ow">in</span> <span class="n">random_lines</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+
+        <span class="c1"># Access the header corresponding to the randomly selected index line using seek </span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># Return to file start</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">read</span><span class="o">.</span><span class="n">byte_offset</span><span class="p">)</span> <span class="c1"># Move to the offset indicated in the index file</span>
+        <span class="k">print</span> <span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span> <span class="c1"># Print read header</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span> <span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span> <span class="c1"># Read lines corresponding to the read</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="k">Random</span> <span class="nv">index</span> <span class="nv">lines</span>
+</pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ref_id</th>
+      <th>ref_start</th>
+      <th>ref_end</th>
+      <th>...</th>
+      <th>missing_kmers</th>
+      <th>byte_offset</th>
+      <th>byte_len</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>14</th>
+      <td>YDR382W</td>
+      <td>5</td>
+      <td>329</td>
+      <td>...</td>
+      <td>16</td>
+      <td>437025</td>
+      <td>13152</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>YGR192C</td>
+      <td>1</td>
+      <td>989</td>
+      <td>...</td>
+      <td>61</td>
+      <td>228702</td>
+      <td>38529</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>YCR030C</td>
+      <td>1578</td>
+      <td>2576</td>
+      <td>...</td>
+      <td>27</td>
+      <td>53047</td>
+      <td>41374</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>YLR441C</td>
+      <td>173</td>
+      <td>764</td>
+      <td>...</td>
+      <td>37</td>
+      <td>205598</td>
+      <td>23103</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>YLR293C</td>
+      <td>1</td>
+      <td>654</td>
+      <td>...</td>
+      <td>43</td>
+      <td>382914</td>
+      <td>26166</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 11 columns</p>
+</div>
+
+<div class="codehilite"><pre><span></span><span class="o">#</span><span class="mi">14</span> <span class="n">YDR382W</span>
+</pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ref_pos</th>
+      <th>ref_kmer</th>
+      <th>num_events</th>
+      <th>...</th>
+      <th>mismatch_dwell_time</th>
+      <th>start_idx</th>
+      <th>end_idx</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5</td>
+      <td>ATACT</td>
+      <td>2</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>48813</td>
+      <td>48858</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>6</td>
+      <td>TACTT</td>
+      <td>2</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>48794</td>
+      <td>48813</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7</td>
+      <td>ACTTA</td>
+      <td>4</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>48741</td>
+      <td>48794</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>8</td>
+      <td>CTTAG</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>48709</td>
+      <td>48741</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9</td>
+      <td>TTAGC</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>48681</td>
+      <td>48709</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 8 columns</p>
+</div>
+
+<div class="codehilite"><pre><span></span><span class="o">#</span><span class="mi">6</span>  <span class="n">YGR192C</span>
+</pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ref_pos</th>
+      <th>ref_kmer</th>
+      <th>num_events</th>
+      <th>...</th>
+      <th>mismatch_dwell_time</th>
+      <th>start_idx</th>
+      <th>end_idx</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>TGGTT</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>45267</td>
+      <td>45311</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>GGTTA</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>45248</td>
+      <td>45267</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>GTTAG</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>45223</td>
+      <td>45248</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>TTAGA</td>
+      <td>4</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>45159</td>
+      <td>45223</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>TAGAG</td>
+      <td>2</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>45137</td>
+      <td>45159</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 8 columns</p>
+</div>
+
+<div class="codehilite"><pre><span></span><span class="o">#</span><span class="mi">1</span>  <span class="n">YCR030C</span>
+</pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ref_pos</th>
+      <th>ref_kmer</th>
+      <th>num_events</th>
+      <th>...</th>
+      <th>mismatch_dwell_time</th>
+      <th>start_idx</th>
+      <th>end_idx</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1578</td>
+      <td>CCACC</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>47517</td>
+      <td>47528</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1579</td>
+      <td>CACCC</td>
+      <td>15</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>47223</td>
+      <td>47517</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1580</td>
+      <td>ACCCT</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>47216</td>
+      <td>47223</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1581</td>
+      <td>CCCTC</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>47209</td>
+      <td>47216</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1582</td>
+      <td>CCTCA</td>
+      <td>5</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>47162</td>
+      <td>47209</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 8 columns</p>
+</div>
+
+<div class="codehilite"><pre><span></span><span class="o">#</span><span class="mi">5</span>  <span class="n">YLR441C</span>
+</pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ref_pos</th>
+      <th>ref_kmer</th>
+      <th>num_events</th>
+      <th>...</th>
+      <th>mismatch_dwell_time</th>
+      <th>start_idx</th>
+      <th>end_idx</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>173</td>
+      <td>AGATG</td>
+      <td>4</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>27161</td>
+      <td>27241</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>174</td>
+      <td>GATGC</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>27150</td>
+      <td>27161</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>175</td>
+      <td>ATGCT</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>27105</td>
+      <td>27150</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>178</td>
+      <td>CTTTG</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>27078</td>
+      <td>27105</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>179</td>
+      <td>TTTGA</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>27061</td>
+      <td>27078</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 8 columns</p>
+</div>
+
+<div class="codehilite"><pre><span></span><span class="o">#</span><span class="mi">12</span> <span class="n">YLR293C</span>
+</pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ref_pos</th>
+      <th>ref_kmer</th>
+      <th>num_events</th>
+      <th>...</th>
+      <th>mismatch_dwell_time</th>
+      <th>start_idx</th>
+      <th>end_idx</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>TGTCT</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>81520</td>
+      <td>81535</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>GTCTG</td>
+      <td>2</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>81436</td>
+      <td>81520</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>TCTGC</td>
+      <td>2</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>81371</td>
+      <td>81436</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>CTGCC</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>81361</td>
+      <td>81371</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>TGCCC</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>81351</td>
+      <td>81361</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 8 columns</p>
+</div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../usage/" title="How to use NanopolishComp" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                How to use NanopolishComp
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../Freq_meth_calculate_usage/" title="Freq_meth_calculate usage" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Freq_meth_calculate usage
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 Adrien Leger
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.c648116f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1235 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Python package for upstream preprocessing and downstream analysis of nanopolish">
+      
+      
+        <link rel="canonical" href="https://a-slide.github.io/NanopolishComp/demo/Freq_meth_calculate_usage/">
+      
+      
+        <meta name="author" content="Adrien Leger">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+    
+    
+      
+        <title>Freq_meth_calculate usage - NanopolishComp</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#freq_meth_calculate-usage" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://a-slide.github.io/NanopolishComp/" title="NanopolishComp" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              NanopolishComp
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Freq_meth_calculate usage
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/a-slide/NanopolishComp/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    a-slide/NanopolishComp
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://a-slide.github.io/NanopolishComp/" title="NanopolishComp" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    NanopolishComp
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/a-slide/NanopolishComp/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    a-slide/NanopolishComp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../installation/" title="Installation instructions" class="md-nav__link">
+      Installation instructions
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Usage
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Usage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../usage/" title="How to use NanopolishComp" class="md-nav__link">
+      How to use NanopolishComp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Eventalign_collapse_usage/" title="Eventalign_collapse usage" class="md-nav__link">
+      Eventalign_collapse usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Freq_meth_calculate usage
+      </label>
+    
+    <a href="./" title="Freq_meth_calculate usage" class="md-nav__link md-nav__link--active">
+      Freq_meth_calculate usage
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#output-files-format" class="md-nav__link">
+    Output files format
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bed-file" class="md-nav__link">
+    BED file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabulated-tsv-file" class="md-nav__link">
+    Tabulated TSV file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bash-command-line-usage" class="md-nav__link">
+    Bash command line usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command-line-help" class="md-nav__link">
+    Command line help
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    Example usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-an-existing-nanopolish-call_methylation-file-output" class="md-nav__link">
+    From an existing nanopolish call_methylation file output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-a-fasta-index-for-output-coordinates-sorting-and-strand-specific-sites" class="md-nav__link">
+    Using a fasta index for output coordinates sorting and strand specific sites
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changing-filtering-thresholds-not-recommended" class="md-nav__link">
+    Changing filtering thresholds (not recommended)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-api-usage" class="md-nav__link">
+    Python API usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-the-package" class="md-nav__link">
+    Import the package
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-api-help" class="md-nav__link">
+    python API help
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-usage_1" class="md-nav__link">
+    Example usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-setting" class="md-nav__link">
+    basic setting
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-a-fasta-index-for-output-coordinates-sorting-and-strand-specific-sites_1" class="md-nav__link">
+    Using a fasta index for output coordinates sorting and strand specific sites
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changing-filtering-threshold-not-recommended" class="md-nav__link">
+    Changing filtering threshold (not recommended)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/" title="Contributing" class="md-nav__link">
+      Contributing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../code_of_conduct/" title="Code of conduct" class="md-nav__link">
+      Code of conduct
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../licence/" title="Licence" class="md-nav__link">
+      Licence
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#output-files-format" class="md-nav__link">
+    Output files format
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bed-file" class="md-nav__link">
+    BED file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabulated-tsv-file" class="md-nav__link">
+    Tabulated TSV file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bash-command-line-usage" class="md-nav__link">
+    Bash command line usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command-line-help" class="md-nav__link">
+    Command line help
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    Example usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-an-existing-nanopolish-call_methylation-file-output" class="md-nav__link">
+    From an existing nanopolish call_methylation file output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-a-fasta-index-for-output-coordinates-sorting-and-strand-specific-sites" class="md-nav__link">
+    Using a fasta index for output coordinates sorting and strand specific sites
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changing-filtering-thresholds-not-recommended" class="md-nav__link">
+    Changing filtering thresholds (not recommended)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-api-usage" class="md-nav__link">
+    Python API usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-the-package" class="md-nav__link">
+    Import the package
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-api-help" class="md-nav__link">
+    python API help
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-usage_1" class="md-nav__link">
+    Example usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-setting" class="md-nav__link">
+    basic setting
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-a-fasta-index-for-output-coordinates-sorting-and-strand-specific-sites_1" class="md-nav__link">
+    Using a fasta index for output coordinates sorting and strand specific sites
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changing-filtering-threshold-not-recommended" class="md-nav__link">
+    Changing filtering threshold (not recommended)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/a-slide/NanopolishComp/edit/master/docs/demo/Freq_meth_calculate_usage.ipynb" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="freq_meth_calculate-usage">Freq_meth_calculate usage</h1>
+<p>Calculate methylation frequency at genomic CpG sites from the output of <code class="codehilite"><span class="n">nanopolish</span> <span class="k">call</span><span class="o">-</span><span class="n">methylation</span></code></p>
+<h2 id="output-files-format">Output files format</h2>
+<p><code class="codehilite"><span class="n">Freq_meth_calculate</span></code> can generates 2 files, a standard BED file and a tabulated file containing extra information</p>
+<h4 id="bed-file">BED file</h4>
+<p>Standard genomic BED6 (<a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">https://genome.ucsc.edu/FAQ/FAQformat.html#format1</a>). The score correspond to the methylation frequency multiplied by 1000. The file is sorted by coordinates and can be rendered with a genome browser such as <a href="https://software.broadinstitute.org/software/igv/">IGV</a></p>
+<h4 id="tabulated-tsv-file">Tabulated TSV file</h4>
+<p>Contrary to the bed file, in the tabulated report, positions are ordered by decreasing methylation frequency.</p>
+<p>The file contains the following fields:</p>
+<ul>
+<li><strong>chrom / start / end / strand</strong>: Genomic coordinates of the motif or group of motifs in case split_group was not selected.</li>
+<li><strong>site_id</strong>: Unique integer identifier of the genomic position.</li>
+<li><strong>methylated_reads / unmethylated_reads / ambiguous_reads</strong>: Number of reads at a given genomic location with a higher likelyhood of being methylated or unmethylated or with an ambiguous methylation call.</li>
+<li><strong>sequence</strong>: -5 to +5 sequence of the motif or group of motifs in case split_group was not selected.</li>
+<li><strong>num_motifs</strong>: Number of motif in the group.</li>
+<li><strong>meth_freq</strong>: Methylation frequency (out of non anbiguous calls).</li>
+</ul>
+<h2 id="bash-command-line-usage">Bash command line usage</h2>
+<h3 id="command-line-help">Command line help</h3>
+<div class="codehilite"><pre><span></span>%%bash
+
+<span class="c1"># Load local bashrc and activate virtual environment</span>
+<span class="nb">source</span> ~/.bashrc
+workon NanopolishComp
+
+NanopolishComp Freq_meth_calculate --help
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nv">usage</span>: <span class="nv">NanopolishComp</span> <span class="nv">Freq_meth_calculate</span> [<span class="o">-</span><span class="nv">h</span>] [<span class="o">-</span><span class="nv">i</span> <span class="nv">INPUT_FN</span>]
+                                          [<span class="o">-</span><span class="nv">b</span> <span class="nv">OUTPUT_BED_FN</span>]
+                                          [<span class="o">-</span><span class="nv">t</span> <span class="nv">OUTPUT_TSV_FN</span>] [<span class="o">-</span><span class="nv">d</span> <span class="nv">MIN_DEPTH</span>]
+                                          [<span class="o">-</span><span class="nv">f</span> <span class="nv">FASTA_INDEX</span>] [<span class="o">-</span><span class="nv">s</span> <span class="nv">SAMPLE_ID</span>]
+                                          [<span class="o">--</span><span class="nv">strand_specific</span>]
+                                          [<span class="o">--</span><span class="nv">min_llr</span> <span class="nv">MIN_LLR</span>] [<span class="o">-</span><span class="nv">v</span> <span class="o">|</span> <span class="o">-</span><span class="nv">q</span>]
+
+<span class="nv">Calculate</span> <span class="nv">methylation</span> <span class="nv">frequency</span> <span class="nv">at</span> <span class="nv">genomic</span> <span class="nv">CpG</span> <span class="nv">sites</span> <span class="nv">from</span> <span class="nv">the</span> <span class="nv">output</span> <span class="nv">of</span>
+<span class="nv">nanopolish</span> <span class="nv">call</span><span class="o">-</span><span class="nv">methylation</span>
+
+<span class="nv">optional</span> <span class="nv">arguments</span>:
+  <span class="o">-</span><span class="nv">h</span>, <span class="o">--</span><span class="nv">help</span>            <span class="k">show</span> <span class="nv">this</span> <span class="nv">help</span> <span class="nv">message</span> <span class="nv">and</span> <span class="k">exit</span>
+  <span class="o">-</span><span class="nv">v</span>, <span class="o">--</span><span class="nv">verbose</span>         <span class="nv">Increase</span> <span class="nv">verbosity</span>
+  <span class="o">-</span><span class="nv">q</span>, <span class="o">--</span><span class="nv">quiet</span>           <span class="nv">Reduce</span> <span class="nv">verbosity</span>
+
+<span class="nv">Input</span><span class="o">/</span><span class="nv">Output</span> <span class="nv">options</span>:
+  <span class="o">-</span><span class="nv">i</span> <span class="nv">INPUT_FN</span>, <span class="o">--</span><span class="nv">input_fn</span> <span class="nv">INPUT_FN</span>
+                        <span class="nv">Path</span> <span class="nv">to</span> <span class="nv">a</span> <span class="nv">nanopolish</span> <span class="nv">call_methylation</span> <span class="nv">tsv</span> <span class="nv">output</span> <span class="nv">file</span>.
+                        <span class="k">If</span> <span class="nv">not</span> <span class="nv">specified</span> <span class="nv">read</span> <span class="nv">from</span> <span class="nv">std</span> <span class="nv">input</span>
+  <span class="o">-</span><span class="nv">b</span> <span class="nv">OUTPUT_BED_FN</span>, <span class="o">--</span><span class="nv">output_bed_fn</span> <span class="nv">OUTPUT_BED_FN</span>
+                        <span class="nv">Path</span> <span class="nv">to</span> <span class="nv">write</span> <span class="nv">a</span> <span class="nv">summary</span> <span class="nb">result</span> <span class="nv">file</span> <span class="nv">in</span> <span class="nv">BED</span> <span class="nv">format</span>
+  <span class="o">-</span><span class="nv">t</span> <span class="nv">OUTPUT_TSV_FN</span>, <span class="o">--</span><span class="nv">output_tsv_fn</span> <span class="nv">OUTPUT_TSV_FN</span>
+                        <span class="nv">Path</span> <span class="nv">to</span> <span class="nv">write</span> <span class="nv">an</span> <span class="nv">more</span> <span class="nv">extensive</span> <span class="nb">result</span> <span class="nv">report</span> <span class="nv">in</span> <span class="nv">TSV</span>
+                        <span class="nv">format</span>
+
+<span class="nv">Filtering</span> <span class="nv">options</span>:
+  <span class="o">-</span><span class="nv">d</span> <span class="nv">MIN_DEPTH</span>, <span class="o">--</span><span class="nv">min_depth</span> <span class="nv">MIN_DEPTH</span>
+                        <span class="nv">Minimal</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">reads</span> <span class="nv">covering</span> <span class="nv">a</span> <span class="nv">site</span> <span class="nv">to</span> <span class="nv">be</span> <span class="nv">reported</span>
+                        <span class="ss">(</span><span class="nv">default</span>: <span class="mi">10</span><span class="ss">)</span>
+
+<span class="nv">Other</span> <span class="nv">options</span>:
+  <span class="o">-</span><span class="nv">f</span> <span class="nv">FASTA_INDEX</span>, <span class="o">--</span><span class="nv">fasta_index</span> <span class="nv">FASTA_INDEX</span>
+                        <span class="nv">fasta</span> <span class="nv">index</span> <span class="nv">file</span> <span class="nv">obtained</span> <span class="nv">with</span> <span class="nv">samtools</span> <span class="nv">faidx</span>.
+                        <span class="nv">Required</span> <span class="k">for</span> <span class="nv">coordinate</span> <span class="nv">sorting</span>
+  <span class="o">-</span><span class="nv">s</span> <span class="nv">SAMPLE_ID</span>, <span class="o">--</span><span class="nv">sample_id</span> <span class="nv">SAMPLE_ID</span>
+                        <span class="nv">Sample</span> <span class="nv">ID</span> <span class="nv">to</span> <span class="nv">be</span> <span class="nv">used</span> <span class="k">for</span> <span class="nv">the</span> <span class="nv">bed</span> <span class="nv">track</span> <span class="nv">header</span>
+                        <span class="ss">(</span><span class="nv">default</span>: <span class="ss">)</span>
+  <span class="o">--</span><span class="nv">strand_specific</span>     <span class="nv">Output</span> <span class="nv">strand</span> <span class="nv">specific</span> <span class="nv">sites</span>
+  <span class="o">--</span><span class="nv">min_llr</span> <span class="nv">MIN_LLR</span>     <span class="nv">Minimal</span> <span class="nv">log</span> <span class="nv">likelyhood</span> <span class="nv">ratio</span> <span class="nv">to</span> <span class="nv">consider</span> <span class="nv">a</span> <span class="nv">site</span>
+                        <span class="nv">significantly</span> <span class="nv">methylated</span> <span class="nv">or</span> <span class="nv">unmethylated</span> <span class="ss">(</span><span class="nv">default</span>: <span class="mi">2</span><span class="ss">)</span>
+</pre></div>
+
+
+<h3 id="example-usage">Example usage</h3>
+<h4 id="from-an-existing-nanopolish-call_methylation-file-output">From an existing nanopolish call_methylation file output</h4>
+<div class="codehilite"><pre><span></span>%%bash
+
+<span class="c1"># Load local bashrc and activate virtual environment</span>
+<span class="nb">source</span> ~/.bashrc
+workon NanopolishComp
+
+NanopolishComp Freq_meth_calculate --verbose -i data/freq_meth_calculate/methylation_calls.tsv -b ./output/freq_meth_calculate/out_freq_meth_calculate.bed -t ./output/freq_meth_calculate/out_freq_meth_calculate.tsv -s Sample1
+
+head ./output/freq_meth_calculate/out_freq_meth_calculate.bed
+head ./output/freq_meth_calculate/out_freq_meth_calculate.tsv
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nv">track</span> <span class="nv">name</span><span class="o">=</span><span class="nv">Methylation_Sample1</span> <span class="nv">itemRgb</span><span class="o">=</span><span class="nv">On</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">138415</span>  <span class="mi">138416</span>  <span class="mi">7224149695747901416</span> <span class="o">-</span><span class="mi">3</span>.<span class="mi">200000</span>   .   <span class="mi">138415</span>  <span class="mi">138416</span>  <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">138429</span>  <span class="mi">138430</span>  <span class="mi">7224167352505884938</span> <span class="o">-</span><span class="mi">4</span>.<span class="mi">722000</span>   .   <span class="mi">138429</span>  <span class="mi">138430</span>  <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">212351</span>  <span class="mi">212352</span>  <span class="mi">7296895538640012056</span> <span class="o">-</span><span class="mi">4</span>.<span class="mi">125000</span>   .   <span class="mi">212351</span>  <span class="mi">212352</span>  <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">212392</span>  <span class="mi">212393</span>  <span class="mi">7296795904077105039</span> <span class="o">-</span><span class="mi">1</span>.<span class="mi">866667</span>   .   <span class="mi">212392</span>  <span class="mi">212393</span>  <span class="s1">&#39;</span><span class="s">100,100,100</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">212457</span>  <span class="mi">212461</span>  <span class="mi">7296716448666179190</span> <span class="o">-</span><span class="mi">5</span>.<span class="mi">546667</span>   .   <span class="mi">212457</span>  <span class="mi">212461</span>  <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">212530</span>  <span class="mi">212531</span>  <span class="mi">7296001349967846549</span> <span class="o">-</span><span class="mi">1</span>.<span class="mi">850833</span>   .   <span class="mi">212530</span>  <span class="mi">212531</span>  <span class="s1">&#39;</span><span class="s">100,100,100</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">212581</span>  <span class="mi">212582</span>  <span class="mi">7295894148222946594</span> <span class="o">-</span><span class="mi">2</span>.<span class="mi">307692</span>   .   <span class="mi">212581</span>  <span class="mi">212582</span>  <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">212596</span>  <span class="mi">212600</span>  <span class="mi">7295913066177928939</span> <span class="o">-</span><span class="mi">5</span>.<span class="mi">900000</span>   .   <span class="mi">212596</span>  <span class="mi">212600</span>  <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">212612</span>  <span class="mi">212613</span>  <span class="mi">7295852528721985435</span> <span class="o">-</span><span class="mi">3</span>.<span class="mi">675385</span>   .   <span class="mi">212612</span>  <span class="mi">212613</span>  <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chromosome</span>  <span class="nv">start</span>   <span class="k">end</span> <span class="nv">strand</span>  <span class="nv">site_id</span> <span class="nv">methylated_reads</span>    <span class="nv">unmethylated_reads</span>  <span class="nv">ambiguous_reads</span> <span class="nv">sequence</span>    <span class="nv">num_motifs</span>  <span class="nv">llr_list</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">138415</span>  <span class="mi">138416</span>  .   <span class="mi">7224149695747901416</span> <span class="mi">0</span>   <span class="mi">7</span>   <span class="mi">3</span>   <span class="nv">GGTCTCGCTTT</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">5</span>.<span class="mi">51</span>,<span class="o">-</span><span class="mi">9</span>.<span class="mi">63</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">23</span>,<span class="mi">0</span>.<span class="mi">53</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">47</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">44</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">38</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">64</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">29</span>,<span class="mi">1</span>.<span class="mi">06</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">138429</span>  <span class="mi">138430</span>  .   <span class="mi">7224167352505884938</span> <span class="mi">0</span>   <span class="mi">8</span>   <span class="mi">2</span>   <span class="nv">AGCTTCGAGGA</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">5</span>.<span class="mi">14</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">64</span>,<span class="o">-</span><span class="mi">9</span>.<span class="mi">53</span>,<span class="o">-</span><span class="mi">8</span>.<span class="mi">07</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">08</span>,<span class="mi">1</span>.<span class="mi">16</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">42</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">97</span>,<span class="o">-</span><span class="mi">9</span>.<span class="mi">1</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">43</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">212351</span>  <span class="mi">212352</span>  .   <span class="mi">7296895538640012056</span> <span class="mi">0</span>   <span class="mi">8</span>   <span class="mi">4</span>   <span class="nv">TGGGGCGACAT</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">9</span>.<span class="mi">1</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">06</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">14</span>,<span class="mi">0</span>.<span class="mi">53</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">48</span>,<span class="o">-</span><span class="mi">11</span>.<span class="mi">61</span>,<span class="mi">0</span>.<span class="mi">17</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">76</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">4</span>,<span class="o">-</span><span class="mi">12</span>.<span class="mi">44</span>,<span class="mi">0</span>.<span class="mi">66</span>,<span class="mi">0</span>.<span class="mi">13</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">212392</span>  <span class="mi">212393</span>  .   <span class="mi">7296795904077105039</span> <span class="mi">1</span>   <span class="mi">5</span>   <span class="mi">6</span>   <span class="nv">ATTAACGTATA</span> <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">21</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">82</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">91</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">89</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">92</span>,<span class="mi">3</span>.<span class="mi">09</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">07</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">12</span>,<span class="mi">1</span>.<span class="mi">83</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">82</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">98</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">0</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">212457</span>  <span class="mi">212461</span>  .   <span class="mi">7296716448666179190</span> <span class="mi">0</span>   <span class="mi">8</span>   <span class="mi">4</span>   <span class="nv">AGAATCGTCGATTA</span>  <span class="mi">2</span>   <span class="o">-</span><span class="mi">3</span>.<span class="mi">48</span>,<span class="mi">0</span>.<span class="mi">08</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">33</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">33</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">83</span>,<span class="o">-</span><span class="mi">13</span>.<span class="mi">56</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">71</span>,<span class="o">-</span><span class="mi">10</span>.<span class="mi">95</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">32</span>,<span class="o">-</span><span class="mi">12</span>.<span class="mi">85</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">55</span>,<span class="o">-</span><span class="mi">7</span>.<span class="mi">73</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">212530</span>  <span class="mi">212531</span>  .   <span class="mi">7296001349967846549</span> <span class="mi">0</span>   <span class="mi">5</span>   <span class="mi">7</span>   <span class="nv">CTATTCGTTTC</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">1</span>.<span class="mi">48</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">42</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">41</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">82</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">49</span>,<span class="mi">1</span>.<span class="mi">29</span>,<span class="mi">0</span>.<span class="mi">15</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">73</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">09</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">11</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">52</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">58</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">212581</span>  <span class="mi">212582</span>  .   <span class="mi">7295894148222946594</span> <span class="mi">1</span>   <span class="mi">4</span>   <span class="mi">8</span>   <span class="nv">GTTACCGCAGG</span> <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">87</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">56</span>,<span class="mi">1</span>.<span class="mi">21</span>,<span class="mi">1</span>.<span class="mi">75</span>,<span class="mi">0</span>.<span class="mi">86</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">03</span>,<span class="mi">7</span>.<span class="mi">31</span>,<span class="o">-</span><span class="mi">12</span>.<span class="mi">54</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">77</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">27</span>,<span class="o">-</span><span class="mi">18</span>.<span class="mi">42</span>,<span class="mi">0</span>.<span class="mi">23</span>,<span class="mi">1</span>.<span class="mi">36</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">212596</span>  <span class="mi">212600</span>  .   <span class="mi">7295913066177928939</span> <span class="mi">0</span>   <span class="mi">10</span>  <span class="mi">3</span>   <span class="nv">TTTGTCGTCGCTGT</span>  <span class="mi">2</span>   <span class="o">-</span><span class="mi">4</span>.<span class="mi">4</span>,<span class="o">-</span><span class="mi">8</span>.<span class="mi">76</span>,<span class="o">-</span><span class="mi">13</span>.<span class="mi">95</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">94</span>,<span class="mi">1</span>.<span class="mi">11</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">47</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">42</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">37</span>,<span class="o">-</span><span class="mi">7</span>.<span class="mi">38</span>,<span class="o">-</span><span class="mi">9</span>.<span class="mi">96</span>,<span class="o">-</span><span class="mi">13</span>.<span class="mi">14</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">26</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">76</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">212612</span>  <span class="mi">212613</span>  .   <span class="mi">7295852528721985435</span> <span class="mi">0</span>   <span class="mi">8</span>   <span class="mi">5</span>   <span class="nv">CACCCCGTTGG</span> <span class="mi">1</span>   <span class="mi">0</span>.<span class="mi">97</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">5</span>,<span class="o">-</span><span class="mi">7</span>.<span class="mi">73</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">92</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">65</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">94</span>,<span class="o">-</span><span class="mi">9</span>.<span class="mi">09</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">83</span>,<span class="o">-</span><span class="mi">7</span>.<span class="mi">41</span>,<span class="mi">0</span>.<span class="mi">14</span>,<span class="mi">1</span>.<span class="mi">11</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">7</span>,<span class="o">-</span><span class="mi">8</span>.<span class="mi">23</span>
+
+
+## <span class="nv">Options</span> <span class="nv">summary</span> ##
+    <span class="nv">package_name</span>: <span class="nv">NanopolishComp</span>
+    <span class="nv">package_version</span>: <span class="mi">0</span>.<span class="mi">6</span>.<span class="mi">11</span>
+    <span class="nv">timestamp</span>: <span class="mi">2019</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">10</span> <span class="mi">16</span>:<span class="mi">20</span>:<span class="mi">56</span>.<span class="mi">119314</span>
+    <span class="nv">quiet</span>: <span class="nv">False</span>
+    <span class="nv">verbose</span>: <span class="nv">True</span>
+    <span class="nv">min_llr</span>: <span class="mi">2</span>
+    <span class="nv">strand_specific</span>: <span class="nv">False</span>
+    <span class="nv">sample_id</span>: <span class="nv">Sample1</span>
+    <span class="nv">min_depth</span>: <span class="mi">10</span>
+    <span class="nv">output_tsv_fn</span>: .<span class="o">/</span><span class="nv">output</span><span class="o">/</span><span class="nv">freq_meth_calculate</span><span class="o">/</span><span class="nv">out_freq_meth_calculate</span>.<span class="nv">tsv</span>
+    <span class="nv">output_bed_fn</span>: .<span class="o">/</span><span class="nv">output</span><span class="o">/</span><span class="nv">freq_meth_calculate</span><span class="o">/</span><span class="nv">out_freq_meth_calculate</span>.<span class="nv">bed</span>
+    <span class="nv">fasta_index</span>: 
+    <span class="nv">input_fn</span>: <span class="nv">data</span><span class="o">/</span><span class="nv">freq_meth_calculate</span><span class="o">/</span><span class="nv">methylation_calls</span>.<span class="nv">tsv</span>
+## <span class="nv">Checking</span> <span class="nv">arguments</span> ##
+    <span class="nv">Testing</span> <span class="nv">input</span> <span class="nv">file</span> <span class="nv">readability</span>
+    <span class="nv">Check</span> <span class="nv">output</span> <span class="nv">file</span>
+        <span class="nv">Output</span> <span class="nv">results</span> <span class="nv">in</span> <span class="nv">bed</span> <span class="nv">format</span>
+        <span class="nv">Output</span> <span class="nv">results</span> <span class="nv">in</span> <span class="nv">tsv</span> <span class="nv">format</span>
+## <span class="nv">Parsing</span> <span class="nv">methylation_calls</span> <span class="nv">file</span> ##
+    <span class="nv">Starting</span> <span class="nv">to</span> <span class="nv">parse</span> <span class="nv">file</span> <span class="nv">Nanopolish</span> <span class="nv">methylation</span> <span class="k">call</span> <span class="nl">file</span>
+    : <span class="mi">605248</span> <span class="nv">lines</span> [<span class="mi">00</span>:<span class="mi">13</span>, <span class="mi">44691</span>.<span class="mi">91</span> <span class="nv">lines</span><span class="o">/</span><span class="nv">s</span>]
+    <span class="nv">Filtering</span> <span class="nv">out</span> <span class="nv">low</span> <span class="nv">coverage</span> <span class="nv">sites</span>
+    <span class="nv">Processing</span> <span class="nv">valid</span> <span class="nv">sites</span> <span class="nv">found</span>
+        <span class="nv">Write</span> <span class="nv">output</span> <span class="nv">file</span> <span class="nv">header</span>
+    : <span class="mi">100</span><span class="o">%|</span>██████████<span class="o">|</span> <span class="mi">804</span><span class="o">/</span><span class="mi">804</span> [<span class="mi">00</span>:<span class="mi">01</span><span class="o">&lt;</span><span class="mi">00</span>:<span class="mi">00</span>, <span class="mi">474</span>.<span class="mi">31</span> <span class="nv">sites</span><span class="o">/</span><span class="nv">s</span>]
+## <span class="nv">Results</span> <span class="nv">summary</span> ##
+    <span class="nv">Total</span> <span class="nv">read</span> <span class="nv">lines</span>: <span class="mi">605</span>,<span class="mi">248</span>
+    <span class="nv">Valid</span> <span class="nv">read</span> <span class="nv">lines</span>: <span class="mi">605</span>,<span class="mi">248</span>
+    <span class="nv">Total</span> <span class="nv">sites</span>: <span class="mi">229</span>,<span class="mi">389</span>
+    <span class="nv">Low</span> <span class="nv">coverage</span> <span class="nv">sites</span>: <span class="mi">228</span>,<span class="mi">585</span>
+    <span class="nv">Valid</span> <span class="nv">sites</span>: <span class="mi">1</span>,<span class="mi">608</span>
+</pre></div>
+
+
+<h4 id="using-a-fasta-index-for-output-coordinates-sorting-and-strand-specific-sites">Using a fasta index for output coordinates sorting and strand specific sites</h4>
+<div class="codehilite"><pre><span></span>%%bash
+
+<span class="c1"># Load local bashrc and activate virtual environment</span>
+<span class="nb">source</span> ~/.bashrc
+workon NanopolishComp
+
+NanopolishComp Freq_meth_calculate --verbose --strand_specific -i data/freq_meth_calculate/methylation_calls.tsv -b ./output/freq_meth_calculate/out_freq_meth_calculate.bed -t ./output/freq_meth_calculate/out_freq_meth_calculate.tsv -s Sample1 -f data/freq_meth_calculate/ref.fa.fai
+
+head ./output/freq_meth_calculate/out_freq_meth_calculate.bed
+head ./output/freq_meth_calculate/out_freq_meth_calculate.tsv
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nv">track</span> <span class="nv">name</span><span class="o">=</span><span class="nv">Methylation_Sample1</span> <span class="nv">itemRgb</span><span class="o">=</span><span class="nv">On</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213351</span>  <span class="mi">213352</span>  <span class="o">-</span><span class="mi">8023785553745245992</span>    <span class="o">-</span><span class="mi">0</span>.<span class="mi">500000</span>   <span class="o">-</span>   <span class="mi">213351</span>  <span class="mi">213352</span>  <span class="s1">&#39;</span><span class="s">100,100,100</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213382</span>  <span class="mi">213386</span>  <span class="o">-</span><span class="mi">8023583102452360367</span>    <span class="o">-</span><span class="mi">5</span>.<span class="mi">103000</span>   <span class="o">-</span>   <span class="mi">213382</span>  <span class="mi">213386</span>  <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213427</span>  <span class="mi">213428</span>  <span class="o">-</span><span class="mi">8023686382448928188</span>    <span class="mi">0</span>.<span class="mi">504545</span>    <span class="o">-</span>   <span class="mi">213427</span>  <span class="mi">213428</span>  <span class="s1">&#39;</span><span class="s">100,100,100</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213516</span>  <span class="mi">213517</span>  <span class="o">-</span><span class="mi">8022685139567842841</span>    <span class="o">-</span><span class="mi">2</span>.<span class="mi">447500</span>   <span class="o">-</span>   <span class="mi">213516</span>  <span class="mi">213517</span>  <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213536</span>  <span class="mi">213537</span>  <span class="o">-</span><span class="mi">8022798660204149733</span>    <span class="o">-</span><span class="mi">3</span>.<span class="mi">103333</span>   <span class="o">-</span>   <span class="mi">213536</span>  <span class="mi">213537</span>  <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213549</span>  <span class="mi">213550</span>  <span class="o">-</span><span class="mi">8022802421743098730</span>    <span class="o">-</span><span class="mi">2</span>.<span class="mi">724167</span>   <span class="o">-</span>   <span class="mi">213549</span>  <span class="mi">213550</span>  <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213645</span>  <span class="mi">213646</span>  <span class="o">-</span><span class="mi">8022541247023329610</span>    <span class="o">-</span><span class="mi">2</span>.<span class="mi">546667</span>   <span class="o">-</span>   <span class="mi">213645</span>  <span class="mi">213646</span>  <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213668</span>  <span class="mi">213669</span>  <span class="o">-</span><span class="mi">8022652358379081217</span>    <span class="o">-</span><span class="mi">3</span>.<span class="mi">728333</span>   <span class="o">-</span>   <span class="mi">213668</span>  <span class="mi">213669</span>  <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213729</span>  <span class="mi">213730</span>  <span class="o">-</span><span class="mi">8022716548847329270</span>    <span class="o">-</span><span class="mi">3</span>.<span class="mi">253846</span>   <span class="o">-</span>   <span class="mi">213729</span>  <span class="mi">213730</span>  <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chromosome</span>  <span class="nv">start</span>   <span class="k">end</span> <span class="nv">strand</span>  <span class="nv">site_id</span> <span class="nv">methylated_reads</span>    <span class="nv">unmethylated_reads</span>  <span class="nv">ambiguous_reads</span> <span class="nv">sequence</span>    <span class="nv">num_motifs</span>  <span class="nv">llr_list</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213351</span>  <span class="mi">213352</span>  <span class="o">-</span>   <span class="o">-</span><span class="mi">8023785553745245992</span>    <span class="mi">0</span>   <span class="mi">1</span>   <span class="mi">9</span>   <span class="nv">ACTAACGGGGA</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">2</span>.<span class="mi">75</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">46</span>,<span class="mi">1</span>.<span class="mi">48</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">35</span>,<span class="mi">0</span>.<span class="mi">34</span>,<span class="mi">0</span>.<span class="mi">66</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">58</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">91</span>,<span class="mi">0</span>.<span class="mi">06</span>,<span class="mi">0</span>.<span class="mi">51</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213382</span>  <span class="mi">213386</span>  <span class="o">-</span>   <span class="o">-</span><span class="mi">8023583102452360367</span>    <span class="mi">1</span>   <span class="mi">7</span>   <span class="mi">2</span>   <span class="nv">TTCTTCGCCGACTG</span>  <span class="mi">2</span>   <span class="o">-</span><span class="mi">7</span>.<span class="mi">94</span>,<span class="mi">3</span>.<span class="mi">23</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">77</span>,<span class="mi">0</span>.<span class="mi">05</span>,<span class="o">-</span><span class="mi">9</span>.<span class="mi">8</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">7</span>,<span class="o">-</span><span class="mi">11</span>.<span class="mi">29</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">61</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">64</span>,<span class="o">-</span><span class="mi">8</span>.<span class="mi">56</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213427</span>  <span class="mi">213428</span>  <span class="o">-</span>   <span class="o">-</span><span class="mi">8023686382448928188</span>    <span class="mi">1</span>   <span class="mi">0</span>   <span class="mi">10</span>  <span class="nv">TTTCTCGCAAA</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">0</span>.<span class="mi">28</span>,<span class="mi">0</span>.<span class="mi">35</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">06</span>,<span class="mi">0</span>.<span class="mi">05</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">11</span>,<span class="mi">2</span>.<span class="mi">63</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">02</span>,<span class="mi">1</span>.<span class="mi">27</span>,<span class="mi">1</span>.<span class="mi">31</span>,<span class="mi">1</span>.<span class="mi">05</span>,<span class="mi">0</span>.<span class="mi">36</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213516</span>  <span class="mi">213517</span>  <span class="o">-</span>   <span class="o">-</span><span class="mi">8022685139567842841</span>    <span class="mi">0</span>   <span class="mi">6</span>   <span class="mi">6</span>   <span class="nv">ACTTCCGTTGC</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">2</span>.<span class="mi">01</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">92</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">28</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">07</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">59</span>,<span class="mi">0</span>.<span class="mi">87</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">23</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">84</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">65</span>,<span class="o">-</span><span class="mi">7</span>.<span class="mi">24</span>,<span class="mi">0</span>.<span class="mi">47</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">88</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213536</span>  <span class="mi">213537</span>  <span class="o">-</span>   <span class="o">-</span><span class="mi">8022798660204149733</span>    <span class="mi">0</span>   <span class="mi">11</span>  <span class="mi">1</span>   <span class="nv">CATCTCGTAAA</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">3</span>.<span class="mi">33</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">35</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">14</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">21</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">92</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">04</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">17</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">34</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">79</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">75</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">01</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">19</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213549</span>  <span class="mi">213550</span>  <span class="o">-</span>   <span class="o">-</span><span class="mi">8022802421743098730</span>    <span class="mi">1</span>   <span class="mi">7</span>   <span class="mi">4</span>   <span class="nv">GGATACGATAA</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">3</span>.<span class="mi">3</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">74</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">15</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">08</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">84</span>,<span class="o">-</span><span class="mi">8</span>.<span class="mi">16</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">61</span>,<span class="mi">2</span>.<span class="mi">21</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">28</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">69</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">15</span>,<span class="mi">0</span>.<span class="mi">1</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213645</span>  <span class="mi">213646</span>  <span class="o">-</span>   <span class="o">-</span><span class="mi">8022541247023329610</span>    <span class="mi">0</span>   <span class="mi">6</span>   <span class="mi">6</span>   <span class="nv">AAATTCGTCAT</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">9</span>.<span class="mi">16</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">83</span>,<span class="mi">1</span>.<span class="mi">66</span>,<span class="mi">0</span>.<span class="mi">58</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">18</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">19</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">13</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">99</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">47</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">88</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">55</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">42</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213668</span>  <span class="mi">213669</span>  <span class="o">-</span>   <span class="o">-</span><span class="mi">8022652358379081217</span>    <span class="mi">0</span>   <span class="mi">8</span>   <span class="mi">4</span>   <span class="nv">CACAACGTTGG</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">10</span>.<span class="mi">85</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">37</span>,<span class="mi">0</span>.<span class="mi">81</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">98</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">37</span>,<span class="o">-</span><span class="mi">7</span>.<span class="mi">49</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">94</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">06</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">53</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">63</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">61</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">72</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">VIII</span>    <span class="mi">213729</span>  <span class="mi">213730</span>  <span class="o">-</span>   <span class="o">-</span><span class="mi">8022716548847329270</span>    <span class="mi">0</span>   <span class="mi">9</span>   <span class="mi">4</span>   <span class="nv">ATTTGCGAATA</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">2</span>.<span class="mi">79</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">55</span>,<span class="mi">1</span>.<span class="mi">21</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">07</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">66</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">28</span>,<span class="o">-</span><span class="mi">7</span>.<span class="mi">42</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">66</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">86</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">36</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">87</span>,<span class="mi">0</span>.<span class="mi">39</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">38</span>
+
+
+## <span class="nv">Options</span> <span class="nv">summary</span> ##
+    <span class="nv">package_name</span>: <span class="nv">NanopolishComp</span>
+    <span class="nv">package_version</span>: <span class="mi">0</span>.<span class="mi">6</span>.<span class="mi">11</span>
+    <span class="nv">timestamp</span>: <span class="mi">2019</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">10</span> <span class="mi">16</span>:<span class="mi">21</span>:<span class="mi">51</span>.<span class="mi">314487</span>
+    <span class="nv">quiet</span>: <span class="nv">False</span>
+    <span class="nv">verbose</span>: <span class="nv">True</span>
+    <span class="nv">min_llr</span>: <span class="mi">2</span>
+    <span class="nv">strand_specific</span>: <span class="nv">True</span>
+    <span class="nv">sample_id</span>: <span class="nv">Sample1</span>
+    <span class="nv">min_depth</span>: <span class="mi">10</span>
+    <span class="nv">output_tsv_fn</span>: .<span class="o">/</span><span class="nv">output</span><span class="o">/</span><span class="nv">freq_meth_calculate</span><span class="o">/</span><span class="nv">out_freq_meth_calculate</span>.<span class="nv">tsv</span>
+    <span class="nv">output_bed_fn</span>: .<span class="o">/</span><span class="nv">output</span><span class="o">/</span><span class="nv">freq_meth_calculate</span><span class="o">/</span><span class="nv">out_freq_meth_calculate</span>.<span class="nv">bed</span>
+    <span class="nv">fasta_index</span>: <span class="nv">data</span><span class="o">/</span><span class="nv">freq_meth_calculate</span><span class="o">/</span><span class="nv">ref</span>.<span class="nv">fa</span>.<span class="nv">fai</span>
+    <span class="nv">input_fn</span>: <span class="nv">data</span><span class="o">/</span><span class="nv">freq_meth_calculate</span><span class="o">/</span><span class="nv">methylation_calls</span>.<span class="nv">tsv</span>
+## <span class="nv">Checking</span> <span class="nv">arguments</span> ##
+    <span class="nv">Testing</span> <span class="nv">input</span> <span class="nv">file</span> <span class="nv">readability</span>
+    <span class="nv">Check</span> <span class="nv">output</span> <span class="nv">file</span>
+        <span class="nv">Output</span> <span class="nv">results</span> <span class="nv">in</span> <span class="nv">bed</span> <span class="nv">format</span>
+        <span class="nv">Output</span> <span class="nv">results</span> <span class="nv">in</span> <span class="nv">tsv</span> <span class="nv">format</span>
+## <span class="nv">Parsing</span> <span class="nv">methylation_calls</span> <span class="nv">file</span> ##
+    <span class="nv">Starting</span> <span class="nv">to</span> <span class="nv">parse</span> <span class="nv">file</span> <span class="nv">Nanopolish</span> <span class="nv">methylation</span> <span class="k">call</span> <span class="nl">file</span>
+    : <span class="mi">605248</span> <span class="nv">lines</span> [<span class="mi">00</span>:<span class="mi">14</span>, <span class="mi">43139</span>.<span class="mi">23</span> <span class="nv">lines</span><span class="o">/</span><span class="nv">s</span>]
+    <span class="nv">Filtering</span> <span class="nv">out</span> <span class="nv">low</span> <span class="nv">coverage</span> <span class="nv">sites</span>
+    <span class="nv">Sorting</span> <span class="nv">by</span> <span class="nv">coordinates</span>
+    <span class="nv">Processing</span> <span class="nv">valid</span> <span class="nv">sites</span> <span class="nv">found</span>
+        <span class="nv">Write</span> <span class="nv">output</span> <span class="nv">file</span> <span class="nv">header</span>
+    : <span class="mi">100</span><span class="o">%|</span>██████████<span class="o">|</span> <span class="mi">999</span><span class="o">/</span><span class="mi">999</span> [<span class="mi">00</span>:<span class="mi">01</span><span class="o">&lt;</span><span class="mi">00</span>:<span class="mi">00</span>, <span class="mi">668</span>.<span class="mi">32</span> <span class="nv">sites</span><span class="o">/</span><span class="nv">s</span>]
+## <span class="nv">Results</span> <span class="nv">summary</span> ##
+    <span class="nv">Total</span> <span class="nv">read</span> <span class="nv">lines</span>: <span class="mi">605</span>,<span class="mi">248</span>
+    <span class="nv">Valid</span> <span class="nv">read</span> <span class="nv">lines</span>: <span class="mi">605</span>,<span class="mi">248</span>
+    <span class="nv">Total</span> <span class="nv">sites</span>: <span class="mi">340</span>,<span class="mi">081</span>
+    <span class="nv">Low</span> <span class="nv">coverage</span> <span class="nv">sites</span>: <span class="mi">339</span>,<span class="mi">082</span>
+    <span class="nv">Valid</span> <span class="nv">sites</span>: <span class="mi">1</span>,<span class="mi">998</span>
+</pre></div>
+
+
+<h4 id="changing-filtering-thresholds-not-recommended">Changing filtering thresholds (not recommended)</h4>
+<div class="codehilite"><pre><span></span>%%bash
+
+<span class="c1"># Load local bashrc and activate virtual environment</span>
+<span class="nb">source</span> ~/.bashrc
+workon NanopolishComp
+
+NanopolishComp Freq_meth_calculate --verbose -i data/freq_meth_calculate/methylation_calls.tsv -b ./output/freq_meth_calculate/out_freq_meth_calculate.bed -t ./output/freq_meth_calculate/out_freq_meth_calculate.tsv --min_depth <span class="m">5</span> --min_llr <span class="m">1</span>
+
+head ./output/freq_meth_calculate/out_freq_meth_calculate.bed
+head ./output/freq_meth_calculate/out_freq_meth_calculate.tsv
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nv">track</span> <span class="nv">name</span><span class="o">=</span><span class="nv">Methylation_</span> <span class="nv">itemRgb</span><span class="o">=</span><span class="nv">On</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">4399</span>    <span class="mi">4400</span>    <span class="mi">1191264914885793541</span> <span class="o">-</span><span class="mi">2</span>.<span class="mi">344000</span>   .   <span class="mi">4399</span>    <span class="mi">4400</span>    <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">4534</span>    <span class="mi">4535</span>    <span class="mi">1191135011594914772</span> <span class="o">-</span><span class="mi">3</span>.<span class="mi">033333</span>   .   <span class="mi">4534</span>    <span class="mi">4535</span>    <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">4591</span>    <span class="mi">4592</span>    <span class="mi">1191022765062019525</span> <span class="o">-</span><span class="mi">3</span>.<span class="mi">181667</span>   .   <span class="mi">4591</span>    <span class="mi">4592</span>    <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">4654</span>    <span class="mi">4655</span>    <span class="mi">1192234775377888428</span> <span class="o">-</span><span class="mi">1</span>.<span class="mi">055000</span>   .   <span class="mi">4654</span>    <span class="mi">4655</span>    <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">1755</span>    <span class="mi">1756</span>    <span class="mi">1195840537597523385</span> <span class="o">-</span><span class="mi">1</span>.<span class="mi">706000</span>   .   <span class="mi">1755</span>    <span class="mi">1756</span>    <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">1782</span>    <span class="mi">1787</span>    <span class="mi">1195897291462470420</span> <span class="o">-</span><span class="mi">2</span>.<span class="mi">776000</span>   .   <span class="mi">1782</span>    <span class="mi">1787</span>    <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">1797</span>    <span class="mi">1798</span>    <span class="mi">1195752253807605775</span> <span class="o">-</span><span class="mi">3</span>.<span class="mi">224000</span>   .   <span class="mi">1797</span>    <span class="mi">1798</span>    <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">1814</span>    <span class="mi">1815</span>    <span class="mi">1195776216550583412</span> <span class="o">-</span><span class="mi">2</span>.<span class="mi">454000</span>   .   <span class="mi">1814</span>    <span class="mi">1815</span>    <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">1829</span>    <span class="mi">1830</span>    <span class="mi">1195792612111568111</span> <span class="o">-</span><span class="mi">2</span>.<span class="mi">896000</span>   .   <span class="mi">1829</span>    <span class="mi">1830</span>    <span class="s1">&#39;</span><span class="s">8,121,207</span><span class="s1">&#39;</span>
+<span class="nv">chromosome</span>  <span class="nv">start</span>   <span class="k">end</span> <span class="nv">strand</span>  <span class="nv">site_id</span> <span class="nv">methylated_reads</span>    <span class="nv">unmethylated_reads</span>  <span class="nv">ambiguous_reads</span> <span class="nv">sequence</span>    <span class="nv">num_motifs</span>  <span class="nv">llr_list</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">4399</span>    <span class="mi">4400</span>    .   <span class="mi">1191264914885793541</span> <span class="mi">1</span>   <span class="mi">3</span>   <span class="mi">1</span>   <span class="nv">CTTGCCGAATA</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">3</span>.<span class="mi">17</span>,<span class="o">-</span><span class="mi">11</span>.<span class="mi">29</span>,<span class="mi">5</span>.<span class="mi">14</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">8</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">6</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">4534</span>    <span class="mi">4535</span>    .   <span class="mi">1191135011594914772</span> <span class="mi">0</span>   <span class="mi">5</span>   <span class="mi">1</span>   <span class="nv">TTATTCGTTTT</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">3</span>.<span class="mi">31</span>,<span class="mi">0</span>.<span class="mi">02</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">66</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">82</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">21</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">22</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">4591</span>    <span class="mi">4592</span>    .   <span class="mi">1191022765062019525</span> <span class="mi">0</span>   <span class="mi">3</span>   <span class="mi">3</span>   <span class="nv">TCAAACGCTTG</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">6</span>.<span class="mi">16</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">6</span>,<span class="mi">0</span>.<span class="mi">28</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">38</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">02</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">21</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">4654</span>    <span class="mi">4655</span>    .   <span class="mi">1192234775377888428</span> <span class="mi">1</span>   <span class="mi">4</span>   <span class="mi">1</span>   <span class="nv">TTAATCGACAA</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">1</span>.<span class="mi">5</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">67</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">66</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">94</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">66</span>,<span class="mi">3</span>.<span class="mi">1</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">1755</span>    <span class="mi">1756</span>    .   <span class="mi">1195840537597523385</span> <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">2</span>   <span class="nv">TTGTTCGTTAA</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">3</span>.<span class="mi">37</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">25</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">17</span>,<span class="o">-</span><span class="mi">7</span>.<span class="mi">47</span>,<span class="mi">2</span>.<span class="mi">73</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">1782</span>    <span class="mi">1787</span>    .   <span class="mi">1195897291462470420</span> <span class="mi">0</span>   <span class="mi">5</span>   <span class="mi">0</span>   <span class="nv">AAACCCGTTCGTAAA</span> <span class="mi">2</span>   <span class="o">-</span><span class="mi">2</span>.<span class="mi">2</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">83</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">37</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">8</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">68</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">1797</span>    <span class="mi">1798</span>    .   <span class="mi">1195752253807605775</span> <span class="mi">0</span>   <span class="mi">4</span>   <span class="mi">1</span>   <span class="nv">ATTGGCGTTTG</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">1</span>.<span class="mi">45</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">09</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">17</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">66</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">75</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">1814</span>    <span class="mi">1815</span>    .   <span class="mi">1195776216550583412</span> <span class="mi">0</span>   <span class="mi">4</span>   <span class="mi">1</span>   <span class="nv">GTTTGCGATAG</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">2</span>.<span class="mi">2</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">1</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">86</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">4</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">71</span>
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>   <span class="mi">1829</span>    <span class="mi">1830</span>    .   <span class="mi">1195792612111568111</span> <span class="mi">0</span>   <span class="mi">4</span>   <span class="mi">1</span>   <span class="nv">GATACCGTCCT</span> <span class="mi">1</span>   <span class="o">-</span><span class="mi">0</span>.<span class="mi">16</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">78</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">32</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">0</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">22</span>
+
+
+## <span class="nv">Options</span> <span class="nv">summary</span> ##
+    <span class="nv">package_name</span>: <span class="nv">NanopolishComp</span>
+    <span class="nv">package_version</span>: <span class="mi">0</span>.<span class="mi">6</span>.<span class="mi">11</span>
+    <span class="nv">timestamp</span>: <span class="mi">2019</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">10</span> <span class="mi">16</span>:<span class="mi">22</span>:<span class="mi">23</span>.<span class="mi">393609</span>
+    <span class="nv">quiet</span>: <span class="nv">False</span>
+    <span class="nv">verbose</span>: <span class="nv">True</span>
+    <span class="nv">min_llr</span>: <span class="mi">1</span>.<span class="mi">0</span>
+    <span class="nv">strand_specific</span>: <span class="nv">False</span>
+    <span class="nv">sample_id</span>: 
+    <span class="nv">min_depth</span>: <span class="mi">5</span>
+    <span class="nv">output_tsv_fn</span>: .<span class="o">/</span><span class="nv">output</span><span class="o">/</span><span class="nv">freq_meth_calculate</span><span class="o">/</span><span class="nv">out_freq_meth_calculate</span>.<span class="nv">tsv</span>
+    <span class="nv">output_bed_fn</span>: .<span class="o">/</span><span class="nv">output</span><span class="o">/</span><span class="nv">freq_meth_calculate</span><span class="o">/</span><span class="nv">out_freq_meth_calculate</span>.<span class="nv">bed</span>
+    <span class="nv">fasta_index</span>: 
+    <span class="nv">input_fn</span>: <span class="nv">data</span><span class="o">/</span><span class="nv">freq_meth_calculate</span><span class="o">/</span><span class="nv">methylation_calls</span>.<span class="nv">tsv</span>
+## <span class="nv">Checking</span> <span class="nv">arguments</span> ##
+    <span class="nv">Testing</span> <span class="nv">input</span> <span class="nv">file</span> <span class="nv">readability</span>
+    <span class="nv">Check</span> <span class="nv">output</span> <span class="nv">file</span>
+        <span class="nv">Output</span> <span class="nv">results</span> <span class="nv">in</span> <span class="nv">bed</span> <span class="nv">format</span>
+        <span class="nv">Output</span> <span class="nv">results</span> <span class="nv">in</span> <span class="nv">tsv</span> <span class="nv">format</span>
+## <span class="nv">Parsing</span> <span class="nv">methylation_calls</span> <span class="nv">file</span> ##
+    <span class="nv">Starting</span> <span class="nv">to</span> <span class="nv">parse</span> <span class="nv">file</span> <span class="nv">Nanopolish</span> <span class="nv">methylation</span> <span class="k">call</span> <span class="nl">file</span>
+    : <span class="mi">605248</span> <span class="nv">lines</span> [<span class="mi">00</span>:<span class="mi">13</span>, <span class="mi">45934</span>.<span class="mi">72</span> <span class="nv">lines</span><span class="o">/</span><span class="nv">s</span>]
+    <span class="nv">Filtering</span> <span class="nv">out</span> <span class="nv">low</span> <span class="nv">coverage</span> <span class="nv">sites</span>
+    <span class="nv">Processing</span> <span class="nv">valid</span> <span class="nv">sites</span> <span class="nv">found</span>
+        <span class="nv">Write</span> <span class="nv">output</span> <span class="nv">file</span> <span class="nv">header</span>
+    : <span class="mi">100</span><span class="o">%|</span>██████████<span class="o">|</span> <span class="mi">18531</span><span class="o">/</span><span class="mi">18531</span> [<span class="mi">00</span>:<span class="mi">05</span><span class="o">&lt;</span><span class="mi">00</span>:<span class="mi">00</span>, <span class="mi">3528</span>.<span class="mi">30</span> <span class="nv">sites</span><span class="o">/</span><span class="nv">s</span>]
+## <span class="nv">Results</span> <span class="nv">summary</span> ##
+    <span class="nv">Total</span> <span class="nv">read</span> <span class="nv">lines</span>: <span class="mi">605</span>,<span class="mi">248</span>
+    <span class="nv">Valid</span> <span class="nv">read</span> <span class="nv">lines</span>: <span class="mi">605</span>,<span class="mi">248</span>
+    <span class="nv">Total</span> <span class="nv">sites</span>: <span class="mi">229</span>,<span class="mi">389</span>
+    <span class="nv">Low</span> <span class="nv">coverage</span> <span class="nv">sites</span>: <span class="mi">210</span>,<span class="mi">858</span>
+    <span class="nv">Valid</span> <span class="nv">sites</span>: <span class="mi">37</span>,<span class="mi">062</span>
+</pre></div>
+
+
+<h2 id="python-api-usage">Python API usage</h2>
+<h3 id="import-the-package">Import the package</h3>
+<div class="codehilite"><pre><span></span><span class="c1"># Import main program</span>
+<span class="kn">from</span> <span class="nn">NanopolishComp.Freq_meth_calculate</span> <span class="kn">import</span> <span class="n">Freq_meth_calculate</span>
+
+<span class="c1"># Import helper functions</span>
+<span class="kn">from</span> <span class="nn">NanopolishComp.common</span> <span class="kn">import</span> <span class="n">jhelp</span><span class="p">,</span> <span class="n">head</span>
+</pre></div>
+
+<h3 id="python-api-help">python API help</h3>
+<div class="codehilite"><pre><span></span><span class="n">jhelp</span><span class="p">(</span><span class="n">Freq_meth_calculate</span><span class="p">)</span>
+</pre></div>
+
+<hr />
+<p><strong>NanopolishComp.Freq_meth_calculate.<strong>init</strong></strong></p>
+<p>Calculate methylation frequency at genomic CpG sites from the output of nanopolish call-methylation</p>
+<hr />
+<ul>
+<li><strong>input_fn</strong> <em>: str (required)</em></li>
+</ul>
+<p>Path to a nanopolish call_methylation tsv output file</p>
+<ul>
+<li><strong>fasta_index</strong> <em>: str (default = )</em></li>
+</ul>
+<p>fasta index file obtained with samtools faidx. Required for coordinate sorting</p>
+<ul>
+<li><strong>output_bed_fn</strong> <em>: str (default = )</em></li>
+</ul>
+<p>Path to write a summary result file in BED format</p>
+<ul>
+<li><strong>output_tsv_fn</strong> <em>: str (default = )</em></li>
+</ul>
+<p>Path to write an more extensive result report in TSV format</p>
+<ul>
+<li><strong>min_depth</strong> <em>: int (default = 10)</em></li>
+</ul>
+<p>Minimal number of reads covering a site to be reported</p>
+<ul>
+<li><strong>sample_id</strong> <em>: str (default = )</em></li>
+</ul>
+<p>Sample ID to be used for the bed track header</p>
+<ul>
+<li><strong>strand_specific</strong> <em>: bool (default = False)</em></li>
+</ul>
+<p>If True, output strand specific sites</p>
+<ul>
+<li><strong>min_llr</strong> <em>: float (default = 2)</em></li>
+</ul>
+<p>Minimal log likelyhood ratio to consider a site significantly methylated or unmethylated</p>
+<ul>
+<li><strong>verbose</strong> <em>: bool (default = False)</em></li>
+</ul>
+<p>Increase verbosity</p>
+<ul>
+<li><strong>quiet</strong> <em>: bool (default = False)</em></li>
+</ul>
+<p>Reduce verbosity</p>
+<h3 id="example-usage_1">Example usage</h3>
+<h4 id="basic-setting">basic setting</h4>
+<div class="codehilite"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Freq_meth_calculate</span><span class="p">(</span>
+    <span class="n">input_fn</span><span class="o">=</span><span class="s2">&quot;./data/freq_meth_calculate/methylation_calls.tsv&quot;</span><span class="p">,</span>
+    <span class="n">output_bed_fn</span><span class="o">=</span><span class="s2">&quot;./output/freq_meth_calculate/out_freq_meth_calculate.bed&quot;</span><span class="p">,</span>
+    <span class="n">sample_id</span><span class="o">=</span><span class="s2">&quot;Sample1&quot;</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./output/freq_meth_calculate/out_freq_meth_calculate.bed&quot;</span><span class="p">)</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="o">##</span> <span class="k">Options</span> <span class="n">summary</span> <span class="o">##</span>
+    <span class="n">package_name</span><span class="p">:</span> <span class="n">NanopolishComp</span>
+    <span class="n">package_version</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">11</span>
+    <span class="k">timestamp</span><span class="p">:</span> <span class="mi">2019</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">10</span> <span class="mi">16</span><span class="p">:</span><span class="mi">23</span><span class="p">:</span><span class="mi">07</span><span class="p">.</span><span class="mi">646062</span>
+    <span class="n">quiet</span><span class="p">:</span> <span class="k">False</span>
+    <span class="k">verbose</span><span class="p">:</span> <span class="k">True</span>
+    <span class="n">min_llr</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">strand_specific</span><span class="p">:</span> <span class="k">False</span>
+    <span class="n">sample_id</span><span class="p">:</span> <span class="n">Sample1</span>
+    <span class="n">min_depth</span><span class="p">:</span> <span class="mi">10</span>
+    <span class="n">output_tsv_fn</span><span class="p">:</span> 
+    <span class="n">output_bed_fn</span><span class="p">:</span> <span class="p">.</span><span class="o">/</span><span class="k">output</span><span class="o">/</span><span class="n">freq_meth_calculate</span><span class="o">/</span><span class="n">out_freq_meth_calculate</span><span class="p">.</span><span class="n">bed</span>
+    <span class="n">fasta_index</span><span class="p">:</span> 
+    <span class="n">input_fn</span><span class="p">:</span> <span class="p">.</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">freq_meth_calculate</span><span class="o">/</span><span class="n">methylation_calls</span><span class="p">.</span><span class="n">tsv</span>
+<span class="o">##</span> <span class="n">Checking</span> <span class="n">arguments</span> <span class="o">##</span>
+    <span class="n">Testing</span> <span class="k">input</span> <span class="n">file</span> <span class="n">readability</span>
+    <span class="k">Check</span> <span class="k">output</span> <span class="n">file</span>
+        <span class="k">Output</span> <span class="n">results</span> <span class="k">in</span> <span class="n">bed</span> <span class="n">format</span>
+<span class="o">##</span> <span class="n">Parsing</span> <span class="n">methylation_calls</span> <span class="n">file</span> <span class="o">##</span>
+    <span class="n">Starting</span> <span class="k">to</span> <span class="n">parse</span> <span class="n">file</span> <span class="n">Nanopolish</span> <span class="n">methylation</span> <span class="k">call</span> <span class="n">file</span>
+    <span class="p">:</span> <span class="mi">605248</span> <span class="n">lines</span> <span class="p">[</span><span class="mi">00</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span> <span class="mi">39476</span><span class="p">.</span><span class="mi">23</span> <span class="n">lines</span><span class="o">/</span><span class="n">s</span><span class="p">]</span>
+    <span class="n">Filtering</span> <span class="k">out</span> <span class="n">low</span> <span class="n">coverage</span> <span class="n">sites</span>
+    <span class="n">Processing</span> <span class="k">valid</span> <span class="n">sites</span> <span class="k">found</span>
+        <span class="k">Write</span> <span class="k">output</span> <span class="n">file</span> <span class="n">header</span>
+    <span class="p">:</span> <span class="mi">100</span><span class="o">%|</span><span class="err">██████████</span><span class="o">|</span> <span class="mi">804</span><span class="o">/</span><span class="mi">804</span> <span class="p">[</span><span class="mi">00</span><span class="p">:</span><span class="mi">01</span><span class="o">&lt;</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">,</span> <span class="mi">492</span><span class="p">.</span><span class="mi">95</span> <span class="n">sites</span><span class="o">/</span><span class="n">s</span><span class="p">]</span> 
+<span class="o">##</span> <span class="n">Results</span> <span class="n">summary</span> <span class="o">##</span>
+    <span class="n">Total</span> <span class="k">read</span> <span class="n">lines</span><span class="p">:</span> <span class="mi">605</span><span class="p">,</span><span class="mi">248</span>
+    <span class="k">Valid</span> <span class="k">read</span> <span class="n">lines</span><span class="p">:</span> <span class="mi">605</span><span class="p">,</span><span class="mi">248</span>
+    <span class="n">Total</span> <span class="n">sites</span><span class="p">:</span> <span class="mi">229</span><span class="p">,</span><span class="mi">389</span>
+    <span class="n">Low</span> <span class="n">coverage</span> <span class="n">sites</span><span class="p">:</span> <span class="mi">228</span><span class="p">,</span><span class="mi">585</span>
+    <span class="k">Valid</span> <span class="n">sites</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span><span class="mi">608</span>
+
+
+<span class="n">track</span> <span class="n">name</span><span class="o">=</span><span class="n">Methylation_Sample1</span> <span class="n">itemRgb</span><span class="o">=</span><span class="k">On</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">138415</span>  <span class="mi">138416</span>  <span class="o">-</span><span class="mi">4387463463888030503</span>    <span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">200000</span>   <span class="p">.</span>   <span class="mi">138415</span>  <span class="mi">138416</span>  <span class="s1">&#39;8,121,207&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">138429</span>  <span class="mi">138430</span>  <span class="o">-</span><span class="mi">4387486165434009317</span>    <span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">722000</span>   <span class="p">.</span>   <span class="mi">138429</span>  <span class="mi">138430</span>  <span class="s1">&#39;8,121,207&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">212351</span>  <span class="mi">212352</span>  <span class="o">-</span><span class="mi">4459725007132593111</span>    <span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">125000</span>   <span class="p">.</span>   <span class="mi">212351</span>  <span class="mi">212352</span>  <span class="s1">&#39;8,121,207&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">212392</span>  <span class="mi">212393</span>  <span class="o">-</span><span class="mi">4459458894565841458</span>    <span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">866667</span>   <span class="p">.</span>   <span class="mi">212392</span>  <span class="mi">212393</span>  <span class="s1">&#39;100,100,100&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">212457</span>  <span class="mi">212461</span>  <span class="o">-</span><span class="mi">4459540872370764953</span>    <span class="o">-</span><span class="mi">5</span><span class="p">.</span><span class="mi">546667</span>   <span class="p">.</span>   <span class="mi">212457</span>  <span class="mi">212461</span>  <span class="s1">&#39;8,121,207&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">212530</span>  <span class="mi">212531</span>  <span class="o">-</span><span class="mi">4460596494258779804</span>    <span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">850833</span>   <span class="p">.</span>   <span class="mi">212530</span>  <span class="mi">212531</span>  <span class="s1">&#39;100,100,100&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">212581</span>  <span class="mi">212582</span>  <span class="o">-</span><span class="mi">4460665860093715069</span>    <span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">307692</span>   <span class="p">.</span>   <span class="mi">212581</span>  <span class="mi">212582</span>  <span class="s1">&#39;8,121,207&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">212596</span>  <span class="mi">212600</span>  <span class="o">-</span><span class="mi">4460684778048697414</span>    <span class="o">-</span><span class="mi">5</span><span class="p">.</span><span class="mi">900000</span>   <span class="p">.</span>   <span class="mi">212596</span>  <span class="mi">212600</span>  <span class="s1">&#39;8,121,207&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">212612</span>  <span class="mi">212613</span>  <span class="o">-</span><span class="mi">4460462807376904566</span>    <span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">675385</span>   <span class="p">.</span>   <span class="mi">212612</span>  <span class="mi">212613</span>  <span class="s1">&#39;8,121,207&#39;</span>
+</pre></div>
+
+
+<h4 id="using-a-fasta-index-for-output-coordinates-sorting-and-strand-specific-sites_1">Using a fasta index for output coordinates sorting and strand specific sites</h4>
+<div class="codehilite"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Freq_meth_calculate</span><span class="p">(</span>
+    <span class="n">input_fn</span><span class="o">=</span><span class="s2">&quot;./data/freq_meth_calculate/methylation_calls.tsv&quot;</span><span class="p">,</span>
+    <span class="n">fasta_index</span><span class="o">=</span><span class="s2">&quot;./data/freq_meth_calculate/ref.fa.fai&quot;</span><span class="p">,</span>
+    <span class="n">output_bed_fn</span><span class="o">=</span><span class="s2">&quot;./output/freq_meth_calculate/out_freq_meth_calculate.bed&quot;</span><span class="p">,</span>
+    <span class="n">sample_id</span><span class="o">=</span><span class="s2">&quot;Sample1&quot;</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">strand_specific</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./output/freq_meth_calculate/out_freq_meth_calculate.bed&quot;</span><span class="p">)</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="o">##</span> <span class="k">Options</span> <span class="n">summary</span> <span class="o">##</span>
+    <span class="n">package_name</span><span class="p">:</span> <span class="n">NanopolishComp</span>
+    <span class="n">package_version</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">11</span>
+    <span class="k">timestamp</span><span class="p">:</span> <span class="mi">2019</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">10</span> <span class="mi">16</span><span class="p">:</span><span class="mi">23</span><span class="p">:</span><span class="mi">56</span><span class="p">.</span><span class="mi">781302</span>
+    <span class="n">quiet</span><span class="p">:</span> <span class="k">False</span>
+    <span class="k">verbose</span><span class="p">:</span> <span class="k">True</span>
+    <span class="n">min_llr</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="n">strand_specific</span><span class="p">:</span> <span class="k">True</span>
+    <span class="n">sample_id</span><span class="p">:</span> <span class="n">Sample1</span>
+    <span class="n">min_depth</span><span class="p">:</span> <span class="mi">10</span>
+    <span class="n">output_tsv_fn</span><span class="p">:</span> 
+    <span class="n">output_bed_fn</span><span class="p">:</span> <span class="p">.</span><span class="o">/</span><span class="k">output</span><span class="o">/</span><span class="n">freq_meth_calculate</span><span class="o">/</span><span class="n">out_freq_meth_calculate</span><span class="p">.</span><span class="n">bed</span>
+    <span class="n">fasta_index</span><span class="p">:</span> <span class="p">.</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">freq_meth_calculate</span><span class="o">/</span><span class="k">ref</span><span class="p">.</span><span class="n">fa</span><span class="p">.</span><span class="n">fai</span>
+    <span class="n">input_fn</span><span class="p">:</span> <span class="p">.</span><span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">freq_meth_calculate</span><span class="o">/</span><span class="n">methylation_calls</span><span class="p">.</span><span class="n">tsv</span>
+<span class="o">##</span> <span class="n">Checking</span> <span class="n">arguments</span> <span class="o">##</span>
+    <span class="n">Testing</span> <span class="k">input</span> <span class="n">file</span> <span class="n">readability</span>
+    <span class="k">Check</span> <span class="k">output</span> <span class="n">file</span>
+        <span class="k">Output</span> <span class="n">results</span> <span class="k">in</span> <span class="n">bed</span> <span class="n">format</span>
+<span class="o">##</span> <span class="n">Parsing</span> <span class="n">methylation_calls</span> <span class="n">file</span> <span class="o">##</span>
+    <span class="n">Starting</span> <span class="k">to</span> <span class="n">parse</span> <span class="n">file</span> <span class="n">Nanopolish</span> <span class="n">methylation</span> <span class="k">call</span> <span class="n">file</span>
+    <span class="p">:</span> <span class="mi">605248</span> <span class="n">lines</span> <span class="p">[</span><span class="mi">00</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span> <span class="mi">40181</span><span class="p">.</span><span class="mi">70</span> <span class="n">lines</span><span class="o">/</span><span class="n">s</span><span class="p">]</span>
+    <span class="n">Filtering</span> <span class="k">out</span> <span class="n">low</span> <span class="n">coverage</span> <span class="n">sites</span>
+    <span class="n">Sorting</span> <span class="k">by</span> <span class="n">coordinates</span>
+    <span class="n">Processing</span> <span class="k">valid</span> <span class="n">sites</span> <span class="k">found</span>
+        <span class="k">Write</span> <span class="k">output</span> <span class="n">file</span> <span class="n">header</span>
+    <span class="p">:</span> <span class="mi">100</span><span class="o">%|</span><span class="err">██████████</span><span class="o">|</span> <span class="mi">999</span><span class="o">/</span><span class="mi">999</span> <span class="p">[</span><span class="mi">00</span><span class="p">:</span><span class="mi">01</span><span class="o">&lt;</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">,</span> <span class="mi">637</span><span class="p">.</span><span class="mi">85</span> <span class="n">sites</span><span class="o">/</span><span class="n">s</span><span class="p">]</span> 
+<span class="o">##</span> <span class="n">Results</span> <span class="n">summary</span> <span class="o">##</span>
+    <span class="n">Total</span> <span class="k">read</span> <span class="n">lines</span><span class="p">:</span> <span class="mi">605</span><span class="p">,</span><span class="mi">248</span>
+    <span class="k">Valid</span> <span class="k">read</span> <span class="n">lines</span><span class="p">:</span> <span class="mi">605</span><span class="p">,</span><span class="mi">248</span>
+    <span class="n">Total</span> <span class="n">sites</span><span class="p">:</span> <span class="mi">340</span><span class="p">,</span><span class="mi">081</span>
+    <span class="n">Low</span> <span class="n">coverage</span> <span class="n">sites</span><span class="p">:</span> <span class="mi">339</span><span class="p">,</span><span class="mi">082</span>
+    <span class="k">Valid</span> <span class="n">sites</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span><span class="mi">998</span>
+
+
+<span class="n">track</span> <span class="n">name</span><span class="o">=</span><span class="n">Methylation_Sample1</span> <span class="n">itemRgb</span><span class="o">=</span><span class="k">On</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">213351</span>  <span class="mi">213352</span>  <span class="mi">3852928671350919267</span> <span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">500000</span>   <span class="o">-</span>   <span class="mi">213351</span>  <span class="mi">213352</span>  <span class="s1">&#39;100,100,100&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">213382</span>  <span class="mi">213386</span>  <span class="mi">3853101183011884366</span> <span class="o">-</span><span class="mi">5</span><span class="p">.</span><span class="mi">103000</span>   <span class="o">-</span>   <span class="mi">213382</span>  <span class="mi">213386</span>  <span class="s1">&#39;8,121,207&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">213427</span>  <span class="mi">213428</span>  <span class="mi">3853155687118280343</span> <span class="mi">0</span><span class="p">.</span><span class="mi">504545</span>    <span class="o">-</span>   <span class="mi">213427</span>  <span class="mi">213428</span>  <span class="s1">&#39;100,100,100&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">213516</span>  <span class="mi">213517</span>  <span class="mi">3846995005950784724</span> <span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">447500</span>   <span class="o">-</span>   <span class="mi">213516</span>  <span class="mi">213517</span>  <span class="s1">&#39;8,121,207&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">213536</span>  <span class="mi">213537</span>  <span class="mi">3846697452562010016</span> <span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">103333</span>   <span class="o">-</span>   <span class="mi">213536</span>  <span class="mi">213537</span>  <span class="s1">&#39;8,121,207&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">213549</span>  <span class="mi">213550</span>  <span class="mi">3846721371280116041</span> <span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">724167</span>   <span class="o">-</span>   <span class="mi">213549</span>  <span class="mi">213550</span>  <span class="s1">&#39;8,121,207&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">213645</span>  <span class="mi">213646</span>  <span class="mi">3846832673276330665</span> <span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">546667</span>   <span class="o">-</span>   <span class="mi">213645</span>  <span class="mi">213646</span>  <span class="s1">&#39;8,121,207&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">213668</span>  <span class="mi">213669</span>  <span class="mi">3847166582036626108</span> <span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">728333</span>   <span class="o">-</span>   <span class="mi">213668</span>  <span class="mi">213669</span>  <span class="s1">&#39;8,121,207&#39;</span>
+<span class="n">chr</span><span class="o">-</span><span class="n">VIII</span>    <span class="mi">213729</span>  <span class="mi">213730</span>  <span class="mi">3846776908639343893</span> <span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">253846</span>   <span class="o">-</span>   <span class="mi">213729</span>  <span class="mi">213730</span>  <span class="s1">&#39;8,121,207&#39;</span>
+</pre></div>
+
+
+<h4 id="changing-filtering-threshold-not-recommended">Changing filtering threshold (not recommended)</h4>
+<div class="codehilite"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Freq_meth_calculate</span><span class="p">(</span>
+    <span class="n">input_fn</span><span class="o">=</span><span class="s2">&quot;./data/freq_meth_calculate/methylation_calls.tsv&quot;</span><span class="p">,</span>
+    <span class="n">output_tsv_fn</span><span class="o">=</span><span class="s2">&quot;./output/freq_meth_calculate/out_freq_meth_calculate.tsv&quot;</span><span class="p">,</span>
+    <span class="n">min_llr</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">min_depth</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./output/freq_meth_calculate/out_freq_meth_calculate.tsv&quot;</span><span class="p">)</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span>## <span class="nv">Checking</span> <span class="nv">arguments</span> ##
+## <span class="nv">Parsing</span> <span class="nv">methylation_calls</span> <span class="nv">file</span> ##
+    <span class="nv">Starting</span> <span class="nv">to</span> <span class="nv">parse</span> <span class="nv">file</span> <span class="nv">Nanopolish</span> <span class="nv">methylation</span> <span class="k">call</span> <span class="nl">file</span>
+    : <span class="mi">605248</span> <span class="nv">lines</span> [<span class="mi">00</span>:<span class="mi">14</span>, <span class="mi">40874</span>.<span class="mi">57</span> <span class="nv">lines</span><span class="o">/</span><span class="nv">s</span>]
+    <span class="nv">Filtering</span> <span class="nv">out</span> <span class="nv">low</span> <span class="nv">coverage</span> <span class="nv">sites</span>
+    <span class="nv">Processing</span> <span class="nv">valid</span> <span class="nv">sites</span> <span class="nv">found</span>
+    : <span class="mi">100</span><span class="o">%|</span>██████████<span class="o">|</span> <span class="mi">18531</span><span class="o">/</span><span class="mi">18531</span> [<span class="mi">00</span>:<span class="mi">05</span><span class="o">&lt;</span><span class="mi">00</span>:<span class="mi">00</span>, <span class="mi">3458</span>.<span class="mi">71</span> <span class="nv">sites</span><span class="o">/</span><span class="nv">s</span>]
+## <span class="nv">Results</span> <span class="nv">summary</span> ##
+    <span class="nv">Total</span> <span class="nv">read</span> <span class="nv">lines</span>: <span class="mi">605</span>,<span class="mi">248</span>
+    <span class="nv">Valid</span> <span class="nv">read</span> <span class="nv">lines</span>: <span class="mi">605</span>,<span class="mi">248</span>
+    <span class="nv">Total</span> <span class="nv">sites</span>: <span class="mi">229</span>,<span class="mi">389</span>
+    <span class="nv">Low</span> <span class="nv">coverage</span> <span class="nv">sites</span>: <span class="mi">210</span>,<span class="mi">858</span>
+    <span class="nv">Valid</span> <span class="nv">sites</span>: <span class="mi">37</span>,<span class="mi">062</span>
+
+
+<span class="nv">chromosome</span> <span class="nv">start</span> <span class="k">end</span>  <span class="nv">strand</span> <span class="nv">site_id</span>              <span class="nv">methylated_reads</span> <span class="nv">unmethylated_reads</span> <span class="nv">ambiguous_reads</span> <span class="nv">sequence</span>        <span class="nv">num_motifs</span> <span class="nv">llr_list</span>                           
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>      <span class="mi">4399</span>  <span class="mi">4400</span> .      <span class="o">-</span><span class="mi">2730676911920365501</span> <span class="mi">1</span>                <span class="mi">3</span>                  <span class="mi">1</span>               <span class="nv">CTTGCCGAATA</span>     <span class="mi">1</span>          <span class="o">-</span><span class="mi">3</span>.<span class="mi">17</span>,<span class="o">-</span><span class="mi">11</span>.<span class="mi">29</span>,<span class="mi">5</span>.<span class="mi">14</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">8</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">6</span>        
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>      <span class="mi">4534</span>  <span class="mi">4535</span> .      <span class="o">-</span><span class="mi">2730544486235489086</span> <span class="mi">0</span>                <span class="mi">5</span>                  <span class="mi">1</span>               <span class="nv">TTATTCGTTTT</span>     <span class="mi">1</span>          <span class="o">-</span><span class="mi">3</span>.<span class="mi">31</span>,<span class="mi">0</span>.<span class="mi">02</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">66</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">82</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">21</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">22</span> 
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>      <span class="mi">4591</span>  <span class="mi">4592</span> .      <span class="o">-</span><span class="mi">2730596195312440829</span> <span class="mi">0</span>                <span class="mi">3</span>                  <span class="mi">3</span>               <span class="nv">TCAAACGCTTG</span>     <span class="mi">1</span>          <span class="o">-</span><span class="mi">6</span>.<span class="mi">16</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">6</span>,<span class="mi">0</span>.<span class="mi">28</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">38</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">02</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">21</span>  
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>      <span class="mi">4654</span>  <span class="mi">4655</span> .      <span class="o">-</span><span class="mi">2731644250018462742</span> <span class="mi">1</span>                <span class="mi">4</span>                  <span class="mi">1</span>               <span class="nv">TTAATCGACAA</span>     <span class="mi">1</span>          <span class="o">-</span><span class="mi">1</span>.<span class="mi">5</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">67</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">66</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">94</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">66</span>,<span class="mi">3</span>.<span class="mi">1</span>   
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>      <span class="mi">1755</span>  <span class="mi">1756</span> .      <span class="o">-</span><span class="mi">2725162958641511345</span> <span class="mi">1</span>                <span class="mi">2</span>                  <span class="mi">2</span>               <span class="nv">TTGTTCGTTAA</span>     <span class="mi">1</span>          <span class="o">-</span><span class="mi">3</span>.<span class="mi">37</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">25</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">17</span>,<span class="o">-</span><span class="mi">7</span>.<span class="mi">47</span>,<span class="mi">2</span>.<span class="mi">73</span>       
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>      <span class="mi">1782</span>  <span class="mi">1787</span> .      <span class="o">-</span><span class="mi">2725136473504536062</span> <span class="mi">0</span>                <span class="mi">5</span>                  <span class="mi">0</span>               <span class="nv">AAACCCGTTCGTAAA</span> <span class="mi">2</span>          <span class="o">-</span><span class="mi">2</span>.<span class="mi">2</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">83</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">37</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">8</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">68</span>        
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>      <span class="mi">1797</span>  <span class="mi">1798</span> .      <span class="o">-</span><span class="mi">2724913241635744391</span> <span class="mi">0</span>                <span class="mi">4</span>                  <span class="mi">1</span>               <span class="nv">ATTGGCGTTTG</span>     <span class="mi">1</span>          <span class="o">-</span><span class="mi">1</span>.<span class="mi">45</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">09</span>,<span class="o">-</span><span class="mi">2</span>.<span class="mi">17</span>,<span class="o">-</span><span class="mi">6</span>.<span class="mi">66</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">75</span>      
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>      <span class="mi">1814</span>  <span class="mi">1815</span> .      <span class="o">-</span><span class="mi">2724934681984724382</span> <span class="mi">0</span>                <span class="mi">4</span>                  <span class="mi">1</span>               <span class="nv">GTTTGCGATAG</span>     <span class="mi">1</span>          <span class="o">-</span><span class="mi">2</span>.<span class="mi">2</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">1</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">86</span>,<span class="o">-</span><span class="mi">0</span>.<span class="mi">4</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">71</span>         
+<span class="nv">chr</span><span class="o">-</span><span class="nv">I</span>      <span class="mi">1829</span>  <span class="mi">1830</span> .      <span class="o">-</span><span class="mi">2724872883331782055</span> <span class="mi">0</span>                <span class="mi">4</span>                  <span class="mi">1</span>               <span class="nv">GATACCGTCCT</span>     <span class="mi">1</span>          <span class="o">-</span><span class="mi">0</span>.<span class="mi">16</span>,<span class="o">-</span><span class="mi">5</span>.<span class="mi">78</span>,<span class="o">-</span><span class="mi">3</span>.<span class="mi">32</span>,<span class="o">-</span><span class="mi">4</span>.<span class="mi">0</span>,<span class="o">-</span><span class="mi">1</span>.<span class="mi">22</span>
+</pre></div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../Eventalign_collapse_usage/" title="Eventalign_collapse usage" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Eventalign_collapse usage
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../contributing/" title="Contributing" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Contributing
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 Adrien Leger
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.c648116f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>
