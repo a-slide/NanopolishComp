@@ -112,7 +112,7 @@ class Freq_meth_calculate():
                 counter["Total read lines"]+=1
                 byte_len = len(line)
                 l = lp(line)
-
+                
                 if not l:
                     # Failsafe if line is malformed
                     counter["Invalid read line"]+=1
